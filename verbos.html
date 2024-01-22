@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script> -->
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin = "anonymous" referrerpolicy = "no-referrer"> </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Practica los Verbos irregulares</p>
+    <b id="verbo"></b><br>
+    <b id="subjectToShow"></b>
+    <input type="text" id="verboConjugado" >
+    <!-- <button onclick="myFunction()">Try it</button> -->
+    <b id="fb"></b><br>
+    <b>Correct: </b>
+    <b id="points">0</b>
+    <b>incorrect: </b>
+    <b id="incorrect">0</b><br><br>
+    <b>Correct/incorrect ratio: </b>
+    <b id="ratio"></b><br>
+    <b>Final Score: </b>
+    <b id="fScore">0</b><br>
+    <input type="text" placeholder="Nombre" id="nombre" onkeyup="success()">
+    <button type = "button" disabled id="fileButon" onclick = "CreateTextFile();">Crear reporte</button>
+
+    <!-- <button onclick="generatePDF()">print Pdf</button> -->
+</body>
+<script>
+    var score = Number(0);
+    var finalScore = Number(0);
+    var negScore = Number(0);
+    var verbosMistakes = {};
+    var fina100score = 0;
+
+    function success() {
+        if(document.getElementById("nombre").value==="") { 
+            document.getElementById('fileButon').disabled = true; 
+        } else { 
+            document.getElementById('fileButon').disabled = false;
+        }
+    }
+
+    function CreateTextFile() {
+        var name = document.getElementById("nombre").value
+
+        var message1 = `${name}, debes terminar el ejercicio y obtener 100 puntos.\n\n¡Sigue practicando!`
+        var message2 = `¡Muy bien, ${name}!\n\n¡Obtuviste ${fina100score} pts!\n${score} correctas y ${negScore} incorrecta(s)\n\n\nObservé algunos detalles en estos verbos:\n\n  ${Object.keys(verbosMistakes)}\n\nLa práctica continua te ayudará a perfeccionarlos.\n `
+        var message3 = `¡${name}, lo has hecho perfecto(a)!\n\n¡Obtuviste ${fina100score} pts sin ningún error!\n\n Practicate ${score} verbos`
+        var finalmessage ="dd0";
+
+        if (fina100score >= 100){
+            if (negScore === 0){
+                finalmessage = message3
+            }
+            else {
+                finalmessage = message2
+            }
+        }
+        else {
+            finalmessage = message1
+        }
+
+        var blob = new Blob([finalmessage], {
+            type: "text/plain;charset=utf-8",
+        });
+        saveAs(blob, "download.txt");
+    }
+
+    // function generatePDF() {
+    //             var pdf = new jsPDF({
+    //                 orientation: 'p',
+    //                 unit: 'mm',
+    //                 format: 'a5',
+    //                 putOnlyUsedFonts:true
+    //                 });
+    //             pdf.text("Hello World", 20, 20);
+    //             pdf.save('Demopdf.pdf');
+    //         }
+        
+
+    onload = function() {
+      
+
+
+        console.log("____________________________-- ")
+
+        console.log("score " + score)
+
+        var points = document.getElementById("points")
+        var incorrect = document.getElementById("incorrect")
+
+        document.getElementById("fb").innerHTML = ""
+        console.log("again")
+        var verbo = document.getElementById ("verbo");
+    var subjectToShow = document.getElementById("subjectToShow")
+    var conj = [
+        {
+            "verbo": "querer",
+            "subject": {
+                "yo": "quiero",
+                "tú": "quieres",
+                "él": "quiere",
+                "ella": "quiere",
+                "Ud.": "quiere",
+                "nosotros": "queremos",
+                "Uds.": "quieren",
+                "ellos": "quieren"
+            }
+        },
+        {
+            "verbo": "poder",
+            "subject": {
+                "yo": "puedo",
+                "tú": "puedes",
+                "él": "puede",
+                "ella": "puede",
+                "Ud.": "puede",
+                "nosotros": "podemos",
+                "Uds.": "pueden",
+                "ellos": "pueden"
+            }
+        },
+        {
+            "verbo": "servir",
+            "subject": {
+                "yo": "sirvo",
+                "tú": "sirves",
+                "él": "sirve",
+                "ella": "sirve",
+                "Ud.": "sirve",
+                "nosotros": "servimos",
+                "Uds.": "sirven",
+                "ellos": "sirven"
+            }
+        },
+        {
+            "verbo": "decir",
+            "subject": {
+                "yo": "digo",
+                "tú": "dices",
+                "él": "dice",
+                "ella": "dice",
+                "Ud.": "dice",
+                "nosotros": "decimos",
+                "Uds.": "dicen",
+                "ellos": "dicen"
+            }  
+        },
+        {
+            "verbo": "venir",
+            "subject": {
+                "yo": "vengo",
+                "tú": "vienes",
+                "él": "viene",
+                "ella": "viene",
+                "Ud.": "viene",
+                "nosotros": "venimos",
+                "Uds.": "vienen",
+                "ellos": "vienen"
+            }
+            
+        },
+        {
+            "verbo": "tener",
+            "subject": {
+                "yo": "tengo",
+                "tú": "tienes",
+                "él": "tiene",
+                "ella": "tiene",
+                "Ud.": "tiene",
+                "nosotros": "tenemos",
+                "Uds.": "tienen",
+                "ellos": "tienen"
+            }
+            
+        },
+    ]
+
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+
+    var pickedVerb = conj[getRandomInt(conj.length)]
+    var pickedSubject = pickedVerb.subject
+
+
+
+    verbo.innerHTML = pickedVerb.verbo;
+    var subject = Object.keys(pickedSubject);
+
+    var pronounPicked = subject[getRandomInt(8)];
+
+    console.log(pronounPicked);
+
+    subjectToShow.innerHTML = pronounPicked;
+
+    console.log(pickedSubject[pronounPicked])
+
+    var flag = false;
+   
+
+
+    document.addEventListener('keydown', function(event) {
+    // Check if the pressed key is the one you are interested in
+    if (event.key === 'Enter') {
+        var verboConjugado = document.getElementById("verboConjugado").value;
+
+        console.log(verboConjugado +  "=" + pickedSubject[pronounPicked])
+        if (verboConjugado.toLowerCase() === pickedSubject[pronounPicked]){
+            document.getElementById("fb").innerHTML = "Correct"
+            score++
+            points.innerHTML = score;
+            finalScore = finalScore + 2
+  
+            pickedSubject[pronounPicked] = null
+            console.log("before load" + verboConjugado +  "=" + pickedSubject[pronounPicked])
+            console.log("this line was excecuteed")
+
+            document.getElementById("verboConjugado").value = "";
+            onload()
+        }
+        if (verboConjugado !== pickedSubject[pronounPicked] && pickedSubject[pronounPicked] !== null && flag === false){
+            console.log("inside else pickedSubject[pronounPicked] = " + pickedSubject[pronounPicked] )
+        
+            document.getElementById("fb").innerHTML = "wrong"
+            verbosMistakes[pickedVerb.verbo] = "err"
+            negScore++
+            incorrect.innerHTML = negScore;
+            flag = true;
+            finalScore = finalScore -4
+        }
+
+        fina100score = finalScore;
+        
+
+ 
+
+
+      // Your custom function or code here
+      document.getElementById("ratio").innerHTML = (score / (score + negScore)) * 100
+      document.getElementById("fScore").innerHTML = finalScore
+      console.log('Enter key pressed!');
+    }
+  });
+
+   
+          
+
+
+    
+    // function myFunction(){
+    //     var verboConjugado = document.getElementById("verboConjugado").value;
+
+
+    //     if (verboConjugado === "juego")
+    //         alert("yes!");
+    //     else document.getElementById("fb").innerHTML = "wrong"
+
+    //         // alert(verboConjugado);
+    // }
+
+
+
+
+
+
+    }
+    
+
+</script>
+</html>
