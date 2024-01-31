@@ -9,7 +9,16 @@
     <title>Document</title>
 </head>
 <body>
-    <p>Practica los Verbos irregulares</p>
+    <p>Practica los verbos<span id="tenseToBePracticed"></span></p>
+
+    <label for="tense">Choose a tense:</label>
+
+    <select onchange="selectTense(event)" name="tense" id="tense">
+        <option value="">Change tense</option>
+        <option value="presente">Presente</option>
+        <option value="preterito">Preterito</option>
+    </select><br>
+    
     <b id="verbo"></b><br>
     <b id="subjectToShow"></b>
     <input type="text" id="verboConjugado" >
@@ -34,6 +43,19 @@
     var negScore = Number(0);
     var verbosMistakes = {};
     var fina100score = 0;
+    var tense = localStorage.getItem("selectedTense");
+    var verboConjugado = "";
+    var tenseToBePracticed = ""
+
+
+    if (localStorage.getItem("selectedTense") === "presente"){
+        tenseToBePracticed = " irregulares en presente"
+    }
+    if (localStorage.getItem("selectedTense") === "preterito"){
+        tenseToBePracticed = "  en preterito"
+    }
+
+    document.getElementById("tenseToBePracticed").innerHTML = tenseToBePracticed;
 
     function success() {
         if(document.getElementById("nombre").value==="") { 
@@ -43,12 +65,38 @@
         }
     }
 
+    function initialize(selectedTense) {
+        score = Number(0);
+        finalScore = Number(0);
+        negScore = Number(0);
+        verbosMistakes = {};
+        fina100score = 0;
+        tense = localStorage.getItem("selectedTense");
+        verboConjugado = "";
+        console.log("reset everything")
+        onload()
+
+    }
+
+
+    function selectTense(e) {
+        console.log("this line works")
+        location.reload();
+        var selectedTense = document.getElementById("tense").value = e.target.value
+
+        localStorage.setItem("selectedTense", selectedTense);
+        
+
+        initialize(selectedTense)
+
+    }
+
     function CreateTextFile() {
         var name = document.getElementById("nombre").value
 
         var message1 = `${name}, debes terminar el ejercicio y obtener 100 puntos.\n\n¡Sigue practicando!`
         var message2 = `¡Muy bien, ${name}!\n\n¡Obtuviste ${fina100score} pts!\n${score} correctas y ${negScore} incorrecta(s)\n\n\nObservé algunos detalles en estos verbos:\n\n  ${Object.keys(verbosMistakes)}\n\nLa práctica continua te ayudará a perfeccionarlos.\n `
-        var message3 = `¡${name}, lo has hecho perfecto(a)!\n\n¡Obtuviste ${fina100score} pts sin ningún error!\n\n Practicate ${score} verbos`
+        var message3 = `¡${name}, lo has hecho perfecto!\n\n¡Obtuviste ${fina100score} pts sin ningún error!\n\n Practicate ${score} verbos`
         var finalmessage ="dd0";
 
         if (fina100score >= 100){
@@ -83,6 +131,7 @@
 
     onload = function() {
       
+
 
 
         console.log("____________________________-- ")
@@ -175,16 +224,201 @@
                 "Uds.": "tienen",
                 "ellos": "tienen"
             }
-            
         },
     ]
+
+
+
+    var conjPreterito = [
+        {
+            "verbo": "hablar",
+            "subject": {
+                "yo": "hable",
+                "tú": "hablaste",
+                "él": "hablo",
+                "ella": "hablo",
+                "Ud.": "hablo",
+                "nosotros": "hablamos",
+                "Uds.": "hablaron",
+                "ellos": "hablaron"
+            }
+        },
+        {
+            "verbo": "comer",
+            "subject": {
+                "yo": "comi",
+                "tú": "comiste",
+                "él": "comio",
+                "ella": "comio",
+                "Ud.": "comio",
+                "nosotros": "comimos",
+                "Uds.": "comieron",
+                "ellos": "comieron"
+            }
+        },
+        {
+            "verbo": "practicar",
+            "subject": {
+                "yo": "practique",
+                "tú": "praticaste",
+                "él": "practico",
+                "ella": "practico",
+                "Ud.": "practico",
+                "nosotros": "practicamos",
+                "Uds.": "practicaron",
+                "ellos": "practicaron"
+            }
+        },
+        {
+            "verbo": "jugar",
+            "subject": {
+                "yo": "jugue",
+                "tú": "jugaste",
+                "él": "jugo",
+                "ella": "jugo",
+                "Ud.": "jugo",
+                "nosotros": "jugamos",
+                "Uds.": "jugaron",
+                "ellos": "jugaron"
+            }  
+        },
+        {
+            "verbo": "empezar",
+            "subject": {
+                "yo": "empece",
+                "tú": "empezaste",
+                "él": "empezo",
+                "ella": "empezo",
+                "Ud.": "empezo",
+                "nosotros": "empezamos",
+                "Uds.": "empezaron",
+                "ellos": "empezaron"
+            }
+            
+        },
+        {
+            "verbo": "cruzar",
+            "subject": {
+                "yo": "cruce",
+                "tú": "cruzaste",
+                "él": "cruzo",
+                "ella": "cruzo",
+                "Ud.": "cruzo",
+                "nosotros": "cruzamos",
+                "Uds.": "cruzaron",
+                "ellos": "cruzaron"
+            }
+        },
+        {
+            "verbo": "tocar",
+            "subject": {
+                "yo": "toque",
+                "tú": "tocaste",
+                "él": "toco",
+                "ella": "toco",
+                "Ud.": "toco",
+                "nosotros": "tocamos",
+                "Uds.": "tocaron",
+                "ellos": "tocaron"
+            }
+        },
+        {
+            "verbo": "pagar",
+            "subject": {
+                "yo": "pague",
+                "tú": "pagaste",
+                "él": "pago",
+                "ella": "pago",
+                "Ud.": "pago",
+                "nosotros": "pagamos",
+                "Uds.": "pagaron",
+                "ellos": "pagaron"
+            }
+        },
+        {
+            "verbo": "buscar",
+            "subject": {
+                "yo": "busque",
+                "tú": "buscaste",
+                "él": "busco",
+                "ella": "busco",
+                "Ud.": "busco",
+                "nosotros": "buscamos",
+                "Uds.": "buscaron",
+                "ellos": "buscaron"
+            }
+        },
+        {
+            "verbo": "llegar",
+            "subject": {
+                "yo": "llegue",
+                "tú": "llegaste",
+                "él": "llego",
+                "ella": "llego",
+                "Ud.": "llego",
+                "nosotros": "llegamos",
+                "Uds.": "llegaron",
+                "ellos": "llegaron"
+            }
+        },
+        {
+            "verbo": "salir",
+            "subject": {
+                "yo": "sali",
+                "tú": "saliste",
+                "él": "salio",
+                "ella": "salio",
+                "Ud.": "salio",
+                "nosotros": "salimos",
+                "Uds.": "salieron",
+                "ellos": "salieron"
+            }
+        },
+        {
+            "verbo": "aprender",
+            "subject": {
+                "yo": "aprendi",
+                "tú": "aprendiste",
+                "él": "aprendio",
+                "ella": "aprendio",
+                "Ud.": "aprendio",
+                "nosotros": "aprendimos",
+                "Uds.": "aprendieron",
+                "ellos": "aprendieron"
+            }
+        },
+    ]
+
+
 
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
     }
 
-    var pickedVerb = conj[getRandomInt(conj.length)]
-    var pickedSubject = pickedVerb.subject
+
+    var pickedVerb;
+    var pickedSubject;
+
+    // pickedVerb = conj[getRandomInt(conj.length)]
+    //         pickedSubject = pickedVerb.subject
+
+
+    if (tense==="preterito") {
+        pickedVerb = conjPreterito[getRandomInt(conjPreterito.length)]
+        pickedSubject = pickedVerb.subject
+        console.log("in if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
+
+    }
+    if (tense==="presente") {
+        pickedVerb = conj[getRandomInt(conj.length)]
+        pickedSubject = pickedVerb.subject
+        console.log("in if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
+
+    }
+    console.log("out of if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
+    console.log("el tiempo es " + tense)
+
+    
 
 
 
@@ -193,11 +427,11 @@
 
     var pronounPicked = subject[getRandomInt(8)];
 
-    console.log(pronounPicked);
+    console.log("pronounPicked: " + pronounPicked);
+    console.log("pickedSubject[pronounPicked] " + pickedSubject[pronounPicked]);
 
     subjectToShow.innerHTML = pronounPicked;
 
-    console.log(pickedSubject[pronounPicked])
 
     var flag = false;
    
@@ -206,7 +440,7 @@
     document.addEventListener('keydown', function(event) {
     // Check if the pressed key is the one you are interested in
     if (event.key === 'Enter') {
-        var verboConjugado = document.getElementById("verboConjugado").value;
+        verboConjugado = document.getElementById("verboConjugado").value;
 
         console.log(verboConjugado +  "=" + pickedSubject[pronounPicked])
         if (verboConjugado.toLowerCase() === pickedSubject[pronounPicked]){
@@ -221,8 +455,13 @@
 
             document.getElementById("verboConjugado").value = "";
             onload()
+
+            console.log("last line of if correct pickedSubject[pronounPicked] = " + pickedSubject[pronounPicked] )
         }
-        if (verboConjugado !== pickedSubject[pronounPicked] && pickedSubject[pronounPicked] !== null && flag === false){
+        if (verboConjugado.toLowerCase() !== pickedSubject[pronounPicked] && pickedSubject[pronounPicked] !== null && flag === false){
+
+            console.log("error statement was excecuted...")
+            // cosole.log("if (verboConjugado !== pickedSubject[pronounPicked] && pickedSubject[pronounPicked] !== null && flag === false) " + verboConjugado + " " + pickedSubject[pronounPicked] + " " + pickedSubject[pronounPicked] + " " + flag)
             console.log("inside else pickedSubject[pronounPicked] = " + pickedSubject[pronounPicked] )
         
             document.getElementById("fb").innerHTML = "wrong"
