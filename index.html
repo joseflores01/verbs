@@ -17,6 +17,7 @@
         <option value="">Change tense</option>
         <option value="presente">Presente</option>
         <option value="preterito">Preterito</option>
+        <option value="preterito_irregular">Preterito (verbos irregulares)</option>
     </select><br>
     
     <b id="verbo"></b><br>
@@ -48,11 +49,14 @@
     var tenseToBePracticed = ""
 
 
-    if (localStorage.getItem("selectedTense") === "presente"){
+    if (tense === "presente"){
         tenseToBePracticed = " irregulares en presente"
     }
-    if (localStorage.getItem("selectedTense") === "preterito"){
+    if (tense === "preterito"){
         tenseToBePracticed = "  en preterito"
+    }
+    if (tense === "preterito_irregular"){
+        tenseToBePracticed = " irregulares en preterito"
     }
 
     document.getElementById("tenseToBePracticed").innerHTML = tenseToBePracticed;
@@ -94,21 +98,26 @@
     function CreateTextFile() {
         var name = document.getElementById("nombre").value
 
-        var message1 = `${name}, debes terminar el ejercicio y obtener 100 puntos.\n\n¡Sigue practicando!`
+        const d = new Date();
+        var date = d.toDateString();
+
+        var message1 = `${name}, debes terminar el ejercicio y obtener 100 puntos.\n\nHas obtenido ${fina100score} pts\n\n¡Sigue practicando!`
         var message2 = `¡Muy bien, ${name}!\n\n¡Obtuviste ${fina100score} pts!\n${score} correctas y ${negScore} incorrecta(s)\n\n\nObservé algunos detalles en estos verbos:\n\n  ${Object.keys(verbosMistakes)}\n\nLa práctica continua te ayudará a perfeccionarlos.\n `
         var message3 = `¡${name}, lo has hecho perfecto!\n\n¡Obtuviste ${fina100score} pts sin ningún error!\n\n Practicate ${score} verbos`
+        var practiceMessage = `\n\nFecha: ${date}  Tiempo gramatical (Grammar tense): ${tense}`
         var finalmessage ="dd0";
+
 
         if (fina100score >= 100){
             if (negScore === 0){
-                finalmessage = message3
+                finalmessage = message3 + practiceMessage
             }
             else {
-                finalmessage = message2
+                finalmessage = message2 + practiceMessage
             }
         }
         else {
-            finalmessage = message1
+            finalmessage = message1 + practiceMessage
         }
 
         var blob = new Blob([finalmessage], {
@@ -389,6 +398,114 @@
         },
     ]
 
+    var conjPreteritoIrregular = [
+        {
+            "verbo": "ser",
+            "subject": {
+                "yo": "fui",
+                "tú": "fuiste",
+                "él": "fue",
+                "ella": "fue",
+                "Ud.": "fue",
+                "nosotros": "fuimos",
+                "Uds.": "fueron",
+                "ellos": "fueron"
+            }
+        },
+        {
+            "verbo": "ir",
+            "subject": {
+                "yo": "fui",
+                "tú": "fuiste",
+                "él": "fue",
+                "ella": "fue",
+                "Ud.": "fue",
+                "nosotros": "fuimos",
+                "Uds.": "fueron",
+                "ellos": "fueron"
+            }
+        },
+        {
+            "verbo": "tener",
+            "subject": {
+                "yo": "tuve",
+                "tú": "tuviste",
+                "él": "tuvo",
+                "ella": "tuvo",
+                "Ud.": "tuvo",
+                "nosotros": "tuvimos",
+                "Uds.": "tuvieron",
+                "ellos": "tuvieron"
+            }
+        },
+        {
+            "verbo": "estar",
+            "subject": {
+                "yo": "estuve",
+                "tú": "estuviste",
+                "él": "estuvo",
+                "ella": "estuvo",
+                "Ud.": "estuvo",
+                "nosotros": "estuvimos",
+                "Uds.": "estuvieron",
+                "ellos": "estuvieron"
+            }  
+        },
+        {
+            "verbo": "hacer",
+            "subject": {
+                "yo": "hice",
+                "tú": "hiciste",
+                "él": "hizo",
+                "ella": "hizo",
+                "Ud.": "hizo",
+                "nosotros": "hicimos",
+                "Uds.": "hicieron",
+                "ellos": "hicieron"
+            }
+            
+        },
+        {
+            "verbo": "querer",
+            "subject": {
+                "yo": "quise",
+                "tú": "quisiste",
+                "él": "quiso",
+                "ella": "quiso",
+                "Ud.": "quiso",
+                "nosotros": "quisimos",
+                "Uds.": "quisieron",
+                "ellos": "quisieron"
+            }
+        },
+        {
+            "verbo": "venir",
+            "subject": {
+                "yo": "vine",
+                "tú": "viniste",
+                "él": "vino",
+                "ella": "vino",
+                "Ud.": "vino",
+                "nosotros": "vinimos",
+                "Uds.": "vinieron",
+                "ellos": "vinieron"
+            }
+        },
+        {
+            "verbo": "poder",
+            "subject": {
+                "yo": "pude",
+                "tú": "pudiste",
+                "él": "pudo",
+                "ella": "pudo",
+                "Ud.": "pudo",
+                "nosotros": "pudimos",
+                "Uds.": "pudieron",
+                "ellos": "pudieron"
+            }
+        }
+    ]
+
 
 
     function getRandomInt(max) {
@@ -401,10 +518,16 @@
 
     // pickedVerb = conj[getRandomInt(conj.length)]
     //         pickedSubject = pickedVerb.subject
-
+    
 
     if (tense==="preterito") {
         pickedVerb = conjPreterito[getRandomInt(conjPreterito.length)]
+        pickedSubject = pickedVerb.subject
+        console.log("in if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
+
+    }
+    if (tense==="preterito_irregular") {
+        pickedVerb = conjPreteritoIrregular[getRandomInt(conjPreteritoIrregular.length)]
         pickedSubject = pickedVerb.subject
         console.log("in if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
 
