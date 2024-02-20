@@ -4,6 +4,7 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script> -->
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin = "anonymous" referrerpolicy = "no-referrer"> </script>
     <script src="./phoenix.js"></script>
+    <!-- <script src="./verbs.js"></script> -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -15,9 +16,11 @@
 
     <select onchange="selectTense(event)" name="tense" id="tense">
         <option value="">Change tense</option>
-        <option value="presente">Presente</option>
+        <option value="presente_irregular">Presente (irregular)</option>
+        <option value="presente">Presente (stem-changing)</option>
         <option value="preterito">Preterito</option>
-        <option value="preterito_irregular">Preterito (verbos irregulares)</option>
+        <option value="preterito_irregular">Preterito (irregular)</option>
+        <option value="imperfecto">Imperfecto</option>
     </select><br>
     
     <b id="verbo"></b><br>
@@ -49,14 +52,21 @@
     var tenseToBePracticed = ""
 
 
-    if (tense === "presente"){
+
+    if (tense === "presente_irregular"){
         tenseToBePracticed = " irregulares en presente"
     }
+    if (tense === "presente"){
+        tenseToBePracticed = " con cambio de raíz (stem-changing verbs) en presente"
+    }
     if (tense === "preterito"){
-        tenseToBePracticed = "  en preterito"
+        tenseToBePracticed = " en preterito"
     }
     if (tense === "preterito_irregular"){
         tenseToBePracticed = " irregulares en preterito"
+    }
+    if (tense === "imperfecto"){
+        tenseToBePracticed = " imperfecto"
     }
 
     document.getElementById("tenseToBePracticed").innerHTML = tenseToBePracticed;
@@ -163,6 +173,12 @@
 
 
     onload = function() {
+
+
+        
+
+
+        
       
 
 
@@ -178,357 +194,573 @@
         console.log("again")
         var verbo = document.getElementById ("verbo");
     var subjectToShow = document.getElementById("subjectToShow")
-    var conj = [
-        {
-            "verbo": "querer",
-            "subject": {
-                "yo": "quiero",
-                "tú": "quieres",
-                "él": "quiere",
-                "ella": "quiere",
-                "Ud.": "quiere",
-                "nosotros": "queremos",
-                "Uds.": "quieren",
-                "ellos": "quieren"
-            }
-        },
-        {
-            "verbo": "poder",
-            "subject": {
-                "yo": "puedo",
-                "tú": "puedes",
-                "él": "puede",
-                "ella": "puede",
-                "Ud.": "puede",
-                "nosotros": "podemos",
-                "Uds.": "pueden",
-                "ellos": "pueden"
-            }
-        },
-        {
-            "verbo": "servir",
-            "subject": {
-                "yo": "sirvo",
-                "tú": "sirves",
-                "él": "sirve",
-                "ella": "sirve",
-                "Ud.": "sirve",
-                "nosotros": "servimos",
-                "Uds.": "sirven",
-                "ellos": "sirven"
-            }
-        },
-        {
-            "verbo": "decir",
-            "subject": {
-                "yo": "digo",
-                "tú": "dices",
-                "él": "dice",
-                "ella": "dice",
-                "Ud.": "dice",
-                "nosotros": "decimos",
-                "Uds.": "dicen",
-                "ellos": "dicen"
-            }  
-        },
-        {
-            "verbo": "venir",
-            "subject": {
-                "yo": "vengo",
-                "tú": "vienes",
-                "él": "viene",
-                "ella": "viene",
-                "Ud.": "viene",
-                "nosotros": "venimos",
-                "Uds.": "vienen",
-                "ellos": "vienen"
-            }
-            
-        },
-        {
-            "verbo": "tener",
-            "subject": {
-                "yo": "tengo",
-                "tú": "tienes",
-                "él": "tiene",
-                "ella": "tiene",
-                "Ud.": "tiene",
-                "nosotros": "tenemos",
-                "Uds.": "tienen",
-                "ellos": "tienen"
-            }
-        },
-    ]
 
-
-
-    var conjPreterito = [
-        {
-            "verbo": "hablar",
-            "subject": {
-                "yo": "hable",
-                "tú": "hablaste",
-                "él": "hablo",
-                "ella": "hablo",
-                "Ud.": "hablo",
-                "nosotros": "hablamos",
-                "Uds.": "hablaron",
-                "ellos": "hablaron"
-            }
-        },
-        {
-            "verbo": "comer",
-            "subject": {
-                "yo": "comi",
-                "tú": "comiste",
-                "él": "comio",
-                "ella": "comio",
-                "Ud.": "comio",
-                "nosotros": "comimos",
-                "Uds.": "comieron",
-                "ellos": "comieron"
-            }
-        },
-        {
-            "verbo": "practicar",
-            "subject": {
-                "yo": "practique",
-                "tú": "practicaste",
-                "él": "practico",
-                "ella": "practico",
-                "Ud.": "practico",
-                "nosotros": "practicamos",
-                "Uds.": "practicaron",
-                "ellos": "practicaron"
-            }
-        },
-        {
-            "verbo": "jugar",
-            "subject": {
-                "yo": "jugue",
-                "tú": "jugaste",
-                "él": "jugo",
-                "ella": "jugo",
-                "Ud.": "jugo",
-                "nosotros": "jugamos",
-                "Uds.": "jugaron",
-                "ellos": "jugaron"
-            }  
-        },
-        {
-            "verbo": "empezar",
-            "subject": {
-                "yo": "empece",
-                "tú": "empezaste",
-                "él": "empezo",
-                "ella": "empezo",
-                "Ud.": "empezo",
-                "nosotros": "empezamos",
-                "Uds.": "empezaron",
-                "ellos": "empezaron"
-            }
-            
-        },
-        {
-            "verbo": "cruzar",
-            "subject": {
-                "yo": "cruce",
-                "tú": "cruzaste",
-                "él": "cruzo",
-                "ella": "cruzo",
-                "Ud.": "cruzo",
-                "nosotros": "cruzamos",
-                "Uds.": "cruzaron",
-                "ellos": "cruzaron"
-            }
-        },
-        {
-            "verbo": "tocar",
-            "subject": {
-                "yo": "toque",
-                "tú": "tocaste",
-                "él": "toco",
-                "ella": "toco",
-                "Ud.": "toco",
-                "nosotros": "tocamos",
-                "Uds.": "tocaron",
-                "ellos": "tocaron"
-            }
-        },
-        {
-            "verbo": "pagar",
-            "subject": {
-                "yo": "pague",
-                "tú": "pagaste",
-                "él": "pago",
-                "ella": "pago",
-                "Ud.": "pago",
-                "nosotros": "pagamos",
-                "Uds.": "pagaron",
-                "ellos": "pagaron"
-            }
-        },
-        {
-            "verbo": "buscar",
-            "subject": {
-                "yo": "busque",
-                "tú": "buscaste",
-                "él": "busco",
-                "ella": "busco",
-                "Ud.": "busco",
-                "nosotros": "buscamos",
-                "Uds.": "buscaron",
-                "ellos": "buscaron"
-            }
-        },
-        {
-            "verbo": "llegar",
-            "subject": {
-                "yo": "llegue",
-                "tú": "llegaste",
-                "él": "llego",
-                "ella": "llego",
-                "Ud.": "llego",
-                "nosotros": "llegamos",
-                "Uds.": "llegaron",
-                "ellos": "llegaron"
-            }
-        },
-        {
-            "verbo": "salir",
-            "subject": {
-                "yo": "sali",
-                "tú": "saliste",
-                "él": "salio",
-                "ella": "salio",
-                "Ud.": "salio",
-                "nosotros": "salimos",
-                "Uds.": "salieron",
-                "ellos": "salieron"
-            }
-        },
-        {
-            "verbo": "aprender",
-            "subject": {
-                "yo": "aprendi",
-                "tú": "aprendiste",
-                "él": "aprendio",
-                "ella": "aprendio",
-                "Ud.": "aprendio",
-                "nosotros": "aprendimos",
-                "Uds.": "aprendieron",
-                "ellos": "aprendieron"
-            }
-        },
-    ]
-
-    var conjPreteritoIrregular = [
-        {
-            "verbo": "ser",
-            "subject": {
-                "yo": "fui",
-                "tú": "fuiste",
-                "él": "fue",
-                "ella": "fue",
-                "Ud.": "fue",
-                "nosotros": "fuimos",
-                "Uds.": "fueron",
-                "ellos": "fueron"
-            }
-        },
-        {
-            "verbo": "ir",
-            "subject": {
-                "yo": "fui",
-                "tú": "fuiste",
-                "él": "fue",
-                "ella": "fue",
-                "Ud.": "fue",
-                "nosotros": "fuimos",
-                "Uds.": "fueron",
-                "ellos": "fueron"
-            }
-        },
-        {
-            "verbo": "tener",
-            "subject": {
-                "yo": "tuve",
-                "tú": "tuviste",
-                "él": "tuvo",
-                "ella": "tuvo",
-                "Ud.": "tuvo",
-                "nosotros": "tuvimos",
-                "Uds.": "tuvieron",
-                "ellos": "tuvieron"
-            }
-        },
-        {
-            "verbo": "estar",
-            "subject": {
-                "yo": "estuve",
-                "tú": "estuviste",
-                "él": "estuvo",
-                "ella": "estuvo",
-                "Ud.": "estuvo",
-                "nosotros": "estuvimos",
-                "Uds.": "estuvieron",
-                "ellos": "estuvieron"
-            }  
-        },
-        {
-            "verbo": "hacer",
-            "subject": {
-                "yo": "hice",
-                "tú": "hiciste",
-                "él": "hizo",
-                "ella": "hizo",
-                "Ud.": "hizo",
-                "nosotros": "hicimos",
-                "Uds.": "hicieron",
-                "ellos": "hicieron"
-            }
-            
-        },
-        {
-            "verbo": "querer",
-            "subject": {
-                "yo": "quise",
-                "tú": "quisiste",
-                "él": "quiso",
-                "ella": "quiso",
-                "Ud.": "quiso",
-                "nosotros": "quisimos",
-                "Uds.": "quisieron",
-                "ellos": "quisieron"
-            }
-        },
-        {
-            "verbo": "venir",
-            "subject": {
-                "yo": "vine",
-                "tú": "viniste",
-                "él": "vino",
-                "ella": "vino",
-                "Ud.": "vino",
-                "nosotros": "vinimos",
-                "Uds.": "vinieron",
-                "ellos": "vinieron"
-            }
-        },
-        {
-            "verbo": "poder",
-            "subject": {
-                "yo": "pude",
-                "tú": "pudiste",
-                "él": "pudo",
-                "ella": "pudo",
-                "Ud.": "pudo",
-                "nosotros": "pudimos",
-                "Uds.": "pudieron",
-                "ellos": "pudieron"
-            }
+    var irrePresent = [
+    {
+        "verbo": "hacer",
+        "subject": {
+            "yo": "hago",
+            "tú": "haces",
+            "él": "hace",
+            "ella": "hace",
+            "Ud.": "hace",
+            "nosotros": "hacemos",
+            "Uds.": "hacen",
+            "ellos": "hacen"
         }
-    ]
+    },
+    {
+        "verbo": "poner",
+        "subject": {
+            "yo": "pongo",
+            "tú": "pones",
+            "él": "pone",
+            "ella": "pone",
+            "Ud.": "pone",
+            "nosotros": "ponemos",
+            "Uds.": "ponen",
+            "ellos": "ponen"
+        }
+    },
+    {
+        "verbo": "salir",
+        "subject": {
+            "yo": "salgo",
+            "tú": "sales",
+            "él": "sale",
+            "ella": "sale",
+            "Ud.": "sale",
+            "nosotros": "salimos",
+            "Uds.": "salen",
+            "ellos": "salen"
+        }
+    },
+    {
+        "verbo": "traer",
+        "subject": {
+            "yo": "traigo",
+            "tú": "traes",
+            "él": "trae",
+            "ella": "trae",
+            "Ud.": "trae",
+            "nosotros": "traemos",
+            "Uds.": "traen",
+            "ellos": "traen"
+        }  
+    },
+    {
+        "verbo": "conocer",
+        "subject": {
+            "yo": "conozco",
+            "tú": "conoces",
+            "él": "conoce",
+            "ella": "conoce",
+            "Ud.": "conoce",
+            "nosotros": "conocemos",
+            "Uds.": "conocen",
+            "ellos": "conocen"
+        }
+        
+    },
+    {
+        "verbo": "dar",
+        "subject": {
+            "yo": "doy",
+            "tú": "das",
+            "él": "da",
+            "ella": "da",
+            "Ud.": "da",
+            "nosotros": "damos",
+            "Uds.": "dan",
+            "ellos": "dan"
+        }
+    },
+    {
+        "verbo": "saber",
+        "subject": {
+            "yo": "se",
+            "tú": "sabes",
+            "él": "sabe",
+            "ella": "sabe",
+            "Ud.": "sabe",
+            "nosotros": "sabemos",
+            "Uds.": "saben",
+            "ellos": "saben"
+        }
+    },
+    {
+        "verbo": "ver",
+        "subject": {
+            "yo": "veo",
+            "tú": "ves",
+            "él": "ve",
+            "ella": "ve",
+            "Ud.": "ve",
+            "nosotros": "vemos",
+            "Uds.": "ven",
+            "ellos": "ven"
+        }
+    },
+]
+
+var conj = [
+    {
+        "verbo": "querer",
+        "subject": {
+            "yo": "quiero",
+            "tú": "quieres",
+            "él": "quiere",
+            "ella": "quiere",
+            "Ud.": "quiere",
+            "nosotros": "queremos",
+            "Uds.": "quieren",
+            "ellos": "quieren"
+        }
+    },
+    {
+        "verbo": "poder",
+        "subject": {
+            "yo": "puedo",
+            "tú": "puedes",
+            "él": "puede",
+            "ella": "puede",
+            "Ud.": "puede",
+            "nosotros": "podemos",
+            "Uds.": "pueden",
+            "ellos": "pueden"
+        }
+    },
+    {
+        "verbo": "servir",
+        "subject": {
+            "yo": "sirvo",
+            "tú": "sirves",
+            "él": "sirve",
+            "ella": "sirve",
+            "Ud.": "sirve",
+            "nosotros": "servimos",
+            "Uds.": "sirven",
+            "ellos": "sirven"
+        }
+    },
+    {
+        "verbo": "decir",
+        "subject": {
+            "yo": "digo",
+            "tú": "dices",
+            "él": "dice",
+            "ella": "dice",
+            "Ud.": "dice",
+            "nosotros": "decimos",
+            "Uds.": "dicen",
+            "ellos": "dicen"
+        }  
+    },
+    {
+        "verbo": "venir",
+        "subject": {
+            "yo": "vengo",
+            "tú": "vienes",
+            "él": "viene",
+            "ella": "viene",
+            "Ud.": "viene",
+            "nosotros": "venimos",
+            "Uds.": "vienen",
+            "ellos": "vienen"
+        }
+        
+    },
+    {
+        "verbo": "tener",
+        "subject": {
+            "yo": "tengo",
+            "tú": "tienes",
+            "él": "tiene",
+            "ella": "tiene",
+            "Ud.": "tiene",
+            "nosotros": "tenemos",
+            "Uds.": "tienen",
+            "ellos": "tienen"
+        }
+    },
+]
+
+var conjPreterito = [
+    {
+        "verbo": "hablar",
+        "subject": {
+            "yo": "hable",
+            "tú": "hablaste",
+            "él": "hablo",
+            "ella": "hablo",
+            "Ud.": "hablo",
+            "nosotros": "hablamos",
+            "Uds.": "hablaron",
+            "ellos": "hablaron"
+        }
+    },
+    {
+        "verbo": "comer",
+        "subject": {
+            "yo": "comi",
+            "tú": "comiste",
+            "él": "comio",
+            "ella": "comio",
+            "Ud.": "comio",
+            "nosotros": "comimos",
+            "Uds.": "comieron",
+            "ellos": "comieron"
+        }
+    },
+    {
+        "verbo": "practicar",
+        "subject": {
+            "yo": "practique",
+            "tú": "practicaste",
+            "él": "practico",
+            "ella": "practico",
+            "Ud.": "practico",
+            "nosotros": "practicamos",
+            "Uds.": "practicaron",
+            "ellos": "practicaron"
+        }
+    },
+    {
+        "verbo": "jugar",
+        "subject": {
+            "yo": "jugue",
+            "tú": "jugaste",
+            "él": "jugo",
+            "ella": "jugo",
+            "Ud.": "jugo",
+            "nosotros": "jugamos",
+            "Uds.": "jugaron",
+            "ellos": "jugaron"
+        }  
+    },
+    {
+        "verbo": "empezar",
+        "subject": {
+            "yo": "empece",
+            "tú": "empezaste",
+            "él": "empezo",
+            "ella": "empezo",
+            "Ud.": "empezo",
+            "nosotros": "empezamos",
+            "Uds.": "empezaron",
+            "ellos": "empezaron"
+        }
+        
+    },
+    {
+        "verbo": "cruzar",
+        "subject": {
+            "yo": "cruce",
+            "tú": "cruzaste",
+            "él": "cruzo",
+            "ella": "cruzo",
+            "Ud.": "cruzo",
+            "nosotros": "cruzamos",
+            "Uds.": "cruzaron",
+            "ellos": "cruzaron"
+        }
+    },
+    {
+        "verbo": "tocar",
+        "subject": {
+            "yo": "toque",
+            "tú": "tocaste",
+            "él": "toco",
+            "ella": "toco",
+            "Ud.": "toco",
+            "nosotros": "tocamos",
+            "Uds.": "tocaron",
+            "ellos": "tocaron"
+        }
+    },
+    {
+        "verbo": "pagar",
+        "subject": {
+            "yo": "pague",
+            "tú": "pagaste",
+            "él": "pago",
+            "ella": "pago",
+            "Ud.": "pago",
+            "nosotros": "pagamos",
+            "Uds.": "pagaron",
+            "ellos": "pagaron"
+        }
+    },
+    {
+        "verbo": "buscar",
+        "subject": {
+            "yo": "busque",
+            "tú": "buscaste",
+            "él": "busco",
+            "ella": "busco",
+            "Ud.": "busco",
+            "nosotros": "buscamos",
+            "Uds.": "buscaron",
+            "ellos": "buscaron"
+        }
+    },
+    {
+        "verbo": "llegar",
+        "subject": {
+            "yo": "llegue",
+            "tú": "llegaste",
+            "él": "llego",
+            "ella": "llego",
+            "Ud.": "llego",
+            "nosotros": "llegamos",
+            "Uds.": "llegaron",
+            "ellos": "llegaron"
+        }
+    },
+    {
+        "verbo": "salir",
+        "subject": {
+            "yo": "sali",
+            "tú": "saliste",
+            "él": "salio",
+            "ella": "salio",
+            "Ud.": "salio",
+            "nosotros": "salimos",
+            "Uds.": "salieron",
+            "ellos": "salieron"
+        }
+    },
+    {
+        "verbo": "aprender",
+        "subject": {
+            "yo": "aprendi",
+            "tú": "aprendiste",
+            "él": "aprendio",
+            "ella": "aprendio",
+            "Ud.": "aprendio",
+            "nosotros": "aprendimos",
+            "Uds.": "aprendieron",
+            "ellos": "aprendieron"
+        }
+    },
+]
+
+var conjPreteritoIrregular = [
+    {
+        "verbo": "ser",
+        "subject": {
+            "yo": "fui",
+            "tú": "fuiste",
+            "él": "fue",
+            "ella": "fue",
+            "Ud.": "fue",
+            "nosotros": "fuimos",
+            "Uds.": "fueron",
+            "ellos": "fueron"
+        }
+    },
+    {
+        "verbo": "ir",
+        "subject": {
+            "yo": "fui",
+            "tú": "fuiste",
+            "él": "fue",
+            "ella": "fue",
+            "Ud.": "fue",
+            "nosotros": "fuimos",
+            "Uds.": "fueron",
+            "ellos": "fueron"
+        }
+    },
+    {
+        "verbo": "tener",
+        "subject": {
+            "yo": "tuve",
+            "tú": "tuviste",
+            "él": "tuvo",
+            "ella": "tuvo",
+            "Ud.": "tuvo",
+            "nosotros": "tuvimos",
+            "Uds.": "tuvieron",
+            "ellos": "tuvieron"
+        }
+    },
+    {
+        "verbo": "estar",
+        "subject": {
+            "yo": "estuve",
+            "tú": "estuviste",
+            "él": "estuvo",
+            "ella": "estuvo",
+            "Ud.": "estuvo",
+            "nosotros": "estuvimos",
+            "Uds.": "estuvieron",
+            "ellos": "estuvieron"
+        }  
+    },
+    {
+        "verbo": "hacer",
+        "subject": {
+            "yo": "hice",
+            "tú": "hiciste",
+            "él": "hizo",
+            "ella": "hizo",
+            "Ud.": "hizo",
+            "nosotros": "hicimos",
+            "Uds.": "hicieron",
+            "ellos": "hicieron"
+        }
+        
+    },
+    {
+        "verbo": "querer",
+        "subject": {
+            "yo": "quise",
+            "tú": "quisiste",
+            "él": "quiso",
+            "ella": "quiso",
+            "Ud.": "quiso",
+            "nosotros": "quisimos",
+            "Uds.": "quisieron",
+            "ellos": "quisieron"
+        }
+    },
+    {
+        "verbo": "venir",
+        "subject": {
+            "yo": "vine",
+            "tú": "viniste",
+            "él": "vino",
+            "ella": "vino",
+            "Ud.": "vino",
+            "nosotros": "vinimos",
+            "Uds.": "vinieron",
+            "ellos": "vinieron"
+        }
+    },
+    {
+        "verbo": "poder",
+        "subject": {
+            "yo": "pude",
+            "tú": "pudiste",
+            "él": "pudo",
+            "ella": "pudo",
+            "Ud.": "pudo",
+            "nosotros": "pudimos",
+            "Uds.": "pudieron",
+            "ellos": "pudieron"
+        }
+    }
+]
+
+var imperfecto = [
+    {
+        "verbo": "jugar",
+        "subject": {
+            "yo": "jugaba",
+            "tú": "jugabas",
+            "él": "jugaba",
+            "ella": "jugaba",
+            "Ud.": "jugaba",
+            "nosotros": "jugabamos",
+            "Uds.": "jugaban",
+            "ellos": "jugaban"
+        }
+    },
+    {
+        "verbo": "ir",
+        "subject": {
+            "yo": "iba",
+            "tú": "ibas",
+            "él": "iba",
+            "ella": "iba",
+            "Ud.": "iba",
+            "nosotros": "ibamos",
+            "Uds.": "iban",
+            "ellos": "iban"
+        }
+    },
+    {
+        "verbo": "tener",
+        "subject": {
+            "yo": "tenia",
+            "tú": "tenias",
+            "él": "tenia",
+            "ella": "tenia",
+            "Ud.": "tenia",
+            "nosotros": "teniamos",
+            "Uds.": "tenian",
+            "ellos": "tenian"
+        }
+    },
+    {
+        "verbo": "estar",
+        "subject": {
+            "yo": "estaba",
+            "tú": "estabas",
+            "él": "estaba",
+            "ella": "estaba",
+            "Ud.": "estaba",
+            "nosotros": "estabamos",
+            "Uds.": "estaban",
+            "ellos": "estaban"
+        }  
+    },
+    {
+        "verbo": "hacer",
+        "subject": {
+            "yo": "hacia",
+            "tú": "hacias",
+            "él": "hacia",
+            "ella": "hacia",
+            "Ud.": "hacia",
+            "nosotros": "haciamos",
+            "Uds.": "hacian",
+            "ellos": "hacian"
+        }
+        
+    },
+    {
+        "verbo": "querer",
+        "subject": {
+            "yo": "queria",
+            "tú": "querias",
+            "él": "queria",
+            "ella": "queria",
+            "Ud.": "queria",
+            "nosotros": "queriamos",
+            "Uds.": "querian",
+            "ellos": "querian"
+        }
+    },
+    {
+        "verbo": "ser",
+        "subject": {
+            "yo": "era",
+            "tú": "eras",
+            "él": "era",
+            "ella": "era",
+            "Ud.": "era",
+            "nosotros": "eramos",
+            "Uds.": "eran",
+            "ellos": "eran"
+        }
+    },
+    {
+        "verbo": "ver",
+        "subject": {
+            "yo": "veia",
+            "tú": "veias",
+            "él": "veia",
+            "ella": "veia",
+            "Ud.": "veia",
+            "nosotros": "veiamos",
+            "Uds.": "veian",
+            "ellos": "veian"
+        }
+    }
+]
+ 
 
 
 
@@ -542,8 +774,12 @@
 
     // pickedVerb = conj[getRandomInt(conj.length)]
     //         pickedSubject = pickedVerb.subject
-    
+    if (tense==="presente_irregular") {
+        pickedVerb = irrePresent[getRandomInt(irrePresent.length)]
+        pickedSubject = pickedVerb.subject
+        console.log("in if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
 
+    }
     if (tense==="preterito") {
         pickedVerb = conjPreterito[getRandomInt(conjPreterito.length)]
         pickedSubject = pickedVerb.subject
@@ -558,6 +794,12 @@
     }
     if (tense==="presente") {
         pickedVerb = conj[getRandomInt(conj.length)]
+        pickedSubject = pickedVerb.subject
+        console.log("in if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
+
+    }
+    if (tense==="imperfecto") {
+        pickedVerb = imperfecto[getRandomInt(imperfecto.length)]
         pickedSubject = pickedVerb.subject
         console.log("in if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
 
