@@ -21,6 +21,7 @@
         <option value="preterito">Preterito</option>
         <option value="preterito_irregular">Preterito (irregular)</option>
         <option value="imperfecto">Imperfecto</option>
+        <option value="imperativo">Imperativo</option>
     </select><br>
     
     <b id="verbo"></b><br>
@@ -67,6 +68,9 @@
     }
     if (tense === "imperfecto"){
         tenseToBePracticed = " imperfecto"
+    }
+    if (tense === "imperativo"){
+        tenseToBePracticed = " en imperativo"
     }
 
     document.getElementById("tenseToBePracticed").innerHTML = tenseToBePracticed;
@@ -760,6 +764,91 @@ var imperfecto = [
         }
     }
 ]
+
+
+var imperativo = [
+    {
+        "verbo": "hablar",
+        "subject": {
+            "(tú)": "habla",
+            "(Ud.)": "hable",
+            "(nosotros)": "hablemos",
+            "(Uds.)": "hablen",
+        }
+    },
+    {
+        "verbo": "comer",
+        "subject": {
+            "(tú)": "come",
+            "(Ud.)": "coma",
+            "(nosotros)": "comamos",
+            "(Uds.)": "coman",
+        }
+    },
+    {
+        "verbo": "escuchar",
+        "subject": {
+            "(tú)": "escucha",
+            "(Ud.)": "escuche",
+            "(nosotros)": "escuchemos",
+            "(Uds.)": "escuchen",
+        }
+    },
+    {
+        "verbo": "hablar (negativo)",
+        "subject": {
+            "(tú)": "no hables",
+            "(Ud.)": "no hable",
+            "(nosotros)": "no hablemos",
+            "(Uds.)": "no hablen",
+        }
+    },
+    {
+        "verbo": "llamar",
+        "subject": {
+            "(tú)": "llama",
+            "(Ud.)": "llame",
+            "(nosotros)": "llamemos",
+            "(Uds.)": "llamen",
+        }
+    },
+    {
+        "verbo": "llamar (negativo)",
+        "subject": {
+            "(tú)": "no llames",
+            "(Ud.)": "no llame",
+            "(nosotros)": "no llamemos",
+            "(Uds.)": "no llamen",
+        }
+    },
+    {
+        "verbo": "limpiar (negativo)",
+        "subject": {
+            "(tú)": "no limpies",
+            "(Ud.)": "no limpie",
+            "(nosotros)": "no limpiemos",
+            "(Uds.)": "no limpien",
+        }
+    },
+    {
+        "verbo": "limpiar",
+        "subject": {
+            "(tú)": "limpia",
+            "(Ud.)": "impie",
+            "(nosotros)": "limpiemos",
+            "(Uds.)": "limpien",
+        }
+    },
+    {
+        "verbo": "reciclar",
+        "subject": {
+            "(tú)": "recicla",
+            "(Ud.)": "recicle",
+            "(nosotros)": "reciclemos",
+            "(Uds.)": "reciclen",
+        }
+    }
+]
  
 
 
@@ -804,6 +893,12 @@ var imperfecto = [
         console.log("in if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
 
     }
+    if (tense==="imperativo") {
+        pickedVerb = imperativo[getRandomInt(imperativo.length)]
+        pickedSubject = pickedVerb.subject
+        console.log("in if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
+
+    }
     console.log("out of if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
     console.log("el tiempo es " + tense)
 
@@ -813,8 +908,11 @@ var imperfecto = [
 
     verbo.innerHTML = pickedVerb.verbo;
     var subject = Object.keys(pickedSubject);
+    let count= Object.keys(pickedSubject).length; 
 
-    var pronounPicked = subject[getRandomInt(8)];
+    var pronounPicked = subject[getRandomInt(count)];
+
+    console.log("count is: " + count)
 
     console.log("pronounPicked: " + pronounPicked);
     console.log("pickedSubject[pronounPicked] " + pickedSubject[pronounPicked]);
