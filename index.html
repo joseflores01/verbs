@@ -4,47 +4,152 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script> -->
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin = "anonymous" referrerpolicy = "no-referrer"> </script>
     <script src="./phoenix.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
     <!-- <script src="./verbs.js"></script> -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <p>Practica los verbos<span id="tenseToBePracticed"></span></p>
+    
+    
+    
+    <div id="title">Spanish with Mr Flores 👨🏻‍🏫</div><br>
+    <!-- <h3>Common expressions exercise</h3> -->
 
-    <label for="tense">Choose a tense:</label>
 
+
+    
+    
+    <label for="tense">Estudiar: </label>
+    
     <select onchange="selectTense(event)" name="tense" id="tense">
-        <option value="">Change tense</option>
+        <option id="tenseToBePracticed" value="">Select topic</option>
         <option value="presente_irregular">Presente (irregular)</option>
         <option value="presente">Presente (stem-changing)</option>
         <option value="preterito">Preterito</option>
         <option value="preterito_irregular">Preterito (irregular)</option>
         <option value="imperfecto">Imperfecto</option>
         <option value="imperativo">Imperativo</option>
-    </select><br>
+        <option value="expresionesImperativo">Expresiones en imperativo</option>
+    </select>
+    <!-- <p>Practice: <span id="tenseToBePracticed"></span></p><br> -->
+    <br><br>
+    <br>
+    <div id="instruction_div">
+        <b id="exercise_title"></b><br><br>
+        <span id="instruction"></span>
+    </div><br><br>
+
+
+
+    <div id="score_div">
+        <b>Correct: </b>
+        <b id="points">0</b><b>/</b>
+        <b id="incorrect">0</b>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <!-- <b>Correct/incorrect ratio: </b> -->
     
-    <b id="verbo"></b><br>
-    <b id="subjectToShow"></b>
-    <input type="text" id="verboConjugado" >
+        <b>Score: </b>
+        <b id="ratio">-</b>
+
+        &nbsp;
+        &nbsp;
+        &nbsp;
+
+
+        <b>Grade: </b>
+        <b id="grade">-</b>
+        <!-- <b id="fScore">0</b><br> -->
+
+
+
+    </div><br><br>
+
+
+
+
+
+
+    
+    <div id="phrase_div">
+        <div id="verb_div">
+            <b id="verbo" onclick="showVerbHint()"></b><br>
+            <b id="verbo_hint"></b><br><br>
+        </div>
+        <div id="complement_div">
+            <b id="complement" onclick="showHint()"></b><br>
+            <b id="complement_hint"></b><br><br>
+        </div>
+    <br>
+    <b id="subjectToShow"></b><br>
+    <input type="text" placeholder="answer" id="verboConjugado">
+    <br><b id="correctAnswer"></b>
     <!-- <button onclick="myFunction()">Try it</button> -->
-    <b id="fb"></b><br>
-    <b>Correct: </b>
-    <b id="points">0</b>
-    <b>incorrect: </b>
-    <b id="incorrect">0</b><br><br>
-    <b>Correct/incorrect ratio: </b>
-    <b id="ratio"></b><br>
-    <b>Final Score: </b>
-    <b id="fScore">0</b><br>
+    <br><b id="fb"></b><br>
+    <!-- <button>reveal answer</button><br><br> -->
+    <br><button onclick="showAnswerDialog()">👻 Reveal answer</button><br><br>
+    <!-- <div id="hide" class="modal_answer">
+        <span>👻 Hey!</span><br>
+        <span>I will tell you the answer</span><br>
+        <button>Reveal answer 💰x 20</button>
+        <button>Decline</button>
+    </div> -->
+
+    <dialog id="modal_answer">
+        <span>👻 Hey!</span><br>
+        <span>I will tell you the answer</span><br><br>
+        <button id="answerButton" disabled onclick="getAnswer()">Reveal answer 💰x 10</button>
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <button onclick="closeAnswerDialog()">Decline</button>
+    </dialog>
+      
+
+    
+
+
+    <br>
+    <b>lifesavers:</b>
+    <b id="lifesavers3">🛟</b>
+    <b id="lifesavers2">🛟</b>
+    <b id="lifesavers1">🛟</b>
+    
+    
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <b id="coins">💰</b><b id="coinsForHint"></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <b>Progress: </b><b id="fScore">0</b><b>%</b><br><br>
+
+    
+    <br><br>
+
+
     <input type="text" placeholder="Nombre" id="nombre" onkeyup="success()">
     <button type = "button" disabled id="fileButon" onclick = "CreateTextFile();">Crear reporte</button>
+    <div></div>
 
     <!-- <button onclick="generatePDF()">print Pdf</button> -->
+
+
+
+
+    </div>
+
+
+    
 </body>
 <script>
+    var hintNum = 20;
+    var hintUsed = false;
+    var lifesavers = 3;
     var score = Number(0);
     var finalScore = Number(0);
+    var grade = 0;
     var negScore = Number(0);
     var verbosMistakes = {};
     var fina100score = 0;
@@ -70,10 +175,53 @@
         tenseToBePracticed = " imperfecto"
     }
     if (tense === "imperativo"){
-        tenseToBePracticed = " en imperativo"
+        tenseToBePracticed = " imperativo"
+    }
+    if (tense === "expresionesImperativo"){
+        tenseToBePracticed = "Expresiones en imperativo"
     }
 
     document.getElementById("tenseToBePracticed").innerHTML = tenseToBePracticed;
+
+
+
+    
+
+
+    function showAnswerDialog() {
+        // alert()
+        var modal = document.getElementById("modal_answer")
+
+
+
+        if (hintNum >= 10) {
+            document.getElementById("answerButton").disabled= false;
+        }
+        else {
+            document.getElementById("answerButton").disabled= true;
+        }
+
+
+        modal.show()
+    }
+
+    function closeAnswerDialog() {
+        var modal = document.getElementById("modal_answer")
+        modal.close()
+
+    }
+    function getAnswer() {
+
+        hintNum = hintNum -10;
+        document.getElementById("coinsForHint").innerHTML = hintNum
+        document.getElementById("correctAnswer").innerHTML = correctAnswer
+        closeAnswerDialog()
+        
+
+    }
+
+
+
 
     function success() {
         if(document.getElementById("nombre").value==="") { 
@@ -91,6 +239,9 @@
         fina100score = 0;
         tense = localStorage.getItem("selectedTense");
         verboConjugado = "";
+        complementHint = "";
+        correctAnswer = "";
+        verbHint = "";
         console.log("reset everything")
         onload()
 
@@ -137,9 +288,9 @@
         var format = formater(name)
 
 
-        var message1 = `${name}, debes terminar el ejercicio y obtener 100 puntos.\n\nHas obtenido ${fina100score} pts\n\n¡Sigue practicando!`
-        var message2 = `¡Muy bien, ${name}!\n\n¡Obtuviste ${fina100score} pts!\n${score} correctas y ${negScore} incorrecta(s)\n\n\nObservé algunos detalles en estos verbos:\n\n  ${Object.keys(verbosMistakes)}\n\nLa práctica continua te ayudará a perfeccionarlos.\n `
-        var message3 = `¡${name}, lo has hecho perfecto!\n\n¡Obtuviste ${fina100score} pts sin ningún error!\n\n Practicate ${score} verbos`
+        var message1 = `${name}, debes terminar el ejercicio.\n\nHas completado un ${fina100score}%\n\n¡Sigue practicando!`
+        var message2 = `¡Muy bien, ${name}!\n\n¡Obtuviste ${grade} pts!\n${score} correctas y ${negScore} incorrecta(s)\n\n\nObservé algunos detalles en estos verbos:\n\n  ${Object.keys(verbosMistakes)}\n\nLa práctica continua te ayudará a perfeccionarlos.\n `
+        var message3 = `¡${name}, lo has hecho perfecto!\n\n¡Obtuviste ${grade} pts sin ningún error!\n\n Practicate ${score} verbos`
         var practiceMessage = `\n\nFecha: ${date}  Tiempo gramatical (Grammar tense): ${tense}`
         var finalmessage ="dd0";
 
@@ -174,9 +325,59 @@
         saveAs(blob, "download.txt");
     }
 
+    
+    
+    function showHint() {
+        if(hintNum > 0 ) {
+    
+            hintUsed = true;
+            hintNum--;
+            document.getElementById("coinsForHint").innerHTML = hintNum
+            var hintMessage = document.getElementById("complement_hint");
+            hintMessage.innerHTML = complementHint
+        }
+    }
+
+    
+
+    function showVerbHint() {
+        if(hintNum > 0) { 
+            hintNum--;
+            hintUsed = true;
+            document.getElementById("coinsForHint").innerHTML = hintNum
+            var hintMessage = document.getElementById("verbo_hint");
+            hintMessage.innerHTML = verbHint
+        }
+
+    }
+
+    function clearHint() {
+        hintUsed = false;
+        var verbMessage = document.getElementById("verbo_hint");
+        var hintMessage = document.getElementById("complement_hint");
+        verbMessage.innerHTML = ""
+        hintMessage.innerHTML = ""
+
+    }
+
+    function clearPreviousAnswer() {
+        document.getElementById("correctAnswer").innerHTML = ""
+    }
 
 
+    
+    
+  
     onload = function() {
+        clearHint()
+        clearPreviousAnswer()
+        document.getElementById("coinsForHint").innerHTML = hintNum
+        // var hintMessage = document.getElementById("verbo_hint");
+        // var hintMessage = document.getElementById("complement_hint");
+        // hintMessage.innerHTML = ""
+        // hintMessage.innerHTML = ""
+
+
 
 
         
@@ -196,12 +397,18 @@
 
         document.getElementById("fb").innerHTML = ""
         console.log("again")
-        var verbo = document.getElementById ("verbo");
-    var subjectToShow = document.getElementById("subjectToShow")
+        var verbo = document.getElementById("verbo");
+        var complement = document.getElementById("complement"); 
+        var subjectToShow = document.getElementById("subjectToShow");
 
-    var irrePresent = [
+
+        var irrePresent = {
+            "exercice": [
     {
         "verbo": "hacer",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "hago",
             "tú": "haces",
@@ -215,6 +422,9 @@
     },
     {
         "verbo": "poner",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "pongo",
             "tú": "pones",
@@ -228,6 +438,9 @@
     },
     {
         "verbo": "salir",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "salgo",
             "tú": "sales",
@@ -241,6 +454,9 @@
     },
     {
         "verbo": "traer",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "traigo",
             "tú": "traes",
@@ -254,6 +470,9 @@
     },
     {
         "verbo": "conocer",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "conozco",
             "tú": "conoces",
@@ -268,6 +487,9 @@
     },
     {
         "verbo": "dar",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "doy",
             "tú": "das",
@@ -281,6 +503,9 @@
     },
     {
         "verbo": "saber",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "se",
             "tú": "sabes",
@@ -294,6 +519,9 @@
     },
     {
         "verbo": "ver",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "veo",
             "tú": "ves",
@@ -306,10 +534,15 @@
         }
     },
 ]
+        }
 
-var conj = [
+var conj = {
+    "exercice": [
     {
         "verbo": "querer",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "quiero",
             "tú": "quieres",
@@ -323,6 +556,9 @@ var conj = [
     },
     {
         "verbo": "poder",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "puedo",
             "tú": "puedes",
@@ -336,6 +572,9 @@ var conj = [
     },
     {
         "verbo": "servir",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "sirvo",
             "tú": "sirves",
@@ -349,6 +588,9 @@ var conj = [
     },
     {
         "verbo": "decir",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "digo",
             "tú": "dices",
@@ -362,6 +604,9 @@ var conj = [
     },
     {
         "verbo": "venir",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "vengo",
             "tú": "vienes",
@@ -376,6 +621,9 @@ var conj = [
     },
     {
         "verbo": "tener",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "tengo",
             "tú": "tienes",
@@ -388,10 +636,15 @@ var conj = [
         }
     },
 ]
+}
 
-var conjPreterito = [
+var conjPreterito = {
+    "exercice": [
     {
         "verbo": "hablar",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "hable",
             "tú": "hablaste",
@@ -405,6 +658,9 @@ var conjPreterito = [
     },
     {
         "verbo": "comer",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "comi",
             "tú": "comiste",
@@ -418,6 +674,9 @@ var conjPreterito = [
     },
     {
         "verbo": "practicar",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "practique",
             "tú": "practicaste",
@@ -431,6 +690,9 @@ var conjPreterito = [
     },
     {
         "verbo": "jugar",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "jugue",
             "tú": "jugaste",
@@ -444,6 +706,9 @@ var conjPreterito = [
     },
     {
         "verbo": "empezar",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "empece",
             "tú": "empezaste",
@@ -458,6 +723,9 @@ var conjPreterito = [
     },
     {
         "verbo": "cruzar",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "cruce",
             "tú": "cruzaste",
@@ -471,6 +739,9 @@ var conjPreterito = [
     },
     {
         "verbo": "tocar",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "toque",
             "tú": "tocaste",
@@ -484,6 +755,9 @@ var conjPreterito = [
     },
     {
         "verbo": "pagar",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "pague",
             "tú": "pagaste",
@@ -497,6 +771,9 @@ var conjPreterito = [
     },
     {
         "verbo": "buscar",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "busque",
             "tú": "buscaste",
@@ -510,6 +787,9 @@ var conjPreterito = [
     },
     {
         "verbo": "llegar",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "llegue",
             "tú": "llegaste",
@@ -523,6 +803,9 @@ var conjPreterito = [
     },
     {
         "verbo": "salir",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "sali",
             "tú": "saliste",
@@ -536,6 +819,9 @@ var conjPreterito = [
     },
     {
         "verbo": "aprender",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "aprendi",
             "tú": "aprendiste",
@@ -548,10 +834,15 @@ var conjPreterito = [
         }
     },
 ]
+}
 
-var conjPreteritoIrregular = [
+var conjPreteritoIrregular = {
+    "exercice": [
     {
         "verbo": "ser",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "fui",
             "tú": "fuiste",
@@ -565,6 +856,9 @@ var conjPreteritoIrregular = [
     },
     {
         "verbo": "ir",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "fui",
             "tú": "fuiste",
@@ -578,6 +872,9 @@ var conjPreteritoIrregular = [
     },
     {
         "verbo": "tener",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "tuve",
             "tú": "tuviste",
@@ -591,6 +888,9 @@ var conjPreteritoIrregular = [
     },
     {
         "verbo": "estar",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "estuve",
             "tú": "estuviste",
@@ -604,6 +904,9 @@ var conjPreteritoIrregular = [
     },
     {
         "verbo": "hacer",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "hice",
             "tú": "hiciste",
@@ -618,6 +921,9 @@ var conjPreteritoIrregular = [
     },
     {
         "verbo": "querer",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "quise",
             "tú": "quisiste",
@@ -631,6 +937,9 @@ var conjPreteritoIrregular = [
     },
     {
         "verbo": "venir",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "vine",
             "tú": "viniste",
@@ -644,6 +953,9 @@ var conjPreteritoIrregular = [
     },
     {
         "verbo": "poder",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "pude",
             "tú": "pudiste",
@@ -656,10 +968,15 @@ var conjPreteritoIrregular = [
         }
     }
 ]
+}
 
-var imperfecto = [
+var imperfecto = {
+    "exercice": [
     {
         "verbo": "jugar",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "jugaba",
             "tú": "jugabas",
@@ -673,6 +990,9 @@ var imperfecto = [
     },
     {
         "verbo": "ir",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "iba",
             "tú": "ibas",
@@ -686,6 +1006,9 @@ var imperfecto = [
     },
     {
         "verbo": "tener",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "tenia",
             "tú": "tenias",
@@ -699,6 +1022,9 @@ var imperfecto = [
     },
     {
         "verbo": "estar",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "estaba",
             "tú": "estabas",
@@ -712,6 +1038,9 @@ var imperfecto = [
     },
     {
         "verbo": "hacer",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "hacia",
             "tú": "hacias",
@@ -726,6 +1055,9 @@ var imperfecto = [
     },
     {
         "verbo": "querer",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "queria",
             "tú": "querias",
@@ -739,6 +1071,9 @@ var imperfecto = [
     },
     {
         "verbo": "ser",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "era",
             "tú": "eras",
@@ -752,6 +1087,9 @@ var imperfecto = [
     },
     {
         "verbo": "ver",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "yo": "veia",
             "tú": "veias",
@@ -764,11 +1102,22 @@ var imperfecto = [
         }
     }
 ]
+}
 
 
-var imperativo = [
-    {
+var imperativo = {
+    "exercise_title": "Conjugación en imperativo",
+    "intro": "An imperative is a verb form used to give commands, requests, or instructions, typically expressed in the base form without specifying the subject.",
+    "instruction": "Conjuga el verbo",
+    "exercice": [
+     {
         "verbo": "hablar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "(tú)": "habla",
             "(Ud.)": "hable",
@@ -778,6 +1127,9 @@ var imperativo = [
     },
     {
         "verbo": "comer",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "(tú)": "come",
             "(Ud.)": "coma",
@@ -787,6 +1139,9 @@ var imperativo = [
     },
     {
         "verbo": "escuchar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "(tú)": "escucha",
             "(Ud.)": "escuche",
@@ -796,6 +1151,9 @@ var imperativo = [
     },
     {
         "verbo": "hablar (negativo)",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "(tú)": "no hables",
             "(Ud.)": "no hable",
@@ -805,6 +1163,9 @@ var imperativo = [
     },
     {
         "verbo": "llamar",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "(tú)": "llama",
             "(Ud.)": "llame",
@@ -814,6 +1175,9 @@ var imperativo = [
     },
     {
         "verbo": "llamar (negativo)",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "(tú)": "no llames",
             "(Ud.)": "no llame",
@@ -823,6 +1187,9 @@ var imperativo = [
     },
     {
         "verbo": "limpiar (negativo)",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "(tú)": "no limpies",
             "(Ud.)": "no limpie",
@@ -832,6 +1199,9 @@ var imperativo = [
     },
     {
         "verbo": "limpiar",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "(tú)": "limpia",
             "(Ud.)": "limpie",
@@ -841,6 +1211,9 @@ var imperativo = [
     },
     {
         "verbo": "reciclar",
+                "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
         "subject": {
             "(tú)": "recicla",
             "(Ud.)": "recicle",
@@ -849,6 +1222,216 @@ var imperativo = [
         }
     }
 ]
+   
+}
+ 
+
+
+var expresionesImperativo = {
+    "exercise_title": "Expresiones en imperativo",
+    "intro": "An imperative is a verb form used to give commands, requests, or instructions, typically expressed in the base form without specifying the subject.",
+    "instruction": "Translate the English phrase into Spanish. If you need help, click on the verb or complement. Each click will cost you virtual coins. You'll earn more coins by completing exercises without hints.",
+    "exercice": [
+    {
+        "verbo": "don't be",
+        "complement": "rude",
+        "hint_complement": "grocero(s)",
+        "hint_verb": "no seas/sea/sean",
+        "subject": {
+            "(tú)": "no seas grocero",
+            "(Ud.)": "no sea grocero",
+            "(Uds.)": "no sean groceros",
+        }
+    },
+    {
+        "verbo": "be",
+        "complement": "nice to your friends",
+        "hint_complement": "amable(s) con tus/sus amigos",
+        "hint_verb": "se/sea/sean",
+        "subject": {
+            "(tú)": "se amable con tus amigos",
+            "(Ud.)": "sea amable con sus amigos",
+            "(Uds.)": "sean amables con sus amigos",
+        }
+    },
+    {
+        "verbo": "get out",
+        "complement": "of here",
+        "hint_complement": "de aqui",
+        "hint_verb": "no seas/sea/sean",
+        "subject": {
+            "(tú)": "sal de aqui",
+            "(Ud.)": "salga de aqui",
+            "(Uds.)": "salgan de aqui",
+        }
+    },
+    {
+        "verbo": "be",
+        "complement": "patient",
+        "hint_complement": "paciente",
+        "hint_verb":  "se/sea/sean",
+        "subject": {
+            "(tú)": "se paciente",
+            "(Ud.)": "sea paciente",
+            "(Uds.)": "sean pacientes",
+        }
+    },
+    {
+        "verbo": "get out",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb":  "sal/salga/salgan",
+        "subject": {
+            "(tú)": "sal",
+            "(Ud.)": "salga",
+            "(Uds.)": "salgan",
+        }
+    },
+    {
+        "verbo": "shut",
+        "complement": "the door",
+        "hint_complement": "la puerta",
+        "hint_verb":  "cierra/cierre/cierren",
+        "subject": {
+            "(tú)": "cierra la puerta",
+            "(Ud.)": "cierre la puerta",
+            "(Uds.)": "cierren la puerta",
+        }
+    },
+    {
+        "verbo": "don't close",
+        "complement": "the door",
+        "hint_complement": "la puerta",
+        "hint_verb":  "no cierres/cierre/cierren",
+        "subject": {
+            "(tú)": "no cierres la puerta",
+            "(Ud.)": "no cierre la puerta",
+            "(Uds.)": "no cierren la puerta",
+        }
+    },
+    {
+        "verbo": "drive",
+        "complement": "carefully",
+        "hint_complement": "con cuidado",
+        "hint_verb":  "conduce/conduzca/conduzcan",
+        "subject": {
+            "(tú)": "conduce con cuidado",
+            "(Ud.)": "conduzca con cuidado",
+            "(Uds.)": "conduzcan con cuidado",
+        }
+    },
+    {
+        "verbo": "be",
+        "complement": "careful",
+        "hint_complement": "cuidado",
+        "hint_verb":  "ten/tenga/tengan",
+        "subject": {
+            "(tú)": "ten cuidado",
+            "(Ud.)": "tenga cuidado",
+            "(Uds.)": "tengan cuidado",
+        }
+    },
+    {
+        "verbo": "do",
+        "complement": "your homework",
+        "hint_complement": "tu/su tarea",
+        "hint_verb":  "haz/haga/hagan",
+        "subject": {
+            "(tú)": "haz tu tarea",
+            "(Ud.)": "haga su tarea",
+        }
+    },
+    {
+        "verbo": "clean",
+        "complement": "your room",
+        "hint_complement": "tu/su habitacion",
+        "hint_verb":  "limpia/limpie/limpien",
+        "subject": {
+            "(tú)": "limpia tu habitacion",
+            "(Ud.)": "limpie su habitacion",
+        }
+    },
+    {
+        "verbo": "don't touch",
+        "complement": "the hot stove",
+        "hint_complement": "la estufa caliente",
+        "hint_verb":  "no toques/toque/toquen",
+        "subject": {
+            "(tú)": "no toques la estufa caliente",
+            "(Ud.)": "no toque la estufa caliente",
+            "(Uds.)": "no toquen la estufa caliente",
+        }
+    },
+    {
+        "verbo": "eat",
+        "complement": "your vegetables",
+        "hint_complement": "tus/sus vegetales",
+        "hint_verb":  "come/coma/coman",
+        "subject": {
+            "(tú)": "come tus vegetales",
+            "(Ud.)": "coma sus vegetales",
+            "(Uds.)": "coman sus vegetales",
+        }
+    },
+    {
+        "verbo": "pass",
+        "complement": "the salt",
+        "hint_complement": "la sal",
+        "hint_verb":  "pasa/pase/pasen",
+        "subject": {
+            "(tú)": "pasa la sal",
+            "(Ud.)": "pase la sal",
+            "(Uds.)": "pasen la sal",
+        }
+    },
+    {
+        "verbo": "let's grab",
+        "complement": "a coffee",
+        "hint_complement": "un cafe",
+        "hint_verb":  "tomar",
+        "subject": {
+            "(nosotros)": "tomemos un cafe",
+
+        }
+    },
+    {
+        "verbo": "let's talk",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb":  "hablar",
+        "subject": {
+            "(nosotros)": "hablemos",
+
+        }
+    },
+    {
+        "verbo": "let's make",
+        "complement": "a plan",
+        "hint_complement": "un plan",
+        "hint_verb":  "hacer",
+        "subject": {
+            "(nosotros)": "hagamos un plan",
+
+        }
+    },
+    {
+        "verbo": "let's goh",
+        "complement": "to the beach",
+        "hint_complement": "a la playa",
+        "hint_verb":  "ir",
+        "subject": {
+            "(nosotros)": "vamos a la playa",
+
+        }
+    },
+]
+
+}
+
+
+
+
+
  
 
 
@@ -860,41 +1443,63 @@ var imperativo = [
 
     var pickedVerb;
     var pickedSubject;
+    var exercise_title;
+    var exercise_instruction;
 
     // pickedVerb = conj[getRandomInt(conj.length)]
     //         pickedSubject = pickedVerb.subject
     if (tense==="presente_irregular") {
-        pickedVerb = irrePresent[getRandomInt(irrePresent.length)]
+        exercise_title = irrePresent.exercise_title
+        exercise_instruction = irrePresent.instruction
+        pickedVerb = irrePresent.exercice[getRandomInt(irrePresent.exercice.length)]
         pickedSubject = pickedVerb.subject
         console.log("in if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
 
     }
     if (tense==="preterito") {
-        pickedVerb = conjPreterito[getRandomInt(conjPreterito.length)]
+        exercise_title = conjPreterito.exercise_title
+        exercise_instruction = conjPreterito.instruction
+        pickedVerb = conjPreterito.exercice[getRandomInt(conjPreterito.exercice.length)]
         pickedSubject = pickedVerb.subject
         console.log("in if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
 
     }
     if (tense==="preterito_irregular") {
-        pickedVerb = conjPreteritoIrregular[getRandomInt(conjPreteritoIrregular.length)]
+        exercise_title = conjPreteritoIrregular.exercise_title
+        exercise_instruction = conjPreteritoIrregular.instruction
+        pickedVerb = conjPreteritoIrregular.exercice[getRandomInt(conjPreteritoIrregular.exercice.length)]
         pickedSubject = pickedVerb.subject
         console.log("in if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
 
     }
     if (tense==="presente") {
-        pickedVerb = conj[getRandomInt(conj.length)]
+        exercise_title = conj.exercise_title
+        exercise_instruction = conj.instruction
+        pickedVerb = conj.exercice[getRandomInt(conj.exercice.length)]
         pickedSubject = pickedVerb.subject
         console.log("in if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
 
     }
     if (tense==="imperfecto") {
-        pickedVerb = imperfecto[getRandomInt(imperfecto.length)]
+        exercise_title = imperfecto.exercise_title
+        exercise_instruction = imperfecto.instruction
+        pickedVerb = imperfecto.exercice[getRandomInt(imperfecto.exercice.length)]
         pickedSubject = pickedVerb.subject
         console.log("in if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
 
     }
     if (tense==="imperativo") {
-        pickedVerb = imperativo[getRandomInt(imperativo.length)]
+        exercise_title = imperativo.exercise_title
+        exercise_instruction = imperativo.instruction
+        pickedVerb = imperativo.exercice[getRandomInt(imperativo.exercice.length)]
+        pickedSubject = pickedVerb.subject
+        console.log("in if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
+
+    }
+    if (tense==="expresionesImperativo") {
+        exercise_title = expresionesImperativo.exercise_title
+        exercise_instruction = expresionesImperativo.instruction
+        pickedVerb = expresionesImperativo.exercice[getRandomInt(expresionesImperativo.exercice.length)]
         pickedSubject = pickedVerb.subject
         console.log("in if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
 
@@ -902,13 +1507,18 @@ var imperativo = [
     console.log("out of if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
     console.log("el tiempo es " + tense)
 
-    
 
+   
+
+    document.getElementById("exercise_title").innerHTML = exercise_title
+    document.getElementById("instruction").innerHTML = exercise_instruction
 
 
     verbo.innerHTML = pickedVerb.verbo;
+    complement.innerHTML = "&nbsp;" + pickedVerb.complement;
     var subject = Object.keys(pickedSubject);
     let count= Object.keys(pickedSubject).length; 
+
 
     var pronounPicked = subject[getRandomInt(count)];
 
@@ -920,7 +1530,20 @@ var imperativo = [
     subjectToShow.innerHTML = pronounPicked;
 
 
+    complementHint = pickedVerb.hint_complement
+    verbHint = pickedVerb.hint_verb
+    correctAnswer = pickedSubject[pronounPicked]
+
+
     var flag = false;
+
+
+
+
+
+
+
+
    
 
 
@@ -929,12 +1552,22 @@ var imperativo = [
     if (event.key === 'Enter') {
         verboConjugado = document.getElementById("verboConjugado").value;
 
+
+
         console.log(verboConjugado +  "=" + pickedSubject[pronounPicked])
         if (verboConjugado.toLowerCase() === pickedSubject[pronounPicked]){
             document.getElementById("fb").innerHTML = "Correct"
             score++
             points.innerHTML = score;
             finalScore = finalScore + 2
+
+
+
+            if (hintUsed === false) {
+                hintNum++
+                document.getElementById("coinsForHint").innerHTML = hintNum
+            }
+
   
             pickedSubject[pronounPicked] = null
             console.log("before load" + verboConjugado +  "=" + pickedSubject[pronounPicked])
@@ -951,23 +1584,58 @@ var imperativo = [
             // cosole.log("if (verboConjugado !== pickedSubject[pronounPicked] && pickedSubject[pronounPicked] !== null && flag === false) " + verboConjugado + " " + pickedSubject[pronounPicked] + " " + pickedSubject[pronounPicked] + " " + flag)
             console.log("inside else pickedSubject[pronounPicked] = " + pickedSubject[pronounPicked] )
         
-            document.getElementById("fb").innerHTML = "wrong"
+            document.getElementById("fb").innerHTML = "incorrect"
             verbosMistakes[pickedVerb.verbo] = "err"
-            negScore++
-            incorrect.innerHTML = negScore;
+
+            lifesavers--
+            if (lifesavers === 2) {
+                document.getElementById("lifesavers1").setAttribute("id", "drop");
+
+            }
+            if (lifesavers === 1) {
+                document.getElementById("lifesavers2").setAttribute("id", "drop");
+
+            }
+            if (lifesavers === 0) {
+                document.getElementById("lifesavers3").setAttribute("id", "drop");
+
+            }
             flag = true;
-            finalScore = finalScore -4
+            
+            
+            if (lifesavers < 0) {
+                negScore++
+                incorrect.innerHTML = negScore;
+                
+                finalScore = finalScore -4
+            }
         }
 
         fina100score = finalScore;
+
+       
+
+
         
 
  
 
 
       // Your custom function or code here
-      document.getElementById("ratio").innerHTML = (score / (score + negScore)) * 100
+      document.getElementById("ratio").innerHTML = ((score / (score + negScore)) * 100).toFixed(2)
       document.getElementById("fScore").innerHTML = finalScore
+
+        
+      if (finalScore <= 110) {
+        // calculate grade
+        grade = (((score / (score + negScore)) * 100) * finalScore/100).toFixed(2)
+
+          document.getElementById("grade").innerHTML = grade;
+      }
+
+
+
+
       console.log('Enter key pressed!');
     }
   });
