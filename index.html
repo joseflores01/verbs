@@ -12,6 +12,12 @@
     <title>Document</title>
 </head>
 <body>
+    <audio id="pfb-mp3">
+        <source src="./p-fb.mp3" type="audio/mp3">
+    </audio>
+    <audio id="nfb-mp3">
+        <source src="./n-fb.mp3" type="audio/mp3">
+    </audio>
     
     
     
@@ -156,6 +162,9 @@
     var tense = localStorage.getItem("selectedTense");
     var verboConjugado = "";
     var tenseToBePracticed = ""
+    var audioFB = document.getElementById("pfb-mp3");
+    var audioNegFB = document.getElementById("nfb-mp3");
+
 
 
 
@@ -1234,46 +1243,46 @@ var expresionesImperativo = {
     "exercice": [
     {
         "verbo": "don't be",
-        "complement": "rude",
+        "complement": "rude!",
         "hint_complement": "grosero(s)",
         "hint_verb": "no seas/sea/sean",
         "subject": {
-            "(tú)": "no seas grosero",
-            "(Ud.)": "no sea grosero",
-            "(Uds.)": "no sean groseros",
+            "(tú)": "¡no seas grosero!",
+            "(Ud.)": "¡no sea grosero!",
+            "(Uds.)": "¡no sean groseros!",
         }
     },
     {
         "verbo": "be",
-        "complement": "nice to your friends",
+        "complement": "nice to your friends!",
         "hint_complement": "amable(s) con tus/sus amigos",
         "hint_verb": "se/sea/sean",
         "subject": {
-            "(tú)": "se amable con tus amigos",
-            "(Ud.)": "sea amable con sus amigos",
-            "(Uds.)": "sean amables con sus amigos",
+            "(tú)": "¡sé amable con tus amigos!",
+            "(Ud.)": "¡sea amable con sus amigos!",
+            "(Uds.)": "¡sean amables con sus amigos!",
         }
     },
     {
         "verbo": "get out",
-        "complement": "of here",
-        "hint_complement": "de aqui",
+        "complement": "of here!",
+        "hint_complement": "de aquí",
         "hint_verb": "sal/salga/salgan",
         "subject": {
-            "(tú)": "sal de aqui",
-            "(Ud.)": "salga de aqui",
-            "(Uds.)": "salgan de aqui",
+            "(tú)": "¡sal de aquí!",
+            "(Ud.)": "¡salga de aquí!",
+            "(Uds.)": "¡salgan de aquí!",
         }
     },
     {
         "verbo": "be",
-        "complement": "patient",
+        "complement": "patient!",
         "hint_complement": "paciente(s)",
         "hint_verb":  "se/sea/sean",
         "subject": {
-            "(tú)": "se paciente",
-            "(Ud.)": "sea paciente",
-            "(Uds.)": "sean pacientes",
+            "(tú)": "¡sé paciente!",
+            "(Ud.)": "¡sea paciente!",
+            "(Uds.)": "¡sean pacientes!",
         }
     },
     {
@@ -1289,13 +1298,13 @@ var expresionesImperativo = {
     },
     {
         "verbo": "shut",
-        "complement": "the door",
+        "complement": "the door!",
         "hint_complement": "la puerta",
         "hint_verb":  "cierra/cierre/cierren",
         "subject": {
-            "(tú)": "cierra la puerta",
-            "(Ud.)": "cierre la puerta",
-            "(Uds.)": "cierren la puerta",
+            "(tú)": "¡cierra la puerta!",
+            "(Ud.)": "¡cierre la puerta!",
+            "(Uds.)": "¡cierren la puerta!",
         }
     },
     {
@@ -1322,105 +1331,105 @@ var expresionesImperativo = {
     },
     {
         "verbo": "be",
-        "complement": "careful",
+        "complement": "careful!",
         "hint_complement": "cuidado",
         "hint_verb":  "ten/tenga/tengan",
         "subject": {
-            "(tú)": "ten cuidado",
-            "(Ud.)": "tenga cuidado",
-            "(Uds.)": "tengan cuidado",
+            "(tú)": "¡ten cuidado!",
+            "(Ud.)": "¡tenga cuidado!",
+            "(Uds.)": "¡tengan cuidado!",
         }
     },
     {
         "verbo": "do",
-        "complement": "your homework",
+        "complement": "your homework!",
         "hint_complement": "tu/su tarea",
         "hint_verb":  "haz/haga/hagan",
         "subject": {
-            "(tú)": "haz tu tarea",
-            "(Ud.)": "haga su tarea",
+            "(tú)": "¡haz tu tarea!",
+            "(Ud.)": "¡haga su tarea!",
         }
     },
     {
         "verbo": "clean",
-        "complement": "your room",
-        "hint_complement": "tu/su habitacion",
+        "complement": "your room!",
+        "hint_complement": "tu/su habitación",
         "hint_verb":  "limpia/limpie/limpien",
         "subject": {
-            "(tú)": "limpia tu habitacion",
-            "(Ud.)": "limpie su habitacion",
+            "(tú)": "¡limpia tu habitación!",
+            "(Ud.)": "¡limpie su habitación!",
         }
     },
     {
         "verbo": "don't touch",
-        "complement": "the hot stove",
+        "complement": "the hot stove!",
         "hint_complement": "la estufa caliente",
         "hint_verb":  "no toques/toque/toquen",
         "subject": {
-            "(tú)": "no toques la estufa caliente",
-            "(Ud.)": "no toque la estufa caliente",
-            "(Uds.)": "no toquen la estufa caliente",
+            "(tú)": "¡no toques la estufa caliente!",
+            "(Ud.)": "¡no toque la estufa caliente!",
+            "(Uds.)": "¡no toquen la estufa caliente!",
         }
     },
     {
         "verbo": "eat",
-        "complement": "your vegetables",
+        "complement": "your vegetables!",
         "hint_complement": "tus/sus vegetales",
         "hint_verb":  "come/coma/coman",
         "subject": {
-            "(tú)": "come tus vegetales",
-            "(Ud.)": "coma sus vegetales",
-            "(Uds.)": "coman sus vegetales",
+            "(tú)": "¡come tus vegetales!",
+            "(Ud.)": "¡coma sus vegetales!",
+            "(Uds.)": "¡coman sus vegetales!",
         }
     },
     {
         "verbo": "pass",
-        "complement": "the salt",
+        "complement": "the salt!",
         "hint_complement": "la sal",
         "hint_verb":  "pasa/pase/pasen",
         "subject": {
-            "(tú)": "pasa la sal",
-            "(Ud.)": "pase la sal",
-            "(Uds.)": "pasen la sal",
+            "(tú)": "¡pasa la sal!",
+            "(Ud.)": "¡pase la sal!",
+            "(Uds.)": "¡pasen la sal!",
         }
     },
     {
         "verbo": "let's grab",
-        "complement": "a coffee",
-        "hint_complement": "un cafe",
+        "complement": "a coffee!",
+        "hint_complement": "un café",
         "hint_verb":  "tomar",
         "subject": {
-            "(nosotros)": "tomemos un cafe",
+            "(nosotros)": "¡tomemos un café!",
 
         }
     },
     {
-        "verbo": "let's talk",
+        "verbo": "let's talk!",
         "complement": "",
         "hint_complement": "",
         "hint_verb":  "hablar",
         "subject": {
-            "(nosotros)": "hablemos",
+            "(nosotros)": "¡hablemos!",
 
         }
     },
     {
         "verbo": "let's make",
-        "complement": "a plan",
+        "complement": "a plan!",
         "hint_complement": "un plan",
         "hint_verb":  "hacer",
         "subject": {
-            "(nosotros)": "hagamos un plan",
+            "(nosotros)": "¡hagamos un plan!",
 
         }
     },
     {
         "verbo": "let's go",
-        "complement": "to the beach",
+        "complement": "to the beach!",
         "hint_complement": "a la playa",
         "hint_verb":  "ir",
         "subject": {
-            "(nosotros)": "vamos a la playa",
+            "(nosotros)": "¡vamos a la playa!",
 
         }
     },
@@ -1543,7 +1552,7 @@ var expresionesImperativo = {
 
 
 
-
+    const regex = /¡|!/g;
    
 
 
@@ -1552,10 +1561,13 @@ var expresionesImperativo = {
     if (event.key === 'Enter') {
         verboConjugado = document.getElementById("verboConjugado").value;
 
-
+        var userInput = verboConjugado.toLowerCase().trim().replaceAll(regex, '').replaceAll("á", "a").replaceAll("é", "e").replaceAll("í", "i").replaceAll("ó", "o").replaceAll("ú", "u");
+        var rightAnswer = pickedSubject[pronounPicked].trim().replaceAll(regex, '').replaceAll("á", "a").replaceAll("é", "e").replaceAll("í", "i").replaceAll("ó", "o").replaceAll("ú", "u");
 
         console.log(verboConjugado +  "=" + pickedSubject[pronounPicked])
-        if (verboConjugado.toLowerCase() === pickedSubject[pronounPicked]){
+
+
+        if ( userInput === rightAnswer){
             document.getElementById("fb").innerHTML = "Correct"
             score++
             points.innerHTML = score;
@@ -1570,15 +1582,25 @@ var expresionesImperativo = {
 
   
             pickedSubject[pronounPicked] = null
+            rightAnswer = null
             console.log("before load" + verboConjugado +  "=" + pickedSubject[pronounPicked])
             console.log("this line was excecuteed")
 
             document.getElementById("verboConjugado").value = "";
+            audioFB.load();
+            audioFB.play();
             onload()
 
             console.log("last line of if correct pickedSubject[pronounPicked] = " + pickedSubject[pronounPicked] )
         }
-        if (verboConjugado.toLowerCase() !== pickedSubject[pronounPicked] && pickedSubject[pronounPicked] !== null && flag === false){
+        if (userInput !== rightAnswer && rightAnswer !== null){
+
+            audioNegFB.load();
+            audioNegFB.play();
+        }
+        if (userInput !== rightAnswer && rightAnswer !== null && flag === false){
+
+   
 
             console.log("error statement was excecuted...")
             // cosole.log("if (verboConjugado !== pickedSubject[pronounPicked] && pickedSubject[pronounPicked] !== null && flag === false) " + verboConjugado + " " + pickedSubject[pronounPicked] + " " + pickedSubject[pronounPicked] + " " + flag)
