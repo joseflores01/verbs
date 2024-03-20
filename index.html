@@ -18,6 +18,10 @@
     <audio id="nfb-mp3">
         <source src="./n-fb.mp3" type="audio/mp3">
     </audio>
+    <audio id="cash-fb-mp3">
+        <source src="./cash-fb.mp3" type="audio/mp3">
+    </audio>
+    
     
     
     
@@ -69,7 +73,7 @@
 
         <b>Grade: </b>
         <b id="grade">-</b>
-        <!-- <b id="fScore">0</b><br> -->
+        <!-- <b id="progress-ui">0</b><br> -->
 
 
 
@@ -93,9 +97,10 @@
     <br>
     <b id="subjectToShow"></b><br>
     <input type="text" placeholder="answer" id="verboConjugado">
-    <br><b id="correctAnswer"></b>
+    <br><span id="correctAnswer"></span><br>
     <!-- <button onclick="myFunction()">Try it</button> -->
-    <br><b id="fb"></b><br>
+    <!-- <button>check</button> -->
+    <span id="fb"></span><br>
     <!-- <button>reveal answer</button><br><br> -->
     <br><button onclick="showAnswerDialog()">👻 Reveal answer</button><br><br>
     <!-- <div id="hide" class="modal_answer">
@@ -108,7 +113,7 @@
     <dialog id="modal_answer">
         <span>👻 Hey!</span><br>
         <span>I will tell you the answer</span><br><br>
-        <button id="answerButton" disabled onclick="getAnswer()">Reveal answer 💰x 10</button>
+        <button id="answerButton" disabled onclick="getAnswer()">Reveal answer 💰x 15</button>
         &nbsp;
         &nbsp;
         &nbsp;
@@ -129,7 +134,7 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <b id="coins">💰</b><b id="coinsForHint"></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-    <b>Progress: </b><b id="fScore">0</b><b>%</b><br><br>
+    <b>Progress: </b><b id="progress-ui">0</b><b>%</b><br><br>
 
     
     <br><br>
@@ -154,7 +159,7 @@
     var hintUsed = false;
     var lifesavers = 3;
     var score = Number(0);
-    var finalScore = Number(0);
+    var progress = Number(0);
     var grade = 0;
     var negScore = Number(0);
     var verbosMistakes = {};
@@ -164,6 +169,7 @@
     var tenseToBePracticed = ""
     var audioFB = document.getElementById("pfb-mp3");
     var audioNegFB = document.getElementById("nfb-mp3");
+    var isSkipped = false;
 
 
 
@@ -203,7 +209,7 @@
 
 
 
-        if (hintNum >= 10) {
+        if (hintNum >= 15) {
             document.getElementById("answerButton").disabled= false;
         }
         else {
@@ -220,14 +226,13 @@
 
     }
     function getAnswer() {
-
-        hintNum = hintNum -10;
+        hintNum = hintNum -15;
         document.getElementById("coinsForHint").innerHTML = hintNum
         document.getElementById("correctAnswer").innerHTML = correctAnswer
+        document.getElementById("cash-fb-mp3").play()
         closeAnswerDialog()
-        
-
     }
+
 
 
 
@@ -242,7 +247,7 @@
 
     function initialize(selectedTense) {
         score = Number(0);
-        finalScore = Number(0);
+        progress = Number(0);
         negScore = Number(0);
         verbosMistakes = {};
         fina100score = 0;
@@ -270,17 +275,22 @@
     }
 
     function formater(name){
+
+        var reporte = `Reporte de ${name}`
+
+
+
          var format = "+"
 
 
-        for (var i=0; i < name.length + 2; i++) {
+        for (var i=0; i < reporte.length + 2; i++) {
             
             format = format + "-"
         }
         format = format + `+\n|`
-        format = format + " " + name + " |" + "\n+";
+        format = format + " " + reporte + " |" + "\n+";
 
-        for (var i=0; i < name.length + 2; i++) {
+        for (var i=0; i < reporte.length + 2; i++) {
             
             format = format + "-"
         }
@@ -297,10 +307,22 @@
         var format = formater(name)
 
 
-        var message1 = `${name}, debes terminar el ejercicio.\n\nHas completado un ${fina100score}%\n\n¡Sigue practicando!`
-        var message2 = `¡Muy bien, ${name}!\n\n¡Obtuviste ${grade} pts!\n${score} correctas y ${negScore} incorrecta(s)\n\n\nObservé algunos detalles en estos verbos:\n\n  ${Object.keys(verbosMistakes)}\n\nLa práctica continua te ayudará a perfeccionarlos.\n `
-        var message3 = `¡${name}, lo has hecho perfecto!\n\n¡Obtuviste ${grade} pts sin ningún error!\n\n Practicate ${score} verbos`
-        var practiceMessage = `\n\nFecha: ${date}  Tiempo gramatical (Grammar tense): ${tense}`
+      var message1 =
+
+`¡Hola ${name}!
+
+Has obtenido una calificación de ${grade} puntos.
+
+Respondiste correctamente a ${score} preguntas y ${score} incorrectas. Completaste el ejercicio en un ${fina100score}%.
+Observé algunos detalles en los siguientes ejercicios:\n
+${Object.keys(verbosMistakes)}
+      `
+
+
+        // var message1 = `${name}, debes terminar el ejercicio.\n\nHas completado un ${fina100score}%\n\n¡Sigue practicando!`
+        // var message2 = `¡${name}!\n\n¡Obtuviste ${grade} pts!\n${score} correctas y ${negScore} incorrecta(s)\n\n\nObservé algunos detalles en los siguientes ejercicios:\n\n  ${Object.keys(verbosMistakes)}\n\nLa práctica continua te ayudará a perfeccionarlos.\n `
+        // var message3 = `¡${name}, lo has hecho perfecto!\n\n¡Obtuviste ${grade} pts sin ningún error!\n\n Practicate ${score} verbos`
+        var practiceMessage = `\n\nFecha: ${date} Ejercicio: ${tense} \n\n   ${parseInt(grade, 16)}`
         var finalmessage ="dd0";
 
         const objKeys = Object.values(mythical)
@@ -308,30 +330,34 @@
         // 8 is the number of keys in the json and (d.getDay()+1) is 7 which is the number of days
         var picture = objKeys[d.getDay()];
 
-        if (fina100score >= 300){
-            if (negScore === 0){
-                finalmessage = format +  message3 + practiceMessage + "\n" + picture
-            }
-            else {
-                finalmessage = format + message2 + practiceMessage + "\n" + picture
-            }
-        }
-        else if (fina100score >= 100){
-            if (negScore === 0){
-                finalmessage = format +  message3 + practiceMessage
-            }
-            else {
-                finalmessage = format + message2 + practiceMessage
-            }
-        }
-        else {
+        // if (fina100score >= 300){
+        //     if (negScore === 0){
+        //         finalmessage = format +  message3 + practiceMessage + "\n" + picture
+        //     }
+        //     else {
+        //         finalmessage = format + message2 + practiceMessage + "\n" + picture
+        //     }
+        // }
+        // else if (fina100score >= 100){
+        //     if (negScore === 0){
+        //         finalmessage = format +  message3 + practiceMessage
+        //     }
+        //     else {
+        //         finalmessage = format + message2 + practiceMessage
+        //     }
+        // }
+        // else {
             finalmessage = format + message1 + practiceMessage
-        }
+        // }
 
         var blob = new Blob([finalmessage], {
             type: "text/plain;charset=utf-8",
         });
+
+        var confirmMessage = "Your progress will get eraser"
+        
         saveAs(blob, "download.txt");
+  
     }
 
     
@@ -1286,14 +1312,14 @@ var expresionesImperativo = {
         }
     },
     {
-        "verbo": "get out",
+        "verbo": "get out!",
         "complement": "",
         "hint_complement": "",
         "hint_verb":  "sal/salga/salgan",
         "subject": {
-            "(tú)": "sal",
-            "(Ud.)": "salga",
-            "(Uds.)": "salgan",
+            "(tú)": "¡sal!",
+            "(Ud.)": "¡salga!",
+            "(Uds.)": "¡salgan!",
         }
     },
     {
@@ -1309,24 +1335,24 @@ var expresionesImperativo = {
     },
     {
         "verbo": "don't close",
-        "complement": "the door",
+        "complement": "the door!",
         "hint_complement": "la puerta",
         "hint_verb":  "no cierres/cierre/cierren",
         "subject": {
-            "(tú)": "no cierres la puerta",
-            "(Ud.)": "no cierre la puerta",
-            "(Uds.)": "no cierren la puerta",
+            "(tú)": "¡no cierres la puerta!",
+            "(Ud.)": "¡no cierre la puerta!",
+            "(Uds.)": "¡no cierren la puerta!",
         }
     },
     {
         "verbo": "drive",
-        "complement": "carefully",
+        "complement": "carefully!",
         "hint_complement": "con cuidado",
         "hint_verb":  "conduce/conduzca/conduzcan",
         "subject": {
-            "(tú)": "conduce con cuidado",
-            "(Ud.)": "conduzca con cuidado",
-            "(Uds.)": "conduzcan con cuidado",
+            "(tú)": "¡conduce con cuidado!",
+            "(Ud.)": "¡conduzca con cuidado!",
+            "(Uds.)": "¡conduzcan con cuidado!",
         }
     },
     {
@@ -1544,7 +1570,77 @@ var expresionesImperativo = {
     correctAnswer = pickedSubject[pronounPicked]
 
 
+    // This flag prevent user to being deducted points when his/her question is wrong and keep tyring
     var flag = false;
+    var isCorrect = true;
+    var reavealAnswerAttempts = 2;
+
+    function handleIncorrectAnswer() {
+        // console.log("error statement was excecuted...")
+        // // cosole.log("if (verboConjugado !== pickedSubject[pronounPicked] && pickedSubject[pronounPicked] !== null && flag === false) " + verboConjugado + " " + pickedSubject[pronounPicked] + " " + pickedSubject[pronounPicked] + " " + flag)
+        // console.log("inside else pickedSubject[pronounPicked] = " + pickedSubject[pronounPicked] )
+        
+        
+        if (isCorrect) {
+            
+            verbosMistakes[correctAnswer] = "err"
+            lifesavers--
+            if (lifesavers === 2) {
+                document.getElementById("lifesavers1").setAttribute("id", "drop");
+            }
+            if (lifesavers === 1) {
+                document.getElementById("lifesavers2").setAttribute("id", "drop");
+            }
+            if (lifesavers === 0) {
+                document.getElementById("lifesavers3").setAttribute("id", "drop");
+            }
+            flag = true;
+            
+            if (lifesavers < 0) {
+                negScore++
+                incorrect.innerHTML = negScore;
+                
+                progress = progress -4
+            }
+            
+            
+        }
+        isCorrect = false;
+        reavealAnswerAttempts--
+        
+        
+        document.getElementById("fb").innerHTML = "incorrect"
+        if (reavealAnswerAttempts <= 0){
+            document.getElementById("correctAnswer").innerHTML = correctAnswer;
+        }
+        
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function updateProgress() {
+        fina100score = progress;
+
+        // Your custom function or code here
+        document.getElementById("ratio").innerHTML = ((score / (score + negScore)) * 100).toFixed(2)
+        document.getElementById("progress-ui").innerHTML = progress
+        if (progress <= 110) {
+        // calculate grade
+        grade = (((score / (score + negScore)) * 100) * progress/100).toFixed(2)
+
+            document.getElementById("grade").innerHTML = grade;
+        }
+    }
 
 
 
@@ -1554,106 +1650,86 @@ var expresionesImperativo = {
 
     const regex = /¡|!/g;
    
+    
 
 
     document.addEventListener('keydown', function(event) {
     // Check if the pressed key is the one you are interested in
+
+    var continueSkip = false;
+
+    
+    
+    
+    
     if (event.key === 'Enter') {
         verboConjugado = document.getElementById("verboConjugado").value;
-
+        
         var userInput = verboConjugado.toLowerCase().trim().replaceAll(regex, '').replaceAll("á", "a").replaceAll("é", "e").replaceAll("í", "i").replaceAll("ó", "o").replaceAll("ú", "u");
         var rightAnswer = pickedSubject[pronounPicked].trim().replaceAll(regex, '').replaceAll("á", "a").replaceAll("é", "e").replaceAll("í", "i").replaceAll("ó", "o").replaceAll("ú", "u");
 
-        console.log(verboConjugado +  "=" + pickedSubject[pronounPicked])
+        // console.log(verboConjugado +  "=" + pickedSubject[pronounPicked])
+
 
 
         if ( userInput === rightAnswer){
             document.getElementById("fb").innerHTML = "Correct"
-            score++
-            points.innerHTML = score;
-            finalScore = finalScore + 2
 
+            if (isCorrect || reavealAnswerAttempts >= 1) {
+                score++
+                points.innerHTML = score;
+                progress = progress + 2
+                audioFB.load();
+                audioFB.play();
 
-
-            if (hintUsed === false) {
+                if (hintUsed === false) {
                 hintNum++
                 document.getElementById("coinsForHint").innerHTML = hintNum
             }
+            }
+            isCorrect = false;
 
-  
+            reavealAnswerAttempts = 2;
+
+
+
             pickedSubject[pronounPicked] = null
             rightAnswer = null
             console.log("before load" + verboConjugado +  "=" + pickedSubject[pronounPicked])
             console.log("this line was excecuteed")
 
             document.getElementById("verboConjugado").value = "";
-            audioFB.load();
-            audioFB.play();
+    
+            
+
+        
             onload()
+            updateProgress();
 
             console.log("last line of if correct pickedSubject[pronounPicked] = " + pickedSubject[pronounPicked] )
         }
+          
+        // if (isSkipped){
+        //     handleIncorrectAnswer()
+        //     onload()
+        //     isSkipped = false;
+        // }
         if (userInput !== rightAnswer && rightAnswer !== null){
-
+        // if (userInput !== rightAnswer){
             audioNegFB.load();
             audioNegFB.play();
+            // alert("userInput: " + userInput)
+            // alert("rightAnswer: " + rightAnswer)
         }
-        if (userInput !== rightAnswer && rightAnswer !== null && flag === false){
-
-   
-
-            console.log("error statement was excecuted...")
-            // cosole.log("if (verboConjugado !== pickedSubject[pronounPicked] && pickedSubject[pronounPicked] !== null && flag === false) " + verboConjugado + " " + pickedSubject[pronounPicked] + " " + pickedSubject[pronounPicked] + " " + flag)
-            console.log("inside else pickedSubject[pronounPicked] = " + pickedSubject[pronounPicked] )
-        
-            document.getElementById("fb").innerHTML = "incorrect"
-            verbosMistakes[pickedVerb.verbo] = "err"
-
-            lifesavers--
-            if (lifesavers === 2) {
-                document.getElementById("lifesavers1").setAttribute("id", "drop");
-
-            }
-            if (lifesavers === 1) {
-                document.getElementById("lifesavers2").setAttribute("id", "drop");
-
-            }
-            if (lifesavers === 0) {
-                document.getElementById("lifesavers3").setAttribute("id", "drop");
-
-            }
-            flag = true;
-            
-            
-            if (lifesavers < 0) {
-                negScore++
-                incorrect.innerHTML = negScore;
-                
-                finalScore = finalScore -4
-            }
+        if (userInput !== rightAnswer && rightAnswer !== null){
+        // if (userInput !== rightAnswer && rightAnswer !== null && flag === false){
+        // if (userInput !== rightAnswer && flag === false){
+            handleIncorrectAnswer()
+            updateProgress();
         }
 
-        fina100score = finalScore;
 
-       
-
-
-        
-
- 
-
-
-      // Your custom function or code here
-      document.getElementById("ratio").innerHTML = ((score / (score + negScore)) * 100).toFixed(2)
-      document.getElementById("fScore").innerHTML = finalScore
-
-        
-      if (finalScore <= 110) {
-        // calculate grade
-        grade = (((score / (score + negScore)) * 100) * finalScore/100).toFixed(2)
-
-          document.getElementById("grade").innerHTML = grade;
-      }
+    
 
 
 
@@ -1661,6 +1737,7 @@ var expresionesImperativo = {
       console.log('Enter key pressed!');
     }
   });
+
 
    
           
@@ -1684,6 +1761,7 @@ var expresionesImperativo = {
 
 
     }
+
     
 
 </script>
