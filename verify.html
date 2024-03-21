@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin = "anonymous" referrerpolicy = "no-referrer"> </script>
+
+
+    <!-- <script src="./verbs.js"></script> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Site</title>
+
+
+</head>
+<body>
+    <input type="text" placeholder="Key" id="verificationKey">
+    <button onclick="decryptMessagge()">Decrypt</button> 
+    <span id="decryptedMessagge"></span>
+</body>
+<script>
+
+function decryptReport(textToDecrypt) {
+        // var encryptedAES = CryptoJS.AES.encrypt(textToEncrypt, "My key");
+        var decryptedBytes = CryptoJS.AES.decrypt(textToDecrypt, "My key");
+        var plaintext = decryptedBytes.toString(CryptoJS.enc.Utf8);
+        return plaintext;
+    }
+
+
+    function decryptMessagge() {
+        var getMessagge = document.getElementById("verificationKey").value
+        var decryptedMessagge  = decryptReport(getMessagge)
+
+        alert(decryptedMessagge)
+
+
+        document.getElementById("decryptedMessagge").innerHTML = decryptedMessagge
+
+    }
+</script>

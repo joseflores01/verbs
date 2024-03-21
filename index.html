@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin = "anonymous" referrerpolicy = "no-referrer"> </script>
+    <!-- <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script> -->
     <script src="./phoenix.js"></script>
     <link rel="stylesheet" href="styles.css">
+
 
     <!-- <script src="./verbs.js"></script> -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Spanish With Mr Flores</title>
 </head>
 <body>
     <audio id="pfb-mp3">
@@ -21,6 +25,13 @@
     <audio id="cash-fb-mp3">
         <source src="./cash-fb.mp3" type="audio/mp3">
     </audio>
+
+
+
+    
+
+
+
     
     
     
@@ -43,6 +54,7 @@
         <option value="imperfecto">Imperfecto</option>
         <option value="imperativo">Imperativo</option>
         <option value="expresionesImperativo">Expresiones en imperativo</option>
+        <!-- <option value="ImperativoWithPronouns">imperativo con pronombres CD y CI</option> -->
     </select>
     <!-- <p>Practice: <span id="tenseToBePracticed"></span></p><br> -->
     <br><br>
@@ -237,6 +249,9 @@
 
 
 
+
+
+
     function success() {
         if(document.getElementById("nombre").value==="") { 
             document.getElementById('fileButon').disabled = true; 
@@ -298,7 +313,24 @@
         return format;
     }
 
+
+    
+
+    function encryptReport(textToEncrypt) {
+        var encryptedAES = CryptoJS.AES.encrypt(textToEncrypt, "My key");
+        // var decryptedBytes = CryptoJS.AES.decrypt(encryptedAES, "My key");
+        // var plaintext = decryptedBytes.toString(CryptoJS.enc.Utf8);
+        return encryptedAES;
+    }
+
+
+
     function CreateTextFile() {
+
+
+
+        
+
         var name = document.getElementById("nombre").value
 
         const d = new Date();
@@ -313,16 +345,18 @@
 
 Has obtenido una calificación de ${grade} puntos.
 
-Respondiste correctamente a ${score} preguntas y ${score} incorrectas. Completaste el ejercicio en un ${fina100score}%.
+Respondiste correctamente a ${score} preguntas y ${negScore} incorrectas. Completaste el ejercicio en un ${fina100score}%.
 Observé algunos detalles en los siguientes ejercicios:\n
 ${Object.keys(verbosMistakes)}
       `
+var authenticityMessage = `Nombre: ${name}\nCalificación: ${grade}\nRespuestas correctas:${score}\nRespuestas incorrectas:${negScore}\n Progreso: ${fina100score}%\nFecha:${date}\n Ejercicio: ${tense}`
+
 
 
         // var message1 = `${name}, debes terminar el ejercicio.\n\nHas completado un ${fina100score}%\n\n¡Sigue practicando!`
         // var message2 = `¡${name}!\n\n¡Obtuviste ${grade} pts!\n${score} correctas y ${negScore} incorrecta(s)\n\n\nObservé algunos detalles en los siguientes ejercicios:\n\n  ${Object.keys(verbosMistakes)}\n\nLa práctica continua te ayudará a perfeccionarlos.\n `
         // var message3 = `¡${name}, lo has hecho perfecto!\n\n¡Obtuviste ${grade} pts sin ningún error!\n\n Practicate ${score} verbos`
-        var practiceMessage = `\n\nFecha: ${date} Ejercicio: ${tense} \n\n   ${parseInt(grade, 16)}`
+        var practiceMessage = `\n\nFecha: ${date} Ejercicio: ${tense} \n\n`
         var finalmessage ="dd0";
 
         const objKeys = Object.values(mythical)
@@ -348,15 +382,35 @@ ${Object.keys(verbosMistakes)}
         // }
         // else {
             finalmessage = format + message1 + practiceMessage
+
+           var MyEncryptedReport =  encryptReport(authenticityMessage)
+
+           var finaMessageWithEncryptedReport = `${finalmessage} \n\nIntegrity Verification Key: ${MyEncryptedReport}`;
+
+
+
+        // var encryptedAES = CryptoJS.AES.encrypt(finalmessage, "My key");
+        // var decryptedBytes = CryptoJS.AES.decrypt(encryptedAES, "My key");
+        // var plaintext = decryptedBytes.toString(CryptoJS.enc.Utf8);
+
+        //    alert(encryptedAES)
         // }
 
-        var blob = new Blob([finalmessage], {
+        var blob = new Blob([finaMessageWithEncryptedReport], {
             type: "text/plain;charset=utf-8",
         });
 
         var confirmMessage = "Your progress will get eraser"
+
+        if (confirm(`Please ensure your name is accurately entered. Once confirmed, your name cannot be edited.\n\nName: ${name}`) == true) {
+            document.getElementById('nombre').disabled = true;
+            saveAs(blob, "download.txt");
+        }
         
-        saveAs(blob, "download.txt");
+        // confirm("Make sure your name is correct. Once you confirm this, you won't be able to edit your name") {
+        //    
+        //     
+        // }
   
     }
 
