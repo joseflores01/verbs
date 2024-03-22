@@ -31,7 +31,6 @@
     
 
 
-
     
     
     
@@ -50,11 +49,11 @@
         <option value="presente_irregular">Presente (irregular)</option>
         <option value="presente">Presente (stem-changing)</option>
         <option value="preterito">Preterito</option>
-        <option value="preterito_irregular">Preterito (irregular)</option>
+        <option value="preterito_irregular">Pretérito (irregular)</option>
         <option value="imperfecto">Imperfecto</option>
         <option value="imperativo">Imperativo</option>
         <option value="expresionesImperativo">Expresiones en imperativo</option>
-        <!-- <option value="ImperativoWithPronouns">imperativo con pronombres CD y CI</option> -->
+        <option value="ImperativoWithPronouns">imperativo con pronombres CD y CI</option>
     </select>
     <!-- <p>Practice: <span id="tenseToBePracticed"></span></p><br> -->
     <br><br>
@@ -85,6 +84,10 @@
 
         <b>Grade: </b>
         <b id="grade">-</b>
+        <br class="extraCredit">
+        <b class="extraCredit">Extra credit attempts available: </b><b  class="extraCredit" id="extraCorrectAttempts">0</b><b class="extraCredit">/</b><b class="extraCredit" id="extraAttemptsGrantted">0</b>
+        <br>
+        
         <!-- <b id="progress-ui">0</b><br> -->
 
 
@@ -131,6 +134,9 @@
         &nbsp;
         <button onclick="closeAnswerDialog()">Decline</button>
     </dialog>
+ 
+    <button class="extraCredit" id="extraAttemptButton" onclick="giveExtraAttempt()">Extra Attempt 💰x 20</button><br>
+    <span class="extraCredit" id="maxReached"></span>
       
 
     
@@ -146,7 +152,7 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <b id="coins">💰</b><b id="coinsForHint"></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-    <b>Progress: </b><b id="progress-ui">0</b><b>%</b><br><br>
+    <b>Progress: </b><b id="progress-ui">0</b><b>%</b><b id="ProgresscCmplete"></b><br><br>
 
     
     <br><br>
@@ -167,7 +173,12 @@
     
 </body>
 <script>
+    
     var hintNum = 20;
+    var extraAttempt = 0;
+    var extraAttemptAvailable = 0;
+    var extraPointAdded = 0;
+    const EXTRA_ATTEMPT_MAX = 5;
     var hintUsed = false;
     var lifesavers = 3;
     var score = Number(0);
@@ -182,6 +193,13 @@
     var audioFB = document.getElementById("pfb-mp3");
     var audioNegFB = document.getElementById("nfb-mp3");
     var isSkipped = false;
+
+
+
+
+
+    // document.getElementById("extraCorrectAttempts") = extraAttemptAvailable
+
 
 
 
@@ -207,8 +225,50 @@
     if (tense === "expresionesImperativo"){
         tenseToBePracticed = "Expresiones en imperativo"
     }
+    if (tense === "ImperativoWithPronouns"){
+        tenseToBePracticed = "Imperativo con pronombres CI y CD"
+    }
 
     document.getElementById("tenseToBePracticed").innerHTML = tenseToBePracticed;
+
+    function updateCoinsButtons() {
+        if (hintNum < 20 || extraAttempt >= EXTRA_ATTEMPT_MAX){
+            document.getElementById("extraAttemptButton").disabled = true;
+        }
+        else {
+            document.getElementById("extraAttemptButton").disabled = false;
+        }
+    }
+
+
+
+
+    
+
+
+    function giveExtraAttempt() {
+
+        if (hintNum >= 20) {
+            hintNum = hintNum -20;
+            document.getElementById("coinsForHint").innerHTML = hintNum
+            document.getElementById("cash-fb-mp3").load()
+            document.getElementById("cash-fb-mp3").play()
+            if (extraAttempt < EXTRA_ATTEMPT_MAX){
+                extraAttempt++
+                extraAttemptAvailable++
+                document.getElementById("extraAttemptsGrantted").innerHTML = extraAttempt;
+                document.getElementById("extraCorrectAttempts").innerHTML = extraAttemptAvailable
+
+                
+            }
+            if (extraAttempt >= EXTRA_ATTEMPT_MAX){
+                document.getElementById("extraAttemptButton").disabled = true;
+                document.getElementById("maxReached").innerHTML = "Maximum extra attempts reached.";
+            }
+        }
+        updateCoinsButtons()
+
+    }
 
 
 
@@ -238,11 +298,14 @@
 
     }
     function getAnswer() {
-        hintNum = hintNum -15;
-        document.getElementById("coinsForHint").innerHTML = hintNum
-        document.getElementById("correctAnswer").innerHTML = correctAnswer
-        document.getElementById("cash-fb-mp3").play()
-        closeAnswerDialog()
+        if (hintNum >= 15) {
+            hintNum = hintNum -15;
+            document.getElementById("coinsForHint").innerHTML = hintNum
+            document.getElementById("correctAnswer").innerHTML = correctAnswer
+            document.getElementById("cash-fb-mp3").play()
+            closeAnswerDialog()
+        }
+        updateCoinsButtons()
     }
 
 
@@ -400,7 +463,8 @@ var authenticityMessage = `Nombre: ${name}\nCalificación: ${grade}\nRespuestas 
             type: "text/plain;charset=utf-8",
         });
 
-        var confirmMessage = "Your progress will get eraser"
+
+        // var confirmMessage = "Your progress will get eraser"
 
         if (confirm(`Please ensure your name is accurately entered. Once confirmed, your name cannot be edited.\n\nName: ${name}`) == true) {
             document.getElementById('nombre').disabled = true;
@@ -425,6 +489,7 @@ var authenticityMessage = `Nombre: ${name}\nCalificación: ${grade}\nRespuestas 
             var hintMessage = document.getElementById("complement_hint");
             hintMessage.innerHTML = complementHint
         }
+        updateCoinsButtons()
     }
 
     
@@ -437,6 +502,7 @@ var authenticityMessage = `Nombre: ${name}\nCalificación: ${grade}\nRespuestas 
             var hintMessage = document.getElementById("verbo_hint");
             hintMessage.innerHTML = verbHint
         }
+        updateCoinsButtons()
 
     }
 
@@ -453,6 +519,18 @@ var authenticityMessage = `Nombre: ${name}\nCalificación: ${grade}\nRespuestas 
         document.getElementById("correctAnswer").innerHTML = ""
     }
 
+    var extraCreditUI = document.getElementsByClassName("extraCredit");
+        for (var i = 0; i < extraCreditUI.length; i++) {
+            extraCreditUI[i].classList.add("hide");
+        }
+
+    function showExtraCreditOptions() {
+        for (var i = 0; i < extraCreditUI.length; i++) {
+            extraCreditUI[i].classList.remove("hide");
+        }
+
+    }
+
 
     
     
@@ -461,6 +539,12 @@ var authenticityMessage = `Nombre: ${name}\nCalificación: ${grade}\nRespuestas 
         clearHint()
         clearPreviousAnswer()
         document.getElementById("coinsForHint").innerHTML = hintNum
+
+
+        
+
+      
+        
         // var hintMessage = document.getElementById("verbo_hint");
         // var hintMessage = document.getElementById("complement_hint");
         // hintMessage.innerHTML = ""
@@ -491,7 +575,24 @@ var authenticityMessage = `Nombre: ${name}\nCalificación: ${grade}\nRespuestas 
         var subjectToShow = document.getElementById("subjectToShow");
 
 
+
+
+//         var irrePresent = {
+//             "extraCreditAllowed": true,
+//             "exercice": [
+//     {
+//         "verbo": "hacer",
+//                 "complement": "",
+//         "hint_complement": "",
+//         "hint_verb": "",
+//         "subject": {
+//             "yo": "hago",
+//         }
+//     },
+// ]}
+
         var irrePresent = {
+            "extraCreditAllowed": true,
             "exercice": [
     {
         "verbo": "hacer",
@@ -626,6 +727,7 @@ var authenticityMessage = `Nombre: ${name}\nCalificación: ${grade}\nRespuestas 
         }
 
 var conj = {
+    "extraCreditAllowed": true,
     "exercice": [
     {
         "verbo": "querer",
@@ -728,6 +830,7 @@ var conj = {
 }
 
 var conjPreterito = {
+    "extraCreditAllowed": true,
     "exercice": [
     {
         "verbo": "hablar",
@@ -926,6 +1029,7 @@ var conjPreterito = {
 }
 
 var conjPreteritoIrregular = {
+    "extraCreditAllowed": false,
     "exercice": [
     {
         "verbo": "ser",
@@ -1060,6 +1164,7 @@ var conjPreteritoIrregular = {
 }
 
 var imperfecto = {
+    "extraCreditAllowed": false,
     "exercice": [
     {
         "verbo": "jugar",
@@ -1198,6 +1303,7 @@ var imperativo = {
     "exercise_title": "Conjugación en imperativo",
     "intro": "An imperative is a verb form used to give commands, requests, or instructions, typically expressed in the base form without specifying the subject.",
     "instruction": "Conjuga el verbo",
+    "extraCreditAllowed": false,
     "exercice": [
      {
         "verbo": "hablar",
@@ -1320,6 +1426,7 @@ var expresionesImperativo = {
     "exercise_title": "Expresiones en imperativo",
     "intro": "An imperative is a verb form used to give commands, requests, or instructions, typically expressed in the base form without specifying the subject.",
     "instruction": "Translate the English phrase into Spanish. If you need help, click on the verb or complement. Each click will cost you virtual coins. You'll earn more coins by completing exercises without hints.",
+    "extraCreditAllowed": true,
     "exercice": [
     {
         "verbo": "don't be",
@@ -1517,6 +1624,334 @@ var expresionesImperativo = {
 
 }
 
+var imperativoWithPronouns = {
+    "exercise_title": "Imperativo con pronombres de complemento directo (CD) e indirecto (CI)",
+    "intro": "Imperative with direct (DOP) and indirect object pronouns (IOP) is when you give someone a command and say who or what it's for at the same time.",
+    "instruction": "In this exercise, you'll practice using just one pronoun in commands. Type the command given along with the appropriate pronoun in Spanish.",
+    "extraCreditAllowed": true,
+    "exercice": [
+    {
+        "verbo": "call",
+        "complement": "him!",
+        "hint_complement": "singular masculine",
+        "hint_verb": "llamar",
+        "subject": {
+            "(tú)": "¡llámalo!",
+            "(Ud.)": "¡llámelo!",
+            "(Uds.)": "¡llámenlo!",
+        }
+    },
+    {
+        "verbo": "call",
+        "complement": "her!",
+        "hint_complement": "singular feminine",
+        "hint_verb": "llamar",
+        "subject": {
+            "(tú)": "¡llámala!",
+            "(Ud.)": "¡llámela!",
+            "(Uds.)": "¡llámenla!",
+        }
+    },
+    {
+        "verbo": "call",
+        "complement": "them (fem.)!",
+        "hint_complement": "plural feminine",
+        "hint_verb": "llamar",
+        "subject": {
+            "(tú)": "¡llámalas!",
+            "(Ud.)": "¡llámelas!",
+            "(Uds.)": "¡llámenlas!",
+        }
+    },
+    {
+        "verbo": "call",
+        "complement": "them!",
+        "hint_complement": "plural",
+        "hint_verb": "llamar",
+        "subject": {
+            "(tú)": "¡llámalos!",
+            "(Ud.)": "¡llámelos!",
+            "(Uds.)": "¡llámenlos!",
+        }
+    },
+    {
+        "verbo": "don't call",
+        "complement": "him!",
+        "hint_complement": "singular masculine",
+        "hint_verb": "llamar",
+        "subject": {
+            "(tú)": "¡no lo llames!",
+            "(Ud.)": "¡no lo llame!",
+            "(Uds.)": "¡no lo llamen!",
+        }
+    },
+    {
+        "verbo": "don't call",
+        "complement": "her!",
+        "hint_complement": "singular feminine",
+        "hint_verb": "llamar",
+        "subject": {
+            "(tú)": "¡no la llames!",
+            "(Ud.)": "¡no la llame!",
+            "(Uds.)": "¡no la llamen!",
+        }
+    },
+    {
+        "verbo": "don't call",
+        "complement": "them (fem.)!",
+        "hint_complement": "plural feminine",
+        "hint_verb": "llamar",
+        "subject": {
+            "(tú)": "¡no las llames!",
+            "(Ud.)": "¡no las llame!",
+            "(Uds.)": "¡no las llamen!",
+        }
+    },
+    {
+        "verbo": "don't call",
+        "complement": "them!",
+        "hint_complement": "plural",
+        "hint_verb": "llamar",
+        "subject": {
+            "(tú)": "¡no los llames!",
+            "(Ud.)": "¡no los llame!",
+            "(Uds.)": "¡no lo llamen!",
+        }
+    },
+    {
+        "verbo": "tell",
+        "complement": "me!",
+        "hint_complement": "singular",
+        "hint_verb": "decir",
+        "subject": {
+            "(tú)": "¡dime!",
+            "(Ud.)": "¡dígame!",
+            "(Uds.)": "¡díganme!",
+        }
+    },
+    {
+        "verbo": "tell",
+        "complement": "him!",
+        "hint_complement": "singular masculine IOP",
+        "hint_verb": "decir",
+        "subject": {
+            "(tú)": "¡dile!",
+            "(Ud.)": "¡dígale!",
+            "(Uds.)": "¡díganle!",
+        }
+    },
+    {
+        "verbo": "tell",
+        "complement": "her!",
+        "hint_complement": "singular feminine IOP",
+        "hint_verb": "decir",
+        "subject": {
+            "(tú)": "¡dile!",
+            "(Ud.)": "¡dígale!",
+            "(Uds.)": "¡díganle!",
+        }
+    },
+    {
+        "verbo": "tell",
+        "complement": "them!",
+        "hint_complement": "plural IOP",
+        "hint_verb": "decir",
+        "subject": {
+            "(tú)": "¡diles!",
+            "(Ud.)": "¡dígales!",
+            "(Uds.)": "¡díganles!",
+        }
+    },
+    {
+        "verbo": "don't tell",
+        "complement": "me!",
+        "hint_complement": "singular",
+        "hint_verb": "decir",
+        "subject": {
+            "(tú)": "¡no me digas!",
+            "(Ud.)": "¡no me diga!",
+            "(Uds.)": "¡no me digan!",
+        }
+    },
+    {
+        "verbo": "don't tell",
+        "complement": "him!",
+        "hint_complement": "singular masculine IOP",
+        "hint_verb": "decir",
+        "subject": {
+            "(tú)": "¡no le digas!",
+            "(Ud.)": "¡no le diga!",
+            "(Uds.)": "¡no le digan!",
+        }
+    },
+    {
+        "verbo": "don't tell",
+        "complement": "her!",
+        "hint_complement": "singular feminine IOP",
+        "hint_verb": "decir",
+        "subject": {
+            "(tú)": "¡no le digas!",
+            "(Ud.)": "¡no le diga!",
+            "(Uds.)": "¡no le digan!",
+        }
+    },
+    {
+        "verbo": "don't tell",
+        "complement": "them!",
+        "hint_complement": "plural IOP",
+        "hint_verb": "decir",
+        "subject": {
+            "(tú)": "¡no les digas!",
+            "(Ud.)": "¡no les diga!",
+            "(Uds.)": "¡no les digan!",
+        }
+    },
+    {
+        "verbo": "try",
+        "complement": "it (la sopa)!",
+        "hint_complement": "singular feminine",
+        "hint_verb": "probar",
+        "subject": {
+            "(tú)": "¡pruébala!",
+            "(Ud.)": "pruébela!",
+            "(Uds.)": "¡pruébenla!",
+        }
+    },
+    {
+        "verbo": "buy",
+        "complement": "them (los juguetes)!",
+        "hint_complement": "plural masculine",
+        "hint_verb": "comprar",
+        "subject": {
+            "(tú)": "¡cómpralos!",
+            "(Ud.)": "¡cómprelos!",
+            "(Uds.)": "¡cómprenlos!",
+        }
+    },
+    {
+        "verbo": "let's do",
+        "complement": "it!",
+        "hint_complement": "masculine singular",
+        "hint_verb": "hacer",
+        "subject": {
+            "(nosotros)": "¡hagamoslo!",
+        }
+    },
+    {
+        "verbo": "recycle",
+        "complement": "them (las latas)!",
+        "hint_complement": "plural feminine",
+        "hint_verb": "reciclar",
+        "subject": {
+            "(tú)": "¡reciclalas!",
+            "(Ud.)": "¡reciclelas!",
+            "(Uds.)": "¡reciclenlas!",
+        }
+    },
+    {
+        "verbo": "interview",
+        "complement": "them (los candidatos)!",
+        "hint_complement": "plural",
+        "hint_verb": "entrevistar",
+        "subject": {
+            "(tú)": "¡entrevistalos!",
+            "(Ud.)": "¡entrevistelos!",
+            "(Uds.)": "¡entrevistenlos!",
+        }
+    },
+    {
+        "verbo": "Sponsor",
+        "complement": "them!",
+        "hint_complement": "plural",
+        "hint_verb": "patrocinar",
+        "subject": {
+            "(tú)": "¡patrocinalos!",
+            "(Ud.)": "¡patrocinelos!",
+            "(Uds.)": "¡patrocinenlos!",
+        }
+    },
+    {
+        "verbo": "explain",
+        "complement": "it!",
+        "hint_complement": "singular masculine",
+        "hint_verb": "patrocinar",
+        "subject": {
+            "(tú)": "¡explicalo!",
+            "(Ud.)": "¡expliquelo!",
+            "(Uds.)": "¡expliquenlo!",
+        }
+    },
+    {
+        "verbo": "request",
+        "complement": "it!",
+        "hint_complement": "singular masculine",
+        "hint_verb": "solicitar",
+        "subject": {
+            "(tú)": "¡solicitalo!",
+            "(Ud.)": "¡solicitelo!",
+            "(Uds.)": "¡solicitenlo!",
+        }
+    },
+    {
+        "verbo": "request",
+        "complement": "them!",
+        "hint_complement": "plural masculine",
+        "hint_verb": "solicitar",
+        "subject": {
+            "(tú)": "¡solicitalos!",
+            "(Ud.)": "¡solicitelos!",
+            "(Uds.)": "¡solicitenlos!",
+        }
+    },
+    {
+        "verbo": "deposit",
+        "complement": "it!",
+        "hint_complement": "singular masculine",
+        "hint_verb": "depositar",
+        "subject": {
+            "(tú)": "¡depositalo!",
+            "(Ud.)": "¡depositelo!",
+            "(Uds.)": "¡depositenlo!",
+        }
+    },
+    {
+        "verbo": "do",
+        "complement": "it!",
+        "hint_complement": "singular masculine",
+        "hint_verb": "hacer",
+        "subject": {
+            "(tú)": "¡hazlo!",
+            "(Ud.)": "¡hagalo!",
+            "(Uds.)": "¡haganlo!",
+        }
+    },
+    {
+        "verbo": "don't do",
+        "complement": "it!",
+        "hint_complement": "singular masculine",
+        "hint_verb": "hacer",
+        "subject": {
+            "(tú)": "¡no lo hagas!",
+            "(Ud.)": "¡no lo haga!",
+            "(Uds.)": "¡no lo hagan!",
+        }
+    },
+    {
+        "verbo": "think",
+        "complement": "about it!",
+        "hint_complement": "singular masculine",
+        "hint_verb": "pensar e → ie",
+        "subject": {
+            "(tú)": "¡piensalo!",
+            "(Ud.)": "¡pienselo!",
+            "(Uds.)": "¡piensenlo!",
+        }
+    },
+
+    
+]
+
+}
 
 
 
@@ -1534,11 +1969,13 @@ var expresionesImperativo = {
     var pickedSubject;
     var exercise_title;
     var exercise_instruction;
+    var isExtraCreditAllowed = false;
 
     // pickedVerb = conj[getRandomInt(conj.length)]
     //         pickedSubject = pickedVerb.subject
     if (tense==="presente_irregular") {
         exercise_title = irrePresent.exercise_title
+        isExtraCreditAllowed = irrePresent.extraCreditAllowed
         exercise_instruction = irrePresent.instruction
         pickedVerb = irrePresent.exercice[getRandomInt(irrePresent.exercice.length)]
         pickedSubject = pickedVerb.subject
@@ -1547,6 +1984,7 @@ var expresionesImperativo = {
     }
     if (tense==="preterito") {
         exercise_title = conjPreterito.exercise_title
+        isExtraCreditAllowed = conjPreterito.extraCreditAllowed
         exercise_instruction = conjPreterito.instruction
         pickedVerb = conjPreterito.exercice[getRandomInt(conjPreterito.exercice.length)]
         pickedSubject = pickedVerb.subject
@@ -1555,6 +1993,7 @@ var expresionesImperativo = {
     }
     if (tense==="preterito_irregular") {
         exercise_title = conjPreteritoIrregular.exercise_title
+        isExtraCreditAllowed = conjPreteritoIrregular.extraCreditAllowed
         exercise_instruction = conjPreteritoIrregular.instruction
         pickedVerb = conjPreteritoIrregular.exercice[getRandomInt(conjPreteritoIrregular.exercice.length)]
         pickedSubject = pickedVerb.subject
@@ -1563,6 +2002,7 @@ var expresionesImperativo = {
     }
     if (tense==="presente") {
         exercise_title = conj.exercise_title
+        isExtraCreditAllowed = conj.extraCreditAllowed
         exercise_instruction = conj.instruction
         pickedVerb = conj.exercice[getRandomInt(conj.exercice.length)]
         pickedSubject = pickedVerb.subject
@@ -1571,6 +2011,7 @@ var expresionesImperativo = {
     }
     if (tense==="imperfecto") {
         exercise_title = imperfecto.exercise_title
+        isExtraCreditAllowed = imperfecto.extraCreditAllowed
         exercise_instruction = imperfecto.instruction
         pickedVerb = imperfecto.exercice[getRandomInt(imperfecto.exercice.length)]
         pickedSubject = pickedVerb.subject
@@ -1579,6 +2020,7 @@ var expresionesImperativo = {
     }
     if (tense==="imperativo") {
         exercise_title = imperativo.exercise_title
+        isExtraCreditAllowed = imperativo.extraCreditAllowed
         exercise_instruction = imperativo.instruction
         pickedVerb = imperativo.exercice[getRandomInt(imperativo.exercice.length)]
         pickedSubject = pickedVerb.subject
@@ -1587,8 +2029,18 @@ var expresionesImperativo = {
     }
     if (tense==="expresionesImperativo") {
         exercise_title = expresionesImperativo.exercise_title
+        isExtraCreditAllowed = expresionesImperativo.extraCreditAllowed
         exercise_instruction = expresionesImperativo.instruction
         pickedVerb = expresionesImperativo.exercice[getRandomInt(expresionesImperativo.exercice.length)]
+        pickedSubject = pickedVerb.subject
+        console.log("in if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
+
+    }
+    if (tense==="ImperativoWithPronouns") {
+        exercise_title = imperativoWithPronouns.exercise_title
+        isExtraCreditAllowed = imperativoWithPronouns.extraCreditAllowed
+        exercise_instruction = imperativoWithPronouns.instruction
+        pickedVerb = imperativoWithPronouns.exercice[getRandomInt(imperativoWithPronouns.exercice.length)]
         pickedSubject = pickedVerb.subject
         console.log("in if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
 
@@ -1629,6 +2081,7 @@ var expresionesImperativo = {
     var isCorrect = true;
     var reavealAnswerAttempts = 2;
 
+
     function handleIncorrectAnswer() {
         // console.log("error statement was excecuted...")
         // // cosole.log("if (verboConjugado !== pickedSubject[pronounPicked] && pickedSubject[pronounPicked] !== null && flag === false) " + verboConjugado + " " + pickedSubject[pronounPicked] + " " + pickedSubject[pronounPicked] + " " + flag)
@@ -1636,6 +2089,12 @@ var expresionesImperativo = {
         
         
         if (isCorrect) {
+
+            // remove any extra poin available for this attempt
+            extraPointAdded = 0
+            if (progress >= 100 && extraAttemptAvailable > 0){
+                extraAttemptAvailable--
+            }
             
             verbosMistakes[correctAnswer] = "err"
             lifesavers--
@@ -1648,6 +2107,7 @@ var expresionesImperativo = {
             if (lifesavers === 0) {
                 document.getElementById("lifesavers3").setAttribute("id", "drop");
             }
+            
             flag = true;
             
             if (lifesavers < 0) {
@@ -1671,6 +2131,7 @@ var expresionesImperativo = {
     }
 
 
+    
 
 
 
@@ -1681,6 +2142,10 @@ var expresionesImperativo = {
 
 
 
+
+    
+
+    
 
     function updateProgress() {
         fina100score = progress;
@@ -1688,12 +2153,36 @@ var expresionesImperativo = {
         // Your custom function or code here
         document.getElementById("ratio").innerHTML = ((score / (score + negScore)) * 100).toFixed(2)
         document.getElementById("progress-ui").innerHTML = progress
-        if (progress <= 110) {
-        // calculate grade
-        grade = (((score / (score + negScore)) * 100) * progress/100).toFixed(2)
-
-            document.getElementById("grade").innerHTML = grade;
+        if (progress <= 100) {
+            // calculate grade
+            grade = parseFloat((((score / (score + negScore)) * 100) * progress/100).toFixed(2))
+            // document.getElementById("grade").innerHTML = grade;
+            
+            // console.log("type of grade is: " + typeof grade)
+            // console.log("type of 2.00 is: " +typeof 2.00)
         }
+        if (progress >= 100) { 
+            document.getElementById("ProgresscCmplete").innerHTML = "🏁";
+
+
+            if (isExtraCreditAllowed) {
+                showExtraCreditOptions();
+            }
+        }
+
+        //     if (extraAttemptAvailable > 0) {
+        //         grade += extraPointAdded
+        //         extraPointAdded = 0
+        //         // grade += extraPointAdded
+        //         document.getElementById("grade").innerHTML = grade;
+        //         document.getElementById("extraCorrectAttempts").innerHTML = extraPointAdded
+        //     }
+        // }
+
+        grade += extraPointAdded;
+        document.getElementById("grade").innerHTML = grade;
+        
+        
     }
 
 
@@ -1731,6 +2220,10 @@ var expresionesImperativo = {
 
             if (isCorrect || reavealAnswerAttempts >= 1) {
                 score++
+                if (progress >= 100 && extraAttemptAvailable > 0) {
+                    extraPointAdded = 2
+                    extraAttemptAvailable--
+                }
                 points.innerHTML = score;
                 progress = progress + 2
                 audioFB.load();
@@ -1759,6 +2252,7 @@ var expresionesImperativo = {
         
             onload()
             updateProgress();
+            extraPointAdded = 0
 
             console.log("last line of if correct pickedSubject[pronounPicked] = " + pickedSubject[pronounPicked] )
         }
@@ -1778,9 +2272,15 @@ var expresionesImperativo = {
         if (userInput !== rightAnswer && rightAnswer !== null){
         // if (userInput !== rightAnswer && rightAnswer !== null && flag === false){
         // if (userInput !== rightAnswer && flag === false){
+
+         
             handleIncorrectAnswer()
             updateProgress();
         }
+
+        document.getElementById("extraCorrectAttempts").innerHTML = extraAttemptAvailable
+
+        updateCoinsButtons()
 
 
     
