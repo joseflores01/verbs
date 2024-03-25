@@ -2549,12 +2549,12 @@ var imperativoWithDoublePronouns = {
 
     verbo.innerHTML = pickedVerb.verbo;
     // Fix alignment if there is not complement
-    if (pickedVerb.complement === "") {
-        document.getElementById("complement_div").style.display = "none";
-    }
-    else{
+    // if (pickedVerb.complement === "") {
+        // document.getElementById("complement_div").style.display = "none";
+    // }
+    // else{
         complement.innerHTML = "&nbsp;" + pickedVerb.complement;
-    }
+    // }
     var subject = Object.keys(pickedSubject);
     let count= Object.keys(pickedSubject).length; 
 
