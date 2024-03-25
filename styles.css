@@ -37,10 +37,25 @@ body {
     margin: auto;
     border-radius: 10px;
     height: auto;
-    padding: 6px;
+    padding: 6px 0px;
+}
+#hintNote_container {
+    min-width: 100px;
+    width: 70%;
+    max-width: 400px;
+    text-align: left;
+    margin: auto;
+    margin-bottom: 5px;
+
+}
+#hintNote {
+    color: rgb(150, 0, 0);
+    background-color: rgb(255, 215, 215);
+    
 }
 #meter {
     background-color: rgb(255, 0, 0);
+    border-radius: 5px;
     /* width: 1%; */
     height: 10px;
     margin: 0;
@@ -168,4 +183,20 @@ body {
 .hide {
     display: none;
 }
+
+
+
+/* Center the loader */
+#loader1 {
+    position: absolute;
+    /* left: 50%; */
+    text-align: center;
+    width: 100%;
+    top: 50%;
+}
+ 
+  #content {
+    display: none;
+    text-align: center;
+  }
 
