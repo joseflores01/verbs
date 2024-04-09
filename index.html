@@ -7,6 +7,10 @@
     <script src = "https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin = "anonymous" referrerpolicy = "no-referrer"> </script>
     <!-- <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script> -->
     <script src="./phoenix.js"></script>
+    <!-- <script src="./main.js"></script> -->
+    <script src="./filegeneration.js"></script>
+    <script src="./selectExercise.js"></script>
+    <!-- <script type="module" src="./exercises.js"></script> -->
     <link rel="stylesheet" href="styles.css">
 
 
@@ -18,186 +22,131 @@
 <body>
     <div id="loader1" onload="myFunction()">Please wait 5 seconds</div>
 
-<div id="content" style="display:none;">
-    <audio id="pfb-mp3">
-        <source src="./p-fb.mp3" type="audio/mp3">
-    </audio>
-    <audio id="nfb-mp3">
-        <source src="./n-fb.mp3" type="audio/mp3">
-    </audio>
-    <audio id="cash-fb-mp3">
-        <source src="./cash-fb.mp3" type="audio/mp3">
-    </audio>
-
-
-
-    
-
-
-    
-    
-    
-    
-    <div id="title">Spanish with Mr Flores 👨🏻‍🏫</div><br>
-    <!-- <h3>Common expressions exercise</h3> -->
-
-
-
-    
-    
-    <label for="tense">Estudiar: </label>
-    
-    <select onchange="selectTense(event)" name="tense" id="tense">
-        <option id="tenseToBePracticed" value="">Select topic</option>
-        <option value="presente_irregular">Presente (irregular)</option>
-        <option value="presente">Presente (stem-changing)</option>
-        <option value="preterito">Preterito</option>
-        <option value="preterito_irregular">Pretérito (irregular)</option>
-        <option value="imperfecto">Imperfecto</option>
-        <option value="imperativo">Imperativo</option>
-        <option value="expresionesImperativo">Expresiones en imperativo</option>
-        <option value="ImperativoWithPronouns">imperativo con pronombres CD y CI</option>
-        <option value="imperativoWithDoublePronouns">imperativo con pronombres combinados</option>
-
-    </select>
-    <!-- <p>Practice: <span id="tenseToBePracticed"></span></p><br> -->
-    <br><br>
-    <br>
-    <div id="instruction_div">
-        <b id="exercise_title"></b><br><br>
-        <span id="instruction"></span>
-    </div><br><br>
-
-
-
-    <div id="score_div">
-        <b>Correct: </b>
-        <b id="points">0</b>
-        <b>/</b>
-        <b id="incorrect">0</b>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <!-- <b>Correct/incorrect ratio: </b> -->
-    
-        <b>Accuracy: </b>
-        <b id="ratio">--</b>
-  
-
-        &nbsp;
-        &nbsp;
-        &nbsp;
-
-
-        <b>Grade: </b>
-        <b id="grade">--</b>
-        <br class="extraCredit">
-        <b class="extraCredit">Extra credit attempts available: </b><b  class="extraCredit" id="extraCorrectAttempts">0</b><b class="extraCredit">/</b><b class="extraCredit" id="extraAttemptsGrantted">0</b>
-        <br>
-        
-        <!-- <b id="progress-ui">0</b><br> -->
-
-
-
-    </div><br>
-    <div id="hintNote_container">
-        <span id="hintNote"></span>
-    </div>
-
-
-
-
-
-
-    
-    <div id="phrase_div">
-        <div id="verb_div">
-            <b id="verbo" onclick="showVerbHint()"></b><br>
-            <b id="verbo_hint"></b><br><br>
-        </div>
-        <div id="complement_div">
-            <b id="complement" onclick="showHint()"></b><br>
-            <b id="complement_hint"></b><br><br>
-        </div>
-    <br>
-    <b id="subjectToShow"></b><br>
-    <input type="text" placeholder="answer" id="verboConjugado">
-    <br><span id="correctAnswer"></span><br>
-    <!-- <button onclick="myFunction()">Try it</button> -->
-    <!-- <button>check</button> -->
-    <span id="fb"></span><br>
-    <!-- <button>reveal answer</button><br><br> -->
-    <br><button onclick="showAnswerDialog()">👻 Reveal answer</button><br><br>
-    <!-- <div id="hide" class="modal_answer">
-        <span>👻 Hey!</span><br>
-        <span>I will tell you the answer</span><br>
-        <button>Reveal answer 💰x 20</button>
-        <button>Decline</button>
-    </div> -->
-
-    <dialog id="modal_answer">
-        <span>👻 Hey!</span><br>
-        <span>I will tell you the answer</span><br><br>
-        <button id="answerButton" disabled onclick="getAnswer()">Reveal answer 💰x 15</button>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <button onclick="closeAnswerDialog()">Decline</button>
-    </dialog>
+    <div id="content" style="display:none;">
+        <audio id="pfb-mp3">
+            <source src="./p-fb.mp3" type="audio/mp3">
+        </audio>
+        <audio id="nfb-mp3">
+            <source src="./n-fb.mp3" type="audio/mp3">
+        </audio>
+        <audio id="cash-fb-mp3">
+            <source src="./cash-fb.mp3" type="audio/mp3">
+        </audio>
  
-    <button class="extraCredit" id="extraAttemptButton" onclick="giveExtraAttempt()">Extra Attempt 💰x 20</button><br>
-    <span class="extraCredit" id="maxReached"></span>
-      
+        <div id="title">Spanish with Mr Flores 👨🏻‍🏫</div><br>
+        <!-- <h3>Common expressions exercise</h3> -->
 
+        <label for="tense">Estudiar: </label>
+        
+        <select onchange="selectTense(event)" name="tense" id="tense">
+            <option id="tenseToBePracticed" value="">Select topic</option>
+            <option value="presente_irregular">Presente (irregular)</option>
+            <option value="presente">Presente (stem-changing)</option>
+            <option value="preterito">Preterito</option>
+            <option value="preterito_irregular">Pretérito (irregular)</option>
+            <option value="imperfecto">Imperfecto</option>
+            <option value="imperativo">Imperativo</option>
+            <option value="expresionesImperativo">Expresiones en imperativo</option>
+            <option value="ImperativoWithPronouns">Imperativo con pronombres CD y CI</option>
+            <option value="imperativoWithDoublePronouns">Imperativo con pronombres combinados</option>
+            <option value="futuro">Futuro</option>
+        </select>
+        <!-- <p>Practice: <span id="tenseToBePracticed"></span></p><br> -->
+        <br><br>
+        <br>
+        <div id="instruction_div">
+            <b id="exercise_title"></b><br><br>
+            <span id="instruction"></span>
+        </div><br><br>
+        <div id="score_div">
+            <b>Correct: </b>
+            <b id="points">0</b>
+            <b>/</b>
+            <b id="incorrect">0</b>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <!-- <b>Correct/incorrect ratio: </b> -->
+            <b>Accuracy: </b>
+            <b id="ratio">--</b>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <b>Grade: </b>
+            <b id="grade">--</b>
+            <br class="extraCredit">
+            <b class="extraCredit">Extra credit attempts available: </b><b  class="extraCredit" id="extraCorrectAttempts">0</b><b class="extraCredit">/</b><b class="extraCredit" id="extraAttemptsGrantted">0</b>
+            <br>
+            
+            <!-- <b id="progress-ui">0</b><br> -->
+
+        </div><br>
+        <div id="hintNote_container">
+            <span id="hintNote"></span>
+        </div>
+
+
+        <div id="phrase_div">
+            <div id="verb_div">
+                <b id="verbo" onclick="showVerbHint()"></b><br>
+                <b id="verbo_hint"></b><br><br>
+            </div>
+            <div id="complement_div">
+                <b id="complement" onclick="showHint()"></b><br>
+                <b id="complement_hint"></b><br><br>
+            </div>
+        <br>
+        <b id="subjectToShow"></b><br>
+        <input type="text" placeholder="answer" id="verboConjugado">
+        <br><span id="correctAnswer"></span><br>
+        <!-- <button onclick="myFunction()">Try it</button> -->
+        <!-- <button>check</button> -->
+        <span id="fb"></span><br>
+        <!-- <button>reveal answer</button><br><br> -->
+        <br><button onclick="showAnswerDialog()">👻 Reveal answer</button><br><br>
+        <!-- <div id="hide" class="modal_answer">
+            <span>👻 Hey!</span><br>
+            <span>I will tell you the answer</span><br>
+            <button>Reveal answer 💰x 20</button>
+            <button>Decline</button>
+        </div> -->
+
+        <dialog id="modal_answer">
+            <span>👻 Hey!</span><br>
+            <span>I will tell you the answer</span><br><br>
+            <button id="answerButton" disabled onclick="getAnswer()">Reveal answer 💰x 15</button>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <button onclick="closeAnswerDialog()">Decline</button>
+        </dialog>
     
+        <button class="extraCredit" id="extraAttemptButton" onclick="giveExtraAttempt()">Extra Attempt 💰x 20</button><br>
+        <span class="extraCredit" id="maxReached"></span>
+        
 
-
-    <br>
-    <b>lifesavers:</b>
-    <b id="lifesavers3">🛟</b>
-    <b id="lifesavers2">🛟</b>
-    <b id="lifesavers1">🛟</b>
-    
-    
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <b id="coins">💰</b><b id="coinsForHint"></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-    <b>Progress: </b><b id="progress-ui">0</b><b>%</b><b id="ProgresscCmplete"></b><br><br>
-
-    
-    <br><br>
-
-
-    <input type="text" placeholder="Nombre" id="nombre" onkeyup="success()">
-    <button type = "button" disabled id="fileButon" onclick = "CreateTextFile();">Crear reporte</button>
-    <div></div>
-
-    <!-- <button onclick="generatePDF()">print Pdf</button> -->
-
-
-
-
+        <br>
+        <b>lifesavers:</b>
+        <b id="lifesavers3">🛟</b>
+        <b id="lifesavers2">🛟</b>
+        <b id="lifesavers1">🛟</b>
+        
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <b id="coins">💰</b><b id="coinsForHint"></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Progress: </b><b id="progress-ui">0</b><b>%</b><b id="ProgresscCmplete"></b><br><br>
+        <br><br>
+        <input type="text" placeholder="Nombre" id="nombre" onkeyup="success()">
+        <button type = "button" disabled id="fileButon" onclick = "CreateTextFile();">Crear reporte</button>
+        <div></div>
+        </div>
     </div>
-
-</div>
-    
-
-
-    
 </body>
 <script>
-
-
-
-var time;
-time = setTimeout(showPage, 5000);
-//   alert()
-// }
-
-function showPage() {
-  document.getElementById("loader1").style.display = "none";
-  document.getElementById("content").style.display = "block";
-}
+    var time = setTimeout(showPage, 5000);
+    function showPage() {
+        document.getElementById("loader1").style.display = "none";
+        document.getElementById("content").style.display = "block";
+    }
     
     var hintNum = 20;
     var extraAttempt = 0;
@@ -221,51 +170,7 @@ function showPage() {
     var isSkipped = false;
     var isExererciseComplete = false
     var hintForFree = false;
-
-
-
-
-
-    // document.getElementById("extraCorrectAttempts") = extraAttemptAvailable
-
-
-
-
-
-    // if (tense === "presente_irregular"){
-    //     tenseToBePracticed = " irregulares en presente"
-    // }
-    // if (tense === "presente"){
-    //     tenseToBePracticed = " con cambio de raíz (stem-changing verbs) en presente"
-    // }
-    // if (tense === "preterito"){
-    //     tenseToBePracticed = " en preterito"
-    // }
-    // if (tense === "preterito_irregular"){
-    //     tenseToBePracticed = " irregulares en preterito"
-    // }
-    // if (tense === "imperfecto"){
-    //     tenseToBePracticed = " imperfecto"
-    // }
-    // if (tense === "imperativo"){
-    //     tenseToBePracticed = " imperativo"
-    // }
-    // if (tense === "expresionesImperativo"){
-    //     tenseToBePracticed = "Expresiones en imperativo"
-    // }
-    // if (tense === "ImperativoWithPronouns"){
-    //     tenseToBePracticed = "Imperativo con pronombres CI y CD"
-    // }
-    // if (tense === "imperativoWithDoublePronouns"){
-    //     tenseToBePracticed = "Imperativo con pronombres combinados"
-    // }
-
-
-
     
-
-    // document.getElementById("tenseToBePracticed").innerHTML = tenseToBePracticed;
-
     function updateCoinsButtons() {
         if (hintNum < 20 || extraAttempt >= EXTRA_ATTEMPT_MAX){
             document.getElementById("extraAttemptButton").disabled = true;
@@ -274,12 +179,6 @@ function showPage() {
             document.getElementById("extraAttemptButton").disabled = false;
         }
     }
-
-
-
-
-    
-
 
     function giveExtraAttempt() {
 
@@ -293,8 +192,6 @@ function showPage() {
                 extraAttemptAvailable++
                 document.getElementById("extraAttemptsGrantted").innerHTML = extraAttempt;
                 document.getElementById("extraCorrectAttempts").innerHTML = extraAttemptAvailable
-
-                
             }
             if (extraAttempt >= EXTRA_ATTEMPT_MAX){
                 document.getElementById("extraAttemptButton").disabled = true;
@@ -302,19 +199,11 @@ function showPage() {
             }
         }
         updateCoinsButtons()
-
     }
-
-
-
-    
-
 
     function showAnswerDialog() {
         // alert()
         var modal = document.getElementById("modal_answer")
-
-
 
         if (hintNum >= 15) {
             document.getElementById("answerButton").disabled= false;
@@ -322,33 +211,24 @@ function showPage() {
         else {
             document.getElementById("answerButton").disabled= true;
         }
-
-
         modal.show()
     }
 
     function closeAnswerDialog() {
         var modal = document.getElementById("modal_answer")
         modal.close()
-
     }
+
     function getAnswer() {
         if (hintNum >= 15) {
             hintNum = hintNum -15;
-            document.getElementById("coinsForHint").innerHTML = hintNum
-            document.getElementById("correctAnswer").innerHTML = correctAnswer
-            document.getElementById("cash-fb-mp3").play()
-            closeAnswerDialog()
+            document.getElementById("coinsForHint").innerHTML = hintNum;
+            document.getElementById("correctAnswer").innerHTML = correctAnswer;
+            document.getElementById("cash-fb-mp3").play();
+            closeAnswerDialog();
         }
-        updateCoinsButtons()
+        updateCoinsButtons();
     }
-
-
-
-
-
-
-
 
     function success() {
         if(document.getElementById("nombre").value==="") { 
@@ -369,33 +249,21 @@ function showPage() {
         complementHint = "";
         correctAnswer = "";
         verbHint = "";
-        console.log("reset everything")
-        onload()
-
+        console.log("reset everything");
+        onload();
     }
-
 
     function selectTense(e) {
         console.log("this line works")
         location.reload();
         var selectedTense = document.getElementById("tense").value = e.target.value
-
         localStorage.setItem("selectedTense", selectedTense);
-        
-
         initialize(selectedTense)
-
     }
 
     function formater(name){
-
         var reporte = `Reporte de ${name}`
-
-
-
-         var format = "+"
-
-
+        var format = "+"
         for (var i=0; i < reporte.length + 2; i++) {
             
             format = format + "-"
@@ -411,9 +279,6 @@ function showPage() {
         return format;
     }
 
-
-    
-
     function encryptReport(textToEncrypt) {
         var encryptedAES = CryptoJS.AES.encrypt(textToEncrypt, "My key");
         // var decryptedBytes = CryptoJS.AES.decrypt(encryptedAES, "My key");
@@ -421,100 +286,6 @@ function showPage() {
         return encryptedAES;
     }
 
-
-
-    function CreateTextFile() {
-
-
-
-        
-
-        var name = document.getElementById("nombre").value
-
-        const d = new Date();
-        var date = d.toDateString();
-
-        var format = formater(name)
-
-
-      var message1 =
-
-`¡Hola ${name}!
-
-Has obtenido una calificación de ${grade} puntos.
-
-Respondiste correctamente a ${score} preguntas y ${negScore} incorrectas. Completaste el ejercicio en un ${fina100score}%.
-Observé algunos detalles en los siguientes ejercicios:\n
-${Object.keys(verbosMistakes)}
-      `
-var authenticityMessage = `Nombre: ${name}\nCalificación: ${grade}\nRespuestas correctas:${score}\nRespuestas incorrectas:${negScore}\n Progreso: ${fina100score}%\nFecha:${date}\n Ejercicio: ${tense}`
-
-
-
-        // var message1 = `${name}, debes terminar el ejercicio.\n\nHas completado un ${fina100score}%\n\n¡Sigue practicando!`
-        // var message2 = `¡${name}!\n\n¡Obtuviste ${grade} pts!\n${score} correctas y ${negScore} incorrecta(s)\n\n\nObservé algunos detalles en los siguientes ejercicios:\n\n  ${Object.keys(verbosMistakes)}\n\nLa práctica continua te ayudará a perfeccionarlos.\n `
-        // var message3 = `¡${name}, lo has hecho perfecto!\n\n¡Obtuviste ${grade} pts sin ningún error!\n\n Practicate ${score} verbos`
-        var practiceMessage = `\n\nFecha: ${date} Ejercicio: ${tense} \n\n`
-        var finalmessage ="dd0";
-
-        const objKeys = Object.values(mythical)
-
-        // 8 is the number of keys in the json and (d.getDay()+1) is 7 which is the number of days
-        var picture = objKeys[d.getDay()];
-
-        // if (fina100score >= 300){
-        //     if (negScore === 0){
-        //         finalmessage = format +  message3 + practiceMessage + "\n" + picture
-        //     }
-        //     else {
-        //         finalmessage = format + message2 + practiceMessage + "\n" + picture
-        //     }
-        // }
-        // else if (fina100score >= 100){
-        //     if (negScore === 0){
-        //         finalmessage = format +  message3 + practiceMessage
-        //     }
-        //     else {
-        //         finalmessage = format + message2 + practiceMessage
-        //     }
-        // }
-        // else {
-            finalmessage = format + message1 + practiceMessage
-
-           var MyEncryptedReport =  encryptReport(authenticityMessage)
-
-           var finaMessageWithEncryptedReport = `${finalmessage} \n\nIntegrity Verification Key: ${MyEncryptedReport}`;
-
-
-
-        // var encryptedAES = CryptoJS.AES.encrypt(finalmessage, "My key");
-        // var decryptedBytes = CryptoJS.AES.decrypt(encryptedAES, "My key");
-        // var plaintext = decryptedBytes.toString(CryptoJS.enc.Utf8);
-
-        //    alert(encryptedAES)
-        // }
-
-        var blob = new Blob([finaMessageWithEncryptedReport], {
-            type: "text/plain;charset=utf-8",
-        });
-
-
-        // var confirmMessage = "Your progress will get eraser"
-
-        if (confirm(`Please ensure your name is accurately entered. Once confirmed, your name cannot be edited.\n\nName: ${name}`) == true) {
-            document.getElementById('nombre').disabled = true;
-            saveAs(blob, "download.txt");
-        }
-        
-        // confirm("Make sure your name is correct. Once you confirm this, you won't be able to edit your name") {
-        //    
-        //     
-        // }
-  
-    }
-
-    
-    
     function showHint() {
         if(hintNum > 0 || hintForFree === true) {
     
@@ -529,8 +300,6 @@ var authenticityMessage = `Nombre: ${name}\nCalificación: ${grade}\nRespuestas 
         }
         updateCoinsButtons()
     }
-
-    
 
     function showVerbHint() {
         if(hintNum > 0 || hintForFree === true) { 
@@ -573,28 +342,30 @@ var authenticityMessage = `Nombre: ${name}\nCalificación: ${grade}\nRespuestas 
 
     }
 
+    var exerciceSelected = selectExercise(tense);
+    var pickedVerb;
+    var pickedSubject;
+    var exercise_title;
+    var exercise_instruction;
+    var isExtraCreditAllowed = false;
+    var note;
+    var subject;
+    let count;
+    var pronounPicked;
+    var flag;
+    var firstAttempt; //a flag to mark if the user is trying the question for first time 
+    var reavealAnswerAttempts;
 
-    
-    
-  
     onload = function() {
+
         clearHint()
         clearPreviousAnswer()
         document.getElementById("coinsForHint").innerHTML = hintNum
 
-
-        
-
-      
-        
         // var hintMessage = document.getElementById("verbo_hint");
         // var hintMessage = document.getElementById("complement_hint");
         // hintMessage.innerHTML = ""
         // hintMessage.innerHTML = ""
-
-
-
-
 
         console.log("____________________________-- ")
 
@@ -610,2048 +381,193 @@ var authenticityMessage = `Nombre: ${name}\nCalificación: ${grade}\nRespuestas 
         var subjectToShow = document.getElementById("subjectToShow");
 
 
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        exercise_title = exerciceSelected.exercise_title;
+        isExtraCreditAllowed = exerciceSelected.extraCreditAllowed;
+        exercise_instruction = exerciceSelected.instruction;
+        pickedVerb = exerciceSelected.exercice[getRandomInt(exerciceSelected.exercice.length)];
+        pickedSubject = pickedVerb.subject;
+        hintForFree = pickedVerb.hintForFree;
+        note = pickedVerb.note
+
+        document.getElementById("hintNote").innerHTML = note;
+        document.getElementById("tenseToBePracticed").innerHTML = exercise_title;
 
 
-        // var irrePresent = {
-        //     "exercise_title": "Presente",
-        //     "extraCreditAllowed": true,
-        //     "exercice": [
-        //     {
-        //         "verbo": "hacer",
-        //         "complement": "",
-        //         "hint_complement": "",
-        //         "hint_verb": "",
-        //         "note": "",
-        //         "hintForFree": false,
-        //         "subject": {
-        //             "yo": "hago",
-        //         }
-        //     },
-        //     ]
+    
+        console.log("out of if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
+        console.log("el tiempo es " + tense)
+
+
+
+        document.getElementById("exercise_title").innerHTML = exercise_title
+        document.getElementById("instruction").innerHTML = exercise_instruction
+
+
+    
+
+
+        verbo.innerHTML = pickedVerb.verbo;
+        // Fix alignment if there is not complement
+        // if (pickedVerb.complement === "") {
+            // document.getElementById("complement_div").style.display = "none";
         // }
+        // else{
+            complement.innerHTML = "&nbsp;" + pickedVerb.complement;
+        // }
+        subject = Object.keys(pickedSubject);
+        count= Object.keys(pickedSubject).length; 
 
-        var irrePresent = {
-            "extraCreditAllowed": true,
-            "exercice": [
-            {
-                "verbo": "hacer",
-                "complement": "",
-                "hint_complement": "",
-                "hint_verb": "",
-                "note": "",
-                "hintForFree": false,
-                "subject": {
-                    "yo": "hago",
-                    "tú": "haces",
-                    "él": "hace",
-                    "ella": "hace",
-                    "Ud.": "hace",
-                    "nosotros": "hacemos",
-                    "Uds.": "hacen",
-                    "ellos": "hacen"
-                }
-            },
-            {
-                "verbo": "poner",
-                "complement": "",
-                "hint_complement": "",
-                "hint_verb": "",
-                "note": "",
-                "hintForFree": false,
-                "subject": {
-                    "yo": "pongo",
-                    "tú": "pones",
-                    "él": "pone",
-                    "ella": "pone",
-                    "Ud.": "pone",
-                    "nosotros": "ponemos",
-                    "Uds.": "ponen",
-                    "ellos": "ponen"
-                }
-            },
-            {
-                "verbo": "salir",
-                "complement": "",
-                "hint_complement": "",
-                "hint_verb": "",
-                "note": "",
-                "hintForFree": false,
-                "subject": {
-                    "yo": "salgo",
-                    "tú": "sales",
-                    "él": "sale",
-                    "ella": "sale",
-                    "Ud.": "sale",
-                    "nosotros": "salimos",
-                    "Uds.": "salen",
-                    "ellos": "salen"
-                }
-            },
-            {
-                "verbo": "traer",
-                "complement": "",
-                "hint_complement": "",
-                "hint_verb": "",
-                "note": "",
-                "hintForFree": false,
-                "subject": {
-                    "yo": "traigo",
-                    "tú": "traes",
-                    "él": "trae",
-                    "ella": "trae",
-                    "Ud.": "trae",
-                    "nosotros": "traemos",
-                    "Uds.": "traen",
-                    "ellos": "traen"
-                }  
-            },
-            {
-                "verbo": "conocer",
-                "complement": "",
-                "hint_complement": "",
-                "hint_verb": "",
-                "note": "",
-                "hintForFree": false,
-                "subject": {
-                    "yo": "conozco",
-                    "tú": "conoces",
-                    "él": "conoce",
-                    "ella": "conoce",
-                    "Ud.": "conoce",
-                    "nosotros": "conocemos",
-                    "Uds.": "conocen",
-                    "ellos": "conocen"
-                }
-                
-            },
-            {
-                "verbo": "dar",
-                "complement": "",
-                "hint_complement": "",
-                "hint_verb": "",
-                "note": "",
-                "hintForFree": false,
-                "subject": {
-                    "yo": "doy",
-                    "tú": "das",
-                    "él": "da",
-                    "ella": "da",
-                    "Ud.": "da",
-                    "nosotros": "damos",
-                    "Uds.": "dan",
-                    "ellos": "dan"
-                }
-            },
-            {
-                "verbo": "saber",
-                "complement": "",
-                "hint_complement": "",
-                "hint_verb": "",
-                "note": "",
-                "hintForFree": false,
-                "subject": {
-                    "yo": "se",
-                    "tú": "sabes",
-                    "él": "sabe",
-                    "ella": "sabe",
-                    "Ud.": "sabe",
-                    "nosotros": "sabemos",
-                    "Uds.": "saben",
-                    "ellos": "saben"
-                }
-            },
-            {
-                "verbo": "ver",
-                "complement": "",
-                "hint_complement": "",
-                "hint_verb": "",
-                "note": "",
-                "hintForFree": false,
-                "subject": {
-                    "yo": "veo",
-                    "tú": "ves",
-                    "él": "ve",
-                    "ella": "ve",
-                    "Ud.": "ve",
-                    "nosotros": "vemos",
-                    "Uds.": "ven",
-                    "ellos": "ven"
-                }
-            },
-        ]
+
+        pronounPicked = subject[getRandomInt(count)];
+
+        console.log("count is: " + count)
+
+        console.log("pronounPicked: " + pronounPicked);
+        console.log("pickedSubject[pronounPicked] " + pickedSubject[pronounPicked]);
+        console.log("pickedSubject " + JSON.stringify(pickedSubject));
+
+        subjectToShow.innerHTML = pronounPicked;
+
+
+        complementHint = pickedVerb.hint_complement
+        verbHint = pickedVerb.hint_verb
+        correctAnswer = pickedSubject[pronounPicked]
+
+
+        // // This flag prevent user to being deducted points when his/her question is wrong and keep tyring
+        flag = false;
+        firstAttempt = true; //a flag to mark if the user is trying the question for first time 
+        reavealAnswerAttempts = 2;
+
     }
-
-var conj = {
-    "exercise_title": "Presente (irregular)",
-    "extraCreditAllowed": true,
-    "exercice": [
-    {
-        "verbo": "querer",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "quiero",
-            "tú": "quieres",
-            "él": "quiere",
-            "ella": "quiere",
-            "Ud.": "quiere",
-            "nosotros": "queremos",
-            "Uds.": "quieren",
-            "ellos": "quieren"
-        }
-    },
-    {
-        "verbo": "poder",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "puedo",
-            "tú": "puedes",
-            "él": "puede",
-            "ella": "puede",
-            "Ud.": "puede",
-            "nosotros": "podemos",
-            "Uds.": "pueden",
-            "ellos": "pueden"
-        }
-    },
-    {
-        "verbo": "servir",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "sirvo",
-            "tú": "sirves",
-            "él": "sirve",
-            "ella": "sirve",
-            "Ud.": "sirve",
-            "nosotros": "servimos",
-            "Uds.": "sirven",
-            "ellos": "sirven"
-        }
-    },
-    {
-        "verbo": "decir",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "digo",
-            "tú": "dices",
-            "él": "dice",
-            "ella": "dice",
-            "Ud.": "dice",
-            "nosotros": "decimos",
-            "Uds.": "dicen",
-            "ellos": "dicen"
-        }  
-    },
-    {
-        "verbo": "venir",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "vengo",
-            "tú": "vienes",
-            "él": "viene",
-            "ella": "viene",
-            "Ud.": "viene",
-            "nosotros": "venimos",
-            "Uds.": "vienen",
-            "ellos": "vienen"
-        }
+    const regex = /¡|!/g;
+    var insertAnswer = document.getElementById("verboConjugado")
+    var userInput;
+    insertAnswer.addEventListener('keydown', function(event) {
+        // verboConjugado = document.getElementById("verboConjugado").value;
+        userInput = insertAnswer.value;
+        userInput = userInput.toLowerCase().trim().replaceAll(regex, '').replaceAll("á", "a").replaceAll("é", "e").replaceAll("í", "i").replaceAll("ó", "o").replaceAll("ú", "u");
+        var rightAnswer = pickedSubject[pronounPicked].toLowerCase().trim().replaceAll(regex, '').replaceAll("á", "a").replaceAll("é", "e").replaceAll("í", "i").replaceAll("ó", "o").replaceAll("ú", "u");
         
-    },
-    {
-        "verbo": "tener",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "tengo",
-            "tú": "tienes",
-            "él": "tiene",
-            "ella": "tiene",
-            "Ud.": "tiene",
-            "nosotros": "tenemos",
-            "Uds.": "tienen",
-            "ellos": "tienen"
-        }
-    },
-]
-}
 
-var conjPreterito = {
-    "exercise_title": "Pretérito",
-    "extraCreditAllowed": true,
-    "exercice": [
-    {
-        "verbo": "hablar",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "hable",
-            "tú": "hablaste",
-            "él": "hablo",
-            "ella": "hablo",
-            "Ud.": "hablo",
-            "nosotros": "hablamos",
-            "Uds.": "hablaron",
-            "ellos": "hablaron"
-        }
-    },
-    {
-        "verbo": "comer",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "comi",
-            "tú": "comiste",
-            "él": "comio",
-            "ella": "comio",
-            "Ud.": "comio",
-            "nosotros": "comimos",
-            "Uds.": "comieron",
-            "ellos": "comieron"
-        }
-    },
-    {
-        "verbo": "practicar",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "practique",
-            "tú": "practicaste",
-            "él": "practico",
-            "ella": "practico",
-            "Ud.": "practico",
-            "nosotros": "practicamos",
-            "Uds.": "practicaron",
-            "ellos": "practicaron"
-        }
-    },
-    {
-        "verbo": "jugar",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "jugue",
-            "tú": "jugaste",
-            "él": "jugo",
-            "ella": "jugo",
-            "Ud.": "jugo",
-            "nosotros": "jugamos",
-            "Uds.": "jugaron",
-            "ellos": "jugaron"
-        }  
-    },
-    {
-        "verbo": "empezar",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "empece",
-            "tú": "empezaste",
-            "él": "empezo",
-            "ella": "empezo",
-            "Ud.": "empezo",
-            "nosotros": "empezamos",
-            "Uds.": "empezaron",
-            "ellos": "empezaron"
-        }
-        
-    },
-    {
-        "verbo": "cruzar",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "cruce",
-            "tú": "cruzaste",
-            "él": "cruzo",
-            "ella": "cruzo",
-            "Ud.": "cruzo",
-            "nosotros": "cruzamos",
-            "Uds.": "cruzaron",
-            "ellos": "cruzaron"
-        }
-    },
-    {
-        "verbo": "tocar",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "toque",
-            "tú": "tocaste",
-            "él": "toco",
-            "ella": "toco",
-            "Ud.": "toco",
-            "nosotros": "tocamos",
-            "Uds.": "tocaron",
-            "ellos": "tocaron"
-        }
-    },
-    {
-        "verbo": "pagar",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "pague",
-            "tú": "pagaste",
-            "él": "pago",
-            "ella": "pago",
-            "Ud.": "pago",
-            "nosotros": "pagamos",
-            "Uds.": "pagaron",
-            "ellos": "pagaron"
-        }
-    },
-    {
-        "verbo": "buscar",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "busque",
-            "tú": "buscaste",
-            "él": "busco",
-            "ella": "busco",
-            "Ud.": "busco",
-            "nosotros": "buscamos",
-            "Uds.": "buscaron",
-            "ellos": "buscaron"
-        }
-    },
-    {
-        "verbo": "llegar",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "llegue",
-            "tú": "llegaste",
-            "él": "llego",
-            "ella": "llego",
-            "Ud.": "llego",
-            "nosotros": "llegamos",
-            "Uds.": "llegaron",
-            "ellos": "llegaron"
-        }
-    },
-    {
-        "verbo": "salir",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "sali",
-            "tú": "saliste",
-            "él": "salio",
-            "ella": "salio",
-            "Ud.": "salio",
-            "nosotros": "salimos",
-            "Uds.": "salieron",
-            "ellos": "salieron"
-        }
-    },
-    {
-        "verbo": "aprender",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "aprendi",
-            "tú": "aprendiste",
-            "él": "aprendio",
-            "ella": "aprendio",
-            "Ud.": "aprendio",
-            "nosotros": "aprendimos",
-            "Uds.": "aprendieron",
-            "ellos": "aprendieron"
-        }
-    },
-]
-}
-
-var conjPreteritoIrregular = {
-    "exercise_title": "Conjugación del Presente",
-    "extraCreditAllowed": false,
-    "exercice": [
-    {
-        "verbo": "ser",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "fui",
-            "tú": "fuiste",
-            "él": "fue",
-            "ella": "fue",
-            "Ud.": "fue",
-            "nosotros": "fuimos",
-            "Uds.": "fueron",
-            "ellos": "fueron"
-        }
-    },
-    {
-        "verbo": "ir",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "fui",
-            "tú": "fuiste",
-            "él": "fue",
-            "ella": "fue",
-            "Ud.": "fue",
-            "nosotros": "fuimos",
-            "Uds.": "fueron",
-            "ellos": "fueron"
-        }
-    },
-    {
-        "verbo": "tener",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "tuve",
-            "tú": "tuviste",
-            "él": "tuvo",
-            "ella": "tuvo",
-            "Ud.": "tuvo",
-            "nosotros": "tuvimos",
-            "Uds.": "tuvieron",
-            "ellos": "tuvieron"
-        }
-    },
-    {
-        "verbo": "estar",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "estuve",
-            "tú": "estuviste",
-            "él": "estuvo",
-            "ella": "estuvo",
-            "Ud.": "estuvo",
-            "nosotros": "estuvimos",
-            "Uds.": "estuvieron",
-            "ellos": "estuvieron"
-        }  
-    },
-    {
-        "verbo": "hacer",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "hice",
-            "tú": "hiciste",
-            "él": "hizo",
-            "ella": "hizo",
-            "Ud.": "hizo",
-            "nosotros": "hicimos",
-            "Uds.": "hicieron",
-            "ellos": "hicieron"
-        }
-        
-    },
-    {
-        "verbo": "querer",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "quise",
-            "tú": "quisiste",
-            "él": "quiso",
-            "ella": "quiso",
-            "Ud.": "quiso",
-            "nosotros": "quisimos",
-            "Uds.": "quisieron",
-            "ellos": "quisieron"
-        }
-    },
-    {
-        "verbo": "venir",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "vine",
-            "tú": "viniste",
-            "él": "vino",
-            "ella": "vino",
-            "Ud.": "vino",
-            "nosotros": "vinimos",
-            "Uds.": "vinieron",
-            "ellos": "vinieron"
-        }
-    },
-    {
-        "verbo": "poder",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "pude",
-            "tú": "pudiste",
-            "él": "pudo",
-            "ella": "pudo",
-            "Ud.": "pudo",
-            "nosotros": "pudimos",
-            "Uds.": "pudieron",
-            "ellos": "pudieron"
-        }
-    }
-]
-}
-
-var imperfecto = {
-    "exercise_title": "Conjugación del Imperfecto",
-    "extraCreditAllowed": false,
-    "exercice": [
-    {
-        "verbo": "jugar",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "jugaba",
-            "tú": "jugabas",
-            "él": "jugaba",
-            "ella": "jugaba",
-            "Ud.": "jugaba",
-            "nosotros": "jugabamos",
-            "Uds.": "jugaban",
-            "ellos": "jugaban"
-        }
-    },
-    {
-        "verbo": "ir",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "iba",
-            "tú": "ibas",
-            "él": "iba",
-            "ella": "iba",
-            "Ud.": "iba",
-            "nosotros": "ibamos",
-            "Uds.": "iban",
-            "ellos": "iban"
-        }
-    },
-    {
-        "verbo": "tener",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "tenia",
-            "tú": "tenias",
-            "él": "tenia",
-            "ella": "tenia",
-            "Ud.": "tenia",
-            "nosotros": "teniamos",
-            "Uds.": "tenian",
-            "ellos": "tenian"
-        }
-    },
-    {
-        "verbo": "estar",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "estaba",
-            "tú": "estabas",
-            "él": "estaba",
-            "ella": "estaba",
-            "Ud.": "estaba",
-            "nosotros": "estabamos",
-            "Uds.": "estaban",
-            "ellos": "estaban"
-        }  
-    },
-    {
-        "verbo": "hacer",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "hacia",
-            "tú": "hacias",
-            "él": "hacia",
-            "ella": "hacia",
-            "Ud.": "hacia",
-            "nosotros": "haciamos",
-            "Uds.": "hacian",
-            "ellos": "hacian"
-        }
-        
-    },
-    {
-        "verbo": "querer",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "queria",
-            "tú": "querias",
-            "él": "queria",
-            "ella": "queria",
-            "Ud.": "queria",
-            "nosotros": "queriamos",
-            "Uds.": "querian",
-            "ellos": "querian"
-        }
-    },
-    {
-        "verbo": "ser",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "era",
-            "tú": "eras",
-            "él": "era",
-            "ella": "era",
-            "Ud.": "era",
-            "nosotros": "eramos",
-            "Uds.": "eran",
-            "ellos": "eran"
-        }
-    },
-    {
-        "verbo": "ver",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "yo": "veia",
-            "tú": "veias",
-            "él": "veia",
-            "ella": "veia",
-            "Ud.": "veia",
-            "nosotros": "veiamos",
-            "Uds.": "veian",
-            "ellos": "veian"
-        }
-    }
-]
-}
-
-
-var imperativo = {
-    "exercise_title": "Conjugación en imperativo",
-    "intro": "An imperative is a verb form used to give commands, requests, or instructions, typically expressed in the base form without specifying the subject.",
-    "instruction": "Conjuga el verbo",
-    "extraCreditAllowed": false,
-    "exercice": [
-     {
-        "verbo": "hablar",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "habla",
-            "(Ud.)": "hable",
-            "(nosotros)": "hablemos",
-            "(Uds.)": "hablen",
-        }
-    },
-    {
-        "verbo": "comer",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "come",
-            "(Ud.)": "coma",
-            "(nosotros)": "comamos",
-            "(Uds.)": "coman",
-        }
-    },
-    {
-        "verbo": "escuchar",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "escucha",
-            "(Ud.)": "escuche",
-            "(nosotros)": "escuchemos",
-            "(Uds.)": "escuchen",
-        }
-    },
-    {
-        "verbo": "hablar (negativo)",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "no hables",
-            "(Ud.)": "no hable",
-            "(nosotros)": "no hablemos",
-            "(Uds.)": "no hablen",
-        }
-    },
-    {
-        "verbo": "llamar",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "llama",
-            "(Ud.)": "llame",
-            "(nosotros)": "llamemos",
-            "(Uds.)": "llamen",
-        }
-    },
-    {
-        "verbo": "llamar (negativo)",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "no llames",
-            "(Ud.)": "no llame",
-            "(nosotros)": "no llamemos",
-            "(Uds.)": "no llamen",
-        }
-    },
-    {
-        "verbo": "limpiar (negativo)",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "no limpies",
-            "(Ud.)": "no limpie",
-            "(nosotros)": "no limpiemos",
-            "(Uds.)": "no limpien",
-        }
-    },
-    {
-        "verbo": "limpiar",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "limpia",
-            "(Ud.)": "limpie",
-            "(nosotros)": "limpiemos",
-            "(Uds.)": "limpien",
-        }
-    },
-    {
-        "verbo": "reciclar",
-                "complement": "",
-        "hint_complement": "",
-        "hint_verb": "",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "recicla",
-            "(Ud.)": "recicle",
-            "(nosotros)": "reciclemos",
-            "(Uds.)": "reciclen",
-        }
-    }
-]
-   
-}
- 
-
-var expresionesImperativo = {
-    "exercise_title": "Expresiones en imperativo",
-    "intro": "An imperative is a verb form used to give commands, requests, or instructions, typically expressed in the base form without specifying the subject.",
-    "instruction": "Translate the English phrase into Spanish. If you need help, click on the verb or complement. Each click will cost you virtual coins. You'll earn more coins by completing exercises without hints.",
-    "extraCreditAllowed": true,
-    "exercice": [
-    {
-        "verbo": "don't be",
-        "complement": "rude!",
-        "hint_complement": "grosero(s)",
-        "hint_verb": "no seas/sea/sean",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡no seas grosero!",
-            "(Ud.)": "¡no sea grosero!",
-            "(Uds.)": "¡no sean groseros!",
-        }
-    },
-    {
-        "verbo": "be",
-        "complement": "nice to your friends!",
-        "hint_complement": "amable(s) con tus/sus amigos",
-        "hint_verb": "se/sea/sean",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡sé amable con tus amigos!",
-            "(Ud.)": "¡sea amable con sus amigos!",
-            "(Uds.)": "¡sean amables con sus amigos!",
-        }
-    },
-    {
-        "verbo": "get out",
-        "complement": "of here!",
-        "hint_complement": "de aquí",
-        "hint_verb": "sal/salga/salgan",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡sal de aquí!",
-            "(Ud.)": "¡salga de aquí!",
-            "(Uds.)": "¡salgan de aquí!",
-        }
-    },
-    {
-        "verbo": "be",
-        "complement": "patient!",
-        "hint_complement": "paciente(s)",
-        "hint_verb":  "se/sea/sean",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡sé paciente!",
-            "(Ud.)": "¡sea paciente!",
-            "(Uds.)": "¡sean pacientes!",
-        }
-    },
-    {
-        "verbo": "get out!",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb":  "sal/salga/salgan",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡sal!",
-            "(Ud.)": "¡salga!",
-            "(Uds.)": "¡salgan!",
-        }
-    },
-    {
-        "verbo": "shut",
-        "complement": "the door!",
-        "hint_complement": "la puerta",
-        "hint_verb":  "cierra/cierre/cierren",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡cierra la puerta!",
-            "(Ud.)": "¡cierre la puerta!",
-            "(Uds.)": "¡cierren la puerta!",
-        }
-    },
-    {
-        "verbo": "don't close",
-        "complement": "the door!",
-        "hint_complement": "la puerta",
-        "hint_verb":  "no cierres/cierre/cierren",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡no cierres la puerta!",
-            "(Ud.)": "¡no cierre la puerta!",
-            "(Uds.)": "¡no cierren la puerta!",
-        }
-    },
-    {
-        "verbo": "drive",
-        "complement": "carefully!",
-        "hint_complement": "con cuidado",
-        "hint_verb":  "conduce/conduzca/conduzcan",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡conduce con cuidado!",
-            "(Ud.)": "¡conduzca con cuidado!",
-            "(Uds.)": "¡conduzcan con cuidado!",
-        }
-    },
-    {
-        "verbo": "be",
-        "complement": "careful!",
-        "hint_complement": "cuidado",
-        "hint_verb":  "ten/tenga/tengan",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡ten cuidado!",
-            "(Ud.)": "¡tenga cuidado!",
-            "(Uds.)": "¡tengan cuidado!",
-        }
-    },
-    {
-        "verbo": "do",
-        "complement": "your homework!",
-        "hint_complement": "tu/su tarea",
-        "hint_verb":  "haz/haga/hagan",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡haz tu tarea!",
-            "(Ud.)": "¡haga su tarea!",
-        }
-    },
-    {
-        "verbo": "clean",
-        "complement": "your room!",
-        "hint_complement": "tu/su habitación",
-        "hint_verb":  "limpia/limpie/limpien",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡limpia tu habitación!",
-            "(Ud.)": "¡limpie su habitación!",
-        }
-    },
-    {
-        "verbo": "don't touch",
-        "complement": "the hot stove!",
-        "hint_complement": "la estufa caliente",
-        "hint_verb":  "no toques/toque/toquen",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡no toques la estufa caliente!",
-            "(Ud.)": "¡no toque la estufa caliente!",
-            "(Uds.)": "¡no toquen la estufa caliente!",
-        }
-    },
-    {
-        "verbo": "eat",
-        "complement": "your vegetables!",
-        "hint_complement": "tus/sus vegetales",
-        "hint_verb":  "come/coma/coman",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡come tus vegetales!",
-            "(Ud.)": "¡coma sus vegetales!",
-            "(Uds.)": "¡coman sus vegetales!",
-        }
-    },
-    {
-        "verbo": "pass",
-        "complement": "the salt!",
-        "hint_complement": "la sal",
-        "hint_verb":  "pasa/pase/pasen",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡pasa la sal!",
-            "(Ud.)": "¡pase la sal!",
-            "(Uds.)": "¡pasen la sal!",
-        }
-    },
-    {
-        "verbo": "let's grab",
-        "complement": "a coffee!",
-        "hint_complement": "un café",
-        "hint_verb":  "tomar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(nosotros)": "¡tomemos un café!",
-
-        }
-    },
-    {
-        "verbo": "let's talk!",
-        "complement": "",
-        "hint_complement": "",
-        "hint_verb":  "hablar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(nosotros)": "¡hablemos!",
-
-        }
-    },
-    {
-        "verbo": "let's make",
-        "complement": "a plan!",
-        "hint_complement": "un plan",
-        "hint_verb":  "hacer",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(nosotros)": "¡hagamos un plan!",
-
-        }
-    },
-    {
-        "verbo": "let's go",
-        "complement": "to the beach!",
-        "hint_complement": "a la playa",
-        "hint_verb":  "ir",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(nosotros)": "¡vamos a la playa!",
-
-        }
-    },
-]
-
-}
-
-var imperativoWithPronouns = {
-    "exercise_title": "Imperativo con pronombres de complemento directo (CD) e indirecto (CI)",
-    "intro": "Imperative with direct (DOP) and indirect object pronouns (IOP) is when you give someone a command and say who or what it's for at the same time.",
-    "instruction": "In this exercise, you'll practice using just one pronoun in commands. Type the command given along with the appropriate pronoun in Spanish.",
-    "extraCreditAllowed": true,
-    "exercice": [
-    {
-        "verbo": "call",
-        "complement": "him!",
-        "hint_complement": "singular masculine",
-        "hint_verb": "llamar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡llámalo!",
-            "(Ud.)": "¡llámelo!",
-            "(Uds.)": "¡llámenlo!",
-        }
-    },
-    {
-        "verbo": "call",
-        "complement": "her!",
-        "hint_complement": "singular feminine",
-        "hint_verb": "llamar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡llámala!",
-            "(Ud.)": "¡llámela!",
-            "(Uds.)": "¡llámenla!",
-        }
-    },
-    {
-        "verbo": "call",
-        "complement": "them (fem.)!",
-        "hint_complement": "plural feminine",
-        "hint_verb": "llamar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡llámalas!",
-            "(Ud.)": "¡llámelas!",
-            "(Uds.)": "¡llámenlas!",
-        }
-    },
-    {
-        "verbo": "call",
-        "complement": "them!",
-        "hint_complement": "plural",
-        "hint_verb": "llamar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡llámalos!",
-            "(Ud.)": "¡llámelos!",
-            "(Uds.)": "¡llámenlos!",
-        }
-    },
-    {
-        "verbo": "don't call",
-        "complement": "him!",
-        "hint_complement": "singular masculine",
-        "hint_verb": "llamar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡no lo llames!",
-            "(Ud.)": "¡no lo llame!",
-            "(Uds.)": "¡no lo llamen!",
-        }
-    },
-    {
-        "verbo": "don't call",
-        "complement": "her!",
-        "hint_complement": "singular feminine",
-        "hint_verb": "llamar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡no la llames!",
-            "(Ud.)": "¡no la llame!",
-            "(Uds.)": "¡no la llamen!",
-        }
-    },
-    {
-        "verbo": "don't call",
-        "complement": "them (fem.)!",
-        "hint_complement": "plural feminine",
-        "hint_verb": "llamar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡no las llames!",
-            "(Ud.)": "¡no las llame!",
-            "(Uds.)": "¡no las llamen!",
-        }
-    },
-    {
-        "verbo": "don't call",
-        "complement": "them!",
-        "hint_complement": "plural",
-        "hint_verb": "llamar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡no los llames!",
-            "(Ud.)": "¡no los llame!",
-            "(Uds.)": "¡no los llamen!",
-        }
-    },
-    {
-        "verbo": "tell",
-        "complement": "me!",
-        "hint_complement": "singular",
-        "hint_verb": "decir",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡dime!",
-            "(Ud.)": "¡dígame!",
-            "(Uds.)": "¡díganme!",
-        }
-    },
-    {
-        "verbo": "tell",
-        "complement": "him!",
-        "hint_complement": "singular masculine IOP",
-        "hint_verb": "decir",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡dile!",
-            "(Ud.)": "¡dígale!",
-            "(Uds.)": "¡díganle!",
-        }
-    },
-    {
-        "verbo": "tell",
-        "complement": "her!",
-        "hint_complement": "singular feminine IOP",
-        "hint_verb": "decir",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡dile!",
-            "(Ud.)": "¡dígale!",
-            "(Uds.)": "¡díganle!",
-        }
-    },
-    {
-        "verbo": "tell",
-        "complement": "them!",
-        "hint_complement": "plural IOP",
-        "hint_verb": "decir",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡diles!",
-            "(Ud.)": "¡dígales!",
-            "(Uds.)": "¡díganles!",
-        }
-    },
-    {
-        "verbo": "don't tell",
-        "complement": "me!",
-        "hint_complement": "singular",
-        "hint_verb": "decir",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡no me digas!",
-            "(Ud.)": "¡no me diga!",
-            "(Uds.)": "¡no me digan!",
-        }
-    },
-    {
-        "verbo": "don't tell",
-        "complement": "him!",
-        "hint_complement": "singular masculine IOP",
-        "hint_verb": "decir",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡no le digas!",
-            "(Ud.)": "¡no le diga!",
-            "(Uds.)": "¡no le digan!",
-        }
-    },
-    {
-        "verbo": "don't tell",
-        "complement": "her!",
-        "hint_complement": "singular feminine IOP",
-        "hint_verb": "decir",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡no le digas!",
-            "(Ud.)": "¡no le diga!",
-            "(Uds.)": "¡no le digan!",
-        }
-    },
-    {
-        "verbo": "don't tell",
-        "complement": "them!",
-        "hint_complement": "plural IOP",
-        "hint_verb": "decir",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡no les digas!",
-            "(Ud.)": "¡no les diga!",
-            "(Uds.)": "¡no les digan!",
-        }
-    },
-    {
-        "verbo": "try",
-        "complement": "it (la sopa)!",
-        "hint_complement": "singular feminine",
-        "hint_verb": "probar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡pruébala!",
-            "(Ud.)": "pruébela!",
-            "(Uds.)": "¡pruébenla!",
-        }
-    },
-    {
-        "verbo": "buy",
-        "complement": "them (los juguetes)!",
-        "hint_complement": "plural masculine",
-        "hint_verb": "comprar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡cómpralos!",
-            "(Ud.)": "¡cómprelos!",
-            "(Uds.)": "¡cómprenlos!",
-        }
-    },
-    {
-        "verbo": "let's do",
-        "complement": "it!",
-        "hint_complement": "masculine singular",
-        "hint_verb": "hacer",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(nosotros)": "¡hagamoslo!",
-        }
-    },
-    {
-        "verbo": "recycle",
-        "complement": "them (las latas)!",
-        "hint_complement": "plural feminine",
-        "hint_verb": "reciclar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡reciclalas!",
-            "(Ud.)": "¡reciclelas!",
-            "(Uds.)": "¡reciclenlas!",
-        }
-    },
-    {
-        "verbo": "interview",
-        "complement": "them (los candidatos)!",
-        "hint_complement": "plural",
-        "hint_verb": "entrevistar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡entrevístalos!",
-            "(Ud.)": "¡entrevístelos!",
-            "(Uds.)": "¡entrevístenlos!",
-        }
-    },
-    {
-        "verbo": "Sponsor",
-        "complement": "them!",
-        "hint_complement": "plural",
-        "hint_verb": "patrocinar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡patrocinalos!",
-            "(Ud.)": "¡patrocinelos!",
-            "(Uds.)": "¡patrocinenlos!",
-        }
-    },
-    {
-        "verbo": "explain",
-        "complement": "it!",
-        "hint_complement": "singular masculine",
-        "hint_verb": "explicar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡explícalo!",
-            "(Ud.)": "¡explíquelo!",
-            "(Uds.)": "¡explíquenlo!",
-        }
-    },
-    {
-        "verbo": "request",
-        "complement": "it!",
-        "hint_complement": "singular masculine",
-        "hint_verb": "solicitar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡solicitalo!",
-            "(Ud.)": "¡solicitelo!",
-            "(Uds.)": "¡solicitenlo!",
-        }
-    },
-    {
-        "verbo": "request",
-        "complement": "them!",
-        "hint_complement": "plural masculine",
-        "hint_verb": "solicitar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡solicitalos!",
-            "(Ud.)": "¡solicitelos!",
-            "(Uds.)": "¡solicitenlos!",
-        }
-    },
-    {
-        "verbo": "deposit",
-        "complement": "it!",
-        "hint_complement": "singular masculine",
-        "hint_verb": "depositar",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡depositalo!",
-            "(Ud.)": "¡depositelo!",
-            "(Uds.)": "¡depositenlo!",
-        }
-    },
-    {
-        "verbo": "do",
-        "complement": "it!",
-        "hint_complement": "singular masculine",
-        "hint_verb": "hacer",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡hazlo!",
-            "(Ud.)": "¡hagalo!",
-            "(Uds.)": "¡haganlo!",
-        }
-    },
-    {
-        "verbo": "don't do",
-        "complement": "it!",
-        "hint_complement": "singular masculine",
-        "hint_verb": "hacer",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡no lo hagas!",
-            "(Ud.)": "¡no lo haga!",
-            "(Uds.)": "¡no lo hagan!",
-        }
-    },
-    {
-        "verbo": "think",
-        "complement": "about it!",
-        "hint_complement": "singular masculine",
-        "hint_verb": "pensar e → ie",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "¡piensalo!",
-            "(Ud.)": "¡pienselo!",
-            "(Uds.)": "¡piensenlo!",
-        }
-    },
-
-    
-]
-}
-
-
-var imperativoWithDoublePronouns = {
-    "exercise_title": "Imperativo con pronombres directos, indirectos y combinados",
-    "intro": "Imperative with direct (DOP) and indirect object pronouns (IOP) is when you give someone a command and say who or what it's for at the same time.",
-    "instruction": "Change the following sentences into commands based on the information provided. Use the necessary object pronouns.",
-    "extraCreditAllowed": true,
-    "exercice": [
-    {
-        "verbo": "Escribir",
-        "complement": "las cartas a los patrocinadores.",
-        "hint_complement": "double object pronouns",
-        "hint_verb": "escribe/escriba/escriban/escribamos",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "Escribeselas",
-            "(Ud.)": "Escribaselas",
-            "(Uds.)": "Escribanselas",
-            "(nosotros)": "Escribamoselas",
-        }
-    },
-    {
-        "verbo": "Poner",
-        "complement": "el anuncio en el periódico.",
-        "hint_complement": "DOP",
-        "hint_verb": "pon/ponga/pongan/pongamos",
-        "note": "Irregular verb",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "Ponlo",
-            "(Ud.)": "Pongalo",
-            "(Uds.)": "Ponganlo",
-            "(nosotros)": "Pongamoslo",
-        }
-    },
-    {
-        "verbo": "Dar",
-        "complement": "el artículo al director.",
-        "hint_complement": "double object pronouns",
-        "hint_verb": "da/de/den/demos",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "Dáselo",
-            "(Ud.)": "Déselo",
-            "(Uds.)": "Dénselo",
-            "(nosotros)": "Démoselo",
-        }
-    },
-    {
-        "verbo": "Explicar",
-        "complement": "la campaña a los voluntarios.",
-        "hint_complement": "double object pronouns",
-        "hint_verb": "explica/explique/expliquen/expliquemos",
-        "note": "Free hint for this exercise!",
-        "hintForFree": true,
-        "subject": {
-            "(tú)": "Explicasela",
-            "(Ud.)": "Expliquesela",
-            "(Uds.)": "Expliquensela",
-            "(nosotros)": "Expliquemosela",
-        }
-    },
-    {
-        "verbo": "Describir",
-        "complement": "el plan del proyecto.",
-        "hint_complement": "DOP",
-        "hint_verb": "describe/describa/describan/describamos",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "Descríbelo",
-            "(Ud.)": "Descríbalo",
-            "(Uds.)": "Descríbanlo",
-            "(nosotros)": "Descríbamoslo",
-        }
-    },
-    {
-        "verbo": "Dar",
-        "complement": "la prioridad a los fotógrafos.",
-        "hint_complement": "double object pronouns",
-        "hint_verb": "da/de/den/demos",
-        "note": "Irregular verb",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "Dásela",
-            "(Ud.)": "Désela",
-            "(Uds.)": "Dénsela",
-            "(nosotros)": "Démosela",
-        }
-    },
-    {
-        "verbo": "Traducir",
-        "complement": "la reseña.",
-        "hint_complement": "DOP",
-        "hint_verb": "traduce/traduzca/traduzcan/traduzcamos",
-        "note": "Free hint for this exercise!",
-        "hintForFree": true,
-        "subject": {
-            "(tú)": "Tradúcela",
-            "(Ud.)": "Tradúzcala",
-            "(Uds.)": "Tradúzcanla",
-            "(nosotros)": "tradúzcamosla"
-        }
-    },
-    {
-        "verbo": "Presentar",
-        "complement": "el anuncio al editor.",
-        "hint_complement": "double object pronouns",
-        "hint_verb": "presenta/presente/presenten/presentemos",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "Preséntaselo",
-            "(Ud.)": "Presénteselo",
-            "(Uds.)": "Preséntenselo",
-            "(nosotros)": "Preséntemoselo",
-        }
-    },
-    {
-        "verbo": "Explicar",
-        "complement": "la cuestión a los voluntarios.",
-        "hint_complement": "double object pronouns",
-        "hint_verb": "explica/explique/expliquen/expliquemos",
-        "note": "Free hint for this exercise!",
-        "hintForFree": true,
-        "subject": {
-            "(tú)": "Explícasela",
-            "(Ud.)": "Explíquesela",
-            "(Uds.)": "Explíquensela",
-            "(nosotros)": "Explíquemosela",
-        }
-    },
-    {
-        "verbo": "Dar",
-        "complement": "acceso a los fotógrafos.",
-        "hint_complement": "double object pronouns",
-        "hint_verb": "da/de/den/demos",
-        "note": "Irregular verb",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "Dáselo",
-            "(Ud.)": "Déselo",
-            "(Uds.)": "Dénselo",
-            "(nosotros)": "Démoselo",
-        }
-    },
-    {
-        "verbo": "Informar",
-        "complement": "los resultados a la directora.",
-        "hint_complement": "double object pronouns",
-        "hint_verb": "informa/informe/informen/informemos",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "Infórmaselos",
-            "(Ud.)": "Infórmeselos",
-            "(Uds.)": "infórmenselos",
-        }
-    },
-    {
-        "verbo": "Hacer",
-        "complement": "la publicidad del evento.",
-        "hint_complement": "DOP",
-        "hint_verb": "haz/haga/hagan/hagamos",
-        "note": "Irregular verb",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "hazla",
-            "(Ud.)": "Hágala",
-            "(Uds.)": "háganla",
-            "(nosotros)": "Hágamosla",
-        }
-    },
-    {
-        "verbo": "Traducir",
-        "complement": "los anuncios al español.",
-        "hint_complement": "DOP",
-        "hint_verb": "traduce/traduzca/traduzcan/traduzcamos",
-        "note": "Free hint for this exercise!",
-        "hintForFree": true,
-        "subject": {
-            "(tú)": "Tradúcelos",
-            "(Ud.)": "Tradúzcalos",
-            "(Uds.)": "Tradúzcanlos",
-            "(nosotros)": "tradúzcamoslos"
-        }
-    },
-    
-
-
-
-
-
-    {
-        "verbo": "(Negativo) escribir",
-        "complement": "las cartas a los patrocinadores.",
-        "hint_complement": "double object pronouns",
-        "hint_verb": "no escribas/escriba/escriban/escribamos",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "No se las escribas",
-            "(Ud.)": "No se las escriba",
-            "(Uds.)": "No se las escriban",
-            "(nosotros)": "No se las escribamos",
-        }
-    },
-    {
-        "verbo": "(Negativo) poner",
-        "complement": "el anuncio en el periódico.",
-        "hint_complement": "DOP",
-        "hint_verb": "No pongas/ponga/pongan/pongamos",
-        "note": "Irregular verb",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "No lo pongas",
-            "(Ud.)": "No lo ponga",
-            "(Uds.)": "No lo pongan",
-            "(nosotros)": "No lo pongamos",
-        }
-    },
-    {
-        "verbo": "(Negativo) dar",
-        "complement": "el artículo al director.",
-        "hint_complement": "double object pronouns",
-        "hint_verb": "No des/dé/den/demos",
-        "note": "Free hint for this exercise!",
-        "hintForFree": true,
-        "subject": {
-            "(tú)": "No se lo des",
-            "(Ud.)": "No se lo dé",
-            "(Uds.)": "No se lo dén",
-            "(nosotros)": "No se lo demos",
-        }
-    },
-    {
-        "verbo": "(Negativo) explicar",
-        "complement": "la campaña a los voluntarios.",
-        "hint_complement": "double object pronouns",
-        "hint_verb": "No expliques/explique/expliquen/expliquemos",
-        "note": "Free hint for this exercise!",
-        "hintForFree": true,
-        "subject": {
-            "(tú)": "No se la expliques",
-            "(Ud.)": "No se la explique",
-            "(Uds.)": "No se la expliquen",
-            "(nosotros)": "No se la expliquemos",
-        }
-    },
-    {
-        "verbo": "(Negativo) describir",
-        "complement": "el plan del proyecto.",
-        "hint_complement": "DOP",
-        "hint_verb": "No describas/describa/describan/describamos",
-        "note": "",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "No lo describas",
-            "(Ud.)": "No lo describa",
-            "(Uds.)": "No lo describan",
-            "(nosotros)": "No lo describamos",
-        }
-    },
-    {
-        "verbo": "(Negativo) hacer",
-        "complement": "la publicidad del evento.",
-        "hint_complement": "DOP",
-        "hint_verb": "no hagas/haga/hagan/hagamos",
-        "note": "Irregular verb",
-        "hintForFree": false,
-        "subject": {
-            "(tú)": "No la hagas",
-            "(Ud.)": "no la haga",
-            "(Uds.)": "No la hagan",
-            "(nosotros)": "No la hagamos",
-        }
-    },
-]
-}
-
-
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * max);
-    }
-
-
-    var exerciceSelected;
-    if (tense==="presente_irregular") {
-        exerciceSelected = irrePresent;
-    }
-    if (tense==="preterito") {
-        exerciceSelected = conjPreterito;
-    }
-    if (tense==="preterito_irregular") {
-        exerciceSelected = conjPreteritoIrregular;
-    }
-    if (tense==="presente") {
-        exerciceSelected = conj;
-    }
-    if (tense==="imperfecto") {
-        exerciceSelected = imperfecto;
-    }
-    if (tense==="imperativo") {
-        exerciceSelected = imperativo;
-    }
-    if (tense==="expresionesImperativo") {
-        exerciceSelected = expresionesImperativo;
-    }
-    if (tense==="ImperativoWithPronouns") {
-        exerciceSelected = imperativoWithPronouns;
-    }
-    if (tense==="imperativoWithDoublePronouns") {
-        exerciceSelected = imperativoWithDoublePronouns;
-    }
-
-    var pickedVerb;
-    var pickedSubject;
-    var exercise_title;
-    var exercise_instruction;
-    var isExtraCreditAllowed = false;
-
-    var note;
-
-
-    exercise_title = exerciceSelected.exercise_title;
-    isExtraCreditAllowed = exerciceSelected.extraCreditAllowed;
-    exercise_instruction = exerciceSelected.instruction;
-    pickedVerb = exerciceSelected.exercice[getRandomInt(exerciceSelected.exercice.length)];
-    pickedSubject = pickedVerb.subject;
-    hintForFree = pickedVerb.hintForFree;
-    note = pickedVerb.note
-
-    document.getElementById("hintNote").innerHTML = note;
-    document.getElementById("tenseToBePracticed").innerHTML = exercise_title;
-
-
-    
-
-
-
-
-
-
-    console.log("out of if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
-    console.log("el tiempo es " + tense)
-
-
-   
-
-    document.getElementById("exercise_title").innerHTML = exercise_title
-    document.getElementById("instruction").innerHTML = exercise_instruction
-
-
-    
-
-
-    verbo.innerHTML = pickedVerb.verbo;
-    // Fix alignment if there is not complement
-    // if (pickedVerb.complement === "") {
-        // document.getElementById("complement_div").style.display = "none";
-    // }
-    // else{
-        complement.innerHTML = "&nbsp;" + pickedVerb.complement;
-    // }
-    var subject = Object.keys(pickedSubject);
-    let count= Object.keys(pickedSubject).length; 
-
-
-    var pronounPicked = subject[getRandomInt(count)];
-
-    console.log("count is: " + count)
-
-    console.log("pronounPicked: " + pronounPicked);
-    console.log("pickedSubject[pronounPicked] " + pickedSubject[pronounPicked]);
-
-    subjectToShow.innerHTML = pronounPicked;
-
-
-    complementHint = pickedVerb.hint_complement
-    verbHint = pickedVerb.hint_verb
-    correctAnswer = pickedSubject[pronounPicked]
-
-
-    // This flag prevent user to being deducted points when his/her question is wrong and keep tyring
-    var flag = false;
-    var firstAttempt = true; //a flag to mark if the user is trying the question for first time 
-    var reavealAnswerAttempts = 2;
-
-
-    function handleIncorrectAnswer() {
-        // console.log("error statement was excecuted...")
-        // // cosole.log("if (verboConjugado !== pickedSubject[pronounPicked] && pickedSubject[pronounPicked] !== null && flag === false) " + verboConjugado + " " + pickedSubject[pronounPicked] + " " + pickedSubject[pronounPicked] + " " + flag)
-        // console.log("inside else pickedSubject[pronounPicked] = " + pickedSubject[pronounPicked] )
-        
-        
-        if (firstAttempt) {
-
-            // remove any extra poin available for this attempt
-            extraPointAdded = 0
-            if (isExererciseComplete && extraAttemptAvailable > 0){
-                extraAttemptAvailable--
+        if (event.key === 'Enter' && insertAnswer.value != '') {
+            console.log("insertAnswer.value " + insertAnswer.value)
+            console.log("userInput should be the same insertAnswer.value " + userInput)
+            console.log("userInput " + userInput + " rightAnswer " + rightAnswer)
+            console.log("insertAnswer " + insertAnswer.value + " rightAnswer " + rightAnswer)
+            if (userInput === rightAnswer) {
+                handleCorrectAnswer();
+                updateProgress();
             }
-            
-            verbosMistakes[correctAnswer] = "err"
-            lifesavers--
-            if (lifesavers === 2) {
-                document.getElementById("lifesavers1").setAttribute("id", "drop");
-            }
-            if (lifesavers === 1) {
-                document.getElementById("lifesavers2").setAttribute("id", "drop");
-            }
-            if (lifesavers === 0) {
-                document.getElementById("lifesavers3").setAttribute("id", "drop");
-            }
-            
-            flag = true;
-            
-            if (lifesavers < 0) {
-                negScore++
-                incorrect.innerHTML = negScore;
+            else {
+                audioNegFB.load();
+                audioNegFB.play();
+                handleIncorrectAnswer();
+                updateProgress();
+            }                
+            document.getElementById("extraCorrectAttempts").innerHTML = extraAttemptAvailable;
+            updateCoinsButtons();
+            console.log('Enter key pressed!');
+        }
+    });
 
-                if (!isExererciseComplete) {
-                    progress = progress -4
+    function handleCorrectAnswer() {
+        document.getElementById("fb").innerHTML = "Correct"
 
-                    if (progress < 0) {
-                        progress = 0 //reset progress
-                    }
-                }
-                
+        if (firstAttempt || reavealAnswerAttempts >= 1) {
+            score++
+            if (progress >= 100 && extraAttemptAvailable > 0) {
+                extraPointAdded = 2;
+                extraAttemptAvailable--;
             }
-            
-            
+            points.innerHTML = score;
+            progress = progress + 2;
+            audioFB.load();
+            audioFB.play();
+
+            if (hintUsed === false) {
+                hintNum++;
+                document.getElementById("coinsForHint").innerHTML = hintNum;
+            }
         }
         firstAttempt = false;
-        reavealAnswerAttempts--
-        
-        
-        document.getElementById("fb").innerHTML = "incorrect"
-        if (reavealAnswerAttempts <= 0){
-            document.getElementById("correctAnswer").innerHTML = correctAnswer;
-        }
-        
+        reavealAnswerAttempts = 2;
+
+        // pickedSubject[pronounPicked] = null
+        // rightAnswer = null
+        console.log("before load" + verboConjugado +  "=" + pickedSubject[pronounPicked]);
+        console.log("this line was excecuteed");
+
+        document.getElementById("verboConjugado").value = "";
+                
+        // updateProgress();
+        // extraPointAdded = 0
+
+        console.log("last line of if correct pickedSubject[pronounPicked] = " + pickedSubject[pronounPicked] )
+        // load to the next question
+        onload();
     }
 
+    function handleIncorrectAnswer() {
+                // console.log("error statement was excecuted...")
+                // // cosole.log("if (verboConjugado !== pickedSubject[pronounPicked] && pickedSubject[pronounPicked] !== null && flag === false) " + verboConjugado + " " + pickedSubject[pronounPicked] + " " + pickedSubject[pronounPicked] + " " + flag)
+                // console.log("inside else pickedSubject[pronounPicked] = " + pickedSubject[pronounPicked] )
+                
+                if (firstAttempt) {
 
-    
+                    // remove any extra poin available for this attempt
+                    extraPointAdded = 0
+                    if (isExererciseComplete && extraAttemptAvailable > 0) {
+                        extraAttemptAvailable--;
+                    }
+                    
+                    verbosMistakes[correctAnswer] = "err"
+                    lifesavers--
+                    if (lifesavers === 2) {
+                        document.getElementById("lifesavers1").setAttribute("id", "drop");
+                    }
+                    if (lifesavers === 1) {
+                        document.getElementById("lifesavers2").setAttribute("id", "drop");
+                    }
+                    if (lifesavers === 0) {
+                        document.getElementById("lifesavers3").setAttribute("id", "drop");
+                    }
+                    flag = true;
+                    if (lifesavers < 0) {
+                        negScore++
+                        incorrect.innerHTML = negScore;
 
+                        if (!isExererciseComplete) {
+                            progress = progress -4
 
+                            if (progress < 0) {
+                                progress = 0 //reset progress
+                            }
+                        }
+                    }
+                }
+                firstAttempt = false;
+                reavealAnswerAttempts--
+                
+                
+                document.getElementById("fb").innerHTML = "incorrect"
+                if (reavealAnswerAttempts <= 0){
+                    document.getElementById("correctAnswer").innerHTML = correctAnswer;
+                }   
+    }
 
     function updateProgress() {
         fina100score = progress;
-
-
         accuracy = parseFloat(((score / (score + negScore)) * 100).toFixed(2))
-
-        // Your custom function or code here
         document.getElementById("ratio").innerHTML = accuracy
         document.getElementById("progress-ui").innerHTML = progress
         if (progress <= 100 && !isExererciseComplete) {
             // calculate grade
-            grade = parseFloat((((score / (score + negScore)) * 100) * progress/100).toFixed(2))
+            grade = parseFloat((((score / (score + negScore)) * 100) * progress / 100).toFixed(2))
             // document.getElementById("grade").innerHTML = grade;
             
             // console.log("type of grade is: " + typeof grade)
@@ -2660,8 +576,6 @@ var imperativoWithDoublePronouns = {
         if (progress >= 100) { 
             document.getElementById("ProgresscCmplete").innerHTML = "🏁";
             isExererciseComplete = true;
-
-
             if (isExtraCreditAllowed) {
                 showExtraCreditOptions();
             }
@@ -2678,121 +592,7 @@ var imperativoWithDoublePronouns = {
 
         grade += extraPointAdded;
         document.getElementById("grade").innerHTML = grade;
-        
-        
+        extraPointAdded = 0;
     }
-
-
-
-
-
-
-
-    const regex = /¡|!/g;
-
-
-    var insertAnswer = document.getElementById("verboConjugado")
-    insertAnswer.addEventListener('keydown', function(event) {
-    // Check if the pressed key is the one you are interested in
-
-    var continueSkip = false;
-
-    
-    
-    
-    
-    if (event.key === 'Enter' && insertAnswer.value != "") {
-        verboConjugado = document.getElementById("verboConjugado").value;
-        
-        var userInput = verboConjugado.toLowerCase().trim().replaceAll(regex, '').replaceAll("á", "a").replaceAll("é", "e").replaceAll("í", "i").replaceAll("ó", "o").replaceAll("ú", "u");
-        var rightAnswer = pickedSubject[pronounPicked].toLowerCase().trim().replaceAll(regex, '').replaceAll("á", "a").replaceAll("é", "e").replaceAll("í", "i").replaceAll("ó", "o").replaceAll("ú", "u");
-
-        // console.log(verboConjugado +  "=" + pickedSubject[pronounPicked])
-
-
-
-        if ( userInput === rightAnswer){
-            document.getElementById("fb").innerHTML = "Correct"
-
-            if (firstAttempt || reavealAnswerAttempts >= 1) {
-                score++
-                if (progress >= 100 && extraAttemptAvailable > 0) {
-                    extraPointAdded = 2;
-                    extraAttemptAvailable--
-                }
-                points.innerHTML = score;
-                progress = progress + 2
-                audioFB.load();
-                audioFB.play();
-
-                if (hintUsed === false) {
-                    hintNum++
-                    document.getElementById("coinsForHint").innerHTML = hintNum
-            }
-            }
-            firstAttempt = false;
-
-            reavealAnswerAttempts = 2;
-
-
-
-            pickedSubject[pronounPicked] = null
-            rightAnswer = null
-            console.log("before load" + verboConjugado +  "=" + pickedSubject[pronounPicked])
-            console.log("this line was excecuteed")
-
-            document.getElementById("verboConjugado").value = "";
-    
-            
-
-        
-            onload()
-            updateProgress();
-            extraPointAdded = 0
-
-            console.log("last line of if correct pickedSubject[pronounPicked] = " + pickedSubject[pronounPicked] )
-        }
-          
-        // if (isSkipped){
-        //     handleIncorrectAnswer()
-        //     onload()
-        //     isSkipped = false;
-        // }
-        if (userInput !== rightAnswer && rightAnswer !== null){
-        // if (userInput !== rightAnswer){
-            audioNegFB.load();
-            audioNegFB.play();
-            // alert("userInput: " + userInput)
-            // alert("rightAnswer: " + rightAnswer)
-        }
-        if (userInput !== rightAnswer && rightAnswer !== null){
-        // if (userInput !== rightAnswer && rightAnswer !== null && flag === false){
-        // if (userInput !== rightAnswer && flag === false){
-
-         
-            handleIncorrectAnswer()
-            updateProgress();
-        }
-
-        document.getElementById("extraCorrectAttempts").innerHTML = extraAttemptAvailable
-
-        updateCoinsButtons()
-
-
-    
-
-
-
-
-      console.log('Enter key pressed!');
-    }
-  });
-
-
-
-    }
-
-    
-
 </script>
 </html>
