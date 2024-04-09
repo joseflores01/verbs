@@ -1970,24 +1970,6 @@ var futuro = {
             }
         },
         {
-            "verbo": "haber",
-            "complement": "",
-            "hint_complement": "",
-            "hint_verb": "stem-changing verb: habr-",
-            "note": "",
-            "hintForFree": false,
-            "subject": {
-                "yo": "habré",
-                "tú": "habrás",
-                "él": "habrá",
-                "ella": "habrá",
-                "Ud.": "habrá",
-                "nosotros": "habremos",
-                "Uds.": "habrán",
-                "ellos": "habrán"
-            }
-        },
-        {
             "verbo": "poder",
             "complement": "",
             "hint_complement": "",
