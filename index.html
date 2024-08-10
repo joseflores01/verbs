@@ -40,15 +40,15 @@
         
         <select onchange="selectTense(event)" name="tense" id="tense">
             <option id="tenseToBePracticed" value="">Select topic</option>
-            <option value="presente_irregular">Presente (irregular)</option>
-            <option value="presente">Presente (stem-changing)</option>
-            <option value="preterito">Preterito</option>
+            <option value="presente_irregular_yo_verbs">Presente (irregular yo verbs)</option>
+            <option value="presente_stem_changing">Presente (stem-changing)</option>
+            <option value="preterito">Pretérito</option>
             <option value="preterito_irregular">Pretérito (irregular)</option>
             <option value="imperfecto">Imperfecto</option>
             <option value="imperativo">Imperativo</option>
-            <option value="expresionesImperativo">Expresiones en imperativo</option>
-            <option value="ImperativoWithPronouns">Imperativo con pronombres CD y CI</option>
-            <option value="imperativoWithDoublePronouns">Imperativo con pronombres combinados</option>
+            <option value="expresiones_en_imperativo">Expresiones en imperativo</option>
+            <option value="imperativo_con_pronombres_CD_y_CI">Imperativo con pronombres CD y CI</option>
+            <option value="imperativo_con_pronombres_combinados">Imperativo con pronombres combinados</option>
             <option value="futuro">Futuro</option>
         </select>
         <!-- <p>Practice: <span id="tenseToBePracticed"></span></p><br> -->
@@ -76,6 +76,11 @@
             <b id="grade">--</b>
             <br class="extraCredit">
             <b class="extraCredit">Extra credit attempts available: </b><b  class="extraCredit" id="extraCorrectAttempts">0</b><b class="extraCredit">/</b><b class="extraCredit" id="extraAttemptsGrantted">0</b>
+            <!-- <br class="extraCreditForEarlyCompletion">
+            <br class="extraCreditForEarlyCompletion">
+            <b class="extraCreditForEarlyCompletion">Finish within 60 seconds to earn 10 extra points!</b>
+            <div id="timerDisplay"></div> -->
+
             <br>
             
             <!-- <b id="progress-ui">0</b><br> -->
@@ -256,7 +261,7 @@
     function selectTense(e) {
         console.log("this line works")
         location.reload();
-        var selectedTense = document.getElementById("tense").value = e.target.value
+        var selectedTense = e.target.value
         localStorage.setItem("selectedTense", selectedTense);
         initialize(selectedTense)
     }
@@ -356,7 +361,33 @@
     var firstAttempt; //a flag to mark if the user is trying the question for first time 
     var reavealAnswerAttempts;
 
+    // function startTimer(minutes, displayElementId) {
+    // let seconds = minutes * 60;
+    // const displayElement = document.getElementById(displayElementId);
+
+//     const timerInterval = setInterval(() => {
+//         let min = Math.floor(seconds / 60);
+//         let sec = seconds % 60;
+
+//         // Format the time as MM:SS
+//         let formattedTime = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+
+//         // Update the HTML element with the formatted time
+//         displayElement.textContent = formattedTime;
+
+//         if (seconds > 0) {
+//             seconds--;
+//         } else {
+//             clearInterval(timerInterval);
+//             displayElement.textContent = "Time's up!";
+//         }
+//     }, 1000);
+// }
+// startTimer(2, 'timerDisplay');
+
+
     onload = function() {
+
 
         clearHint()
         clearPreviousAnswer()
@@ -394,7 +425,7 @@
         note = pickedVerb.note
 
         document.getElementById("hintNote").innerHTML = note;
-        document.getElementById("tenseToBePracticed").innerHTML = exercise_title;
+        // document.getElementById("tenseToBePracticed").innerHTML = exercise_title;
 
 
     
@@ -453,7 +484,7 @@
         userInput = userInput.toLowerCase().trim().replaceAll(regex, '').replaceAll("á", "a").replaceAll("é", "e").replaceAll("í", "i").replaceAll("ó", "o").replaceAll("ú", "u");
         var rightAnswer = pickedSubject[pronounPicked].toLowerCase().trim().replaceAll(regex, '').replaceAll("á", "a").replaceAll("é", "e").replaceAll("í", "i").replaceAll("ó", "o").replaceAll("ú", "u");
         
-
+        
         if (event.key === 'Enter' && insertAnswer.value != '') {
             console.log("insertAnswer.value " + insertAnswer.value)
             console.log("userInput should be the same insertAnswer.value " + userInput)

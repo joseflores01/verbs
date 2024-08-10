@@ -17,8 +17,11 @@
 //             ]
 //         }
 
-var irrePresent = {
-    "extraCreditAllowed": true,
+var presente_irregular_yo_verbs = {
+    "exercise_title_ES": "Presente de los Verbos Irregulares en la Primera Persona del Singular",
+    "exercise_title": "Present Tense of Irregular Yo Form",
+    "instruction": 'Conjugate the verb in the present tense.',
+    "extraCreditAllowed": false,
     "exercice": [
     {
         "verbo": "hacer",
@@ -168,8 +171,10 @@ var irrePresent = {
 ]
 }
 
-var conj = {
-    "exercise_title": "Presente (irregular)",
+var presente_stem_changing = {
+    "exercise_title_ES": "Presente de los Verbos con Cambio de Raíz",
+    "exercise_title": "Present Tense of Stem-Changing Verbs",
+    "instruction": 'Conjugate the verb in the present tense.',
     "extraCreditAllowed": true,
     "exercice": [
     {
@@ -284,8 +289,10 @@ var conj = {
 ]
 }
 
-var conjPreterito = {
-    "exercise_title": "Pretérito",
+var preterito = {
+    "exercise_title_ES": "Pretérito de los Verbos Regulares",
+    "exercise_title": "Preterite Tense of Regular Verbs",
+    "instruction": 'Conjugate the verb in the preterite tense.',
     "extraCreditAllowed": true,
     "exercice": [
     {
@@ -508,8 +515,10 @@ var conjPreterito = {
 ]
 }
 
-var conjPreteritoIrregular = {
-    "exercise_title": "Conjugación del Presente",
+var preterito_irregular = {
+    "exercise_title_ES": "Pretéritos irregulares",
+    "exercise_title": "Irregular Preterites",
+    "instruction": 'Conjugate the verb in the preterite tense.',
     "extraCreditAllowed": false,
     "exercice": [
     {
@@ -661,7 +670,9 @@ var conjPreteritoIrregular = {
 }
 
 var imperfecto = {
-    "exercise_title": "Conjugación del Imperfecto",
+    "exercise_title_ES": "Tiempo Imperfecto",
+    "exercise_title": "Imperfect Tense",
+    "instruction": 'Conjugate the verb in the imperfect tense.',
     "extraCreditAllowed": false,
     "exercice": [
     {
@@ -813,9 +824,10 @@ var imperfecto = {
 }
 
 var imperativo = {
+    "exercise_title_ES": "Conjugación en imperativo",
     "exercise_title": "Conjugación en imperativo",
     "intro": "An imperative is a verb form used to give commands, requests, or instructions, typically expressed in the base form without specifying the subject.",
-    "instruction": "Conjuga el verbo",
+    "instruction": 'Conjugate the verb in the imperative mood (command forms).',
     "extraCreditAllowed": false,
     "exercice": [
         {
@@ -951,7 +963,8 @@ var imperativo = {
     
 }
     
-var expresionesImperativo = {
+var expresiones_en_imperativo = {
+    "exercise_title_ES": "Expresiones en imperativo",
     "exercise_title": "Expresiones en imperativo",
     "intro": "An imperative is a verb form used to give commands, requests, or instructions, typically expressed in the base form without specifying the subject.",
     "instruction": "Translate the English phrase into Spanish. If you need help, click on the verb or complement. Each click will cost you virtual coins. You'll earn more coins by completing exercises without hints.",
@@ -1189,7 +1202,8 @@ var expresionesImperativo = {
 
 }
 
-var imperativoWithPronouns = {
+var imperativo_con_pronombres_CD_y_CI = {
+    "exercise_title_ES": "Imperativo con pronombres de complemento directo (CD) e indirecto (CI)",
     "exercise_title": "Imperativo con pronombres de complemento directo (CD) e indirecto (CI)",
     "intro": "Imperative with direct (DOP) and indirect object pronouns (IOP) is when you give someone a command and say who or what it's for at the same time.",
     "instruction": "In this exercise, you'll practice using just one pronoun in commands. Type the command given along with the appropriate pronoun in Spanish.",
@@ -1575,7 +1589,8 @@ var imperativoWithPronouns = {
 ]
 }
 
-var imperativoWithDoublePronouns = {
+var imperativo_con_pronombres_combinados = {
+    "exercise_title_ES": "Imperativo con pronombres directos, indirectos y combinados",
     "exercise_title": "Imperativo con pronombres directos, indirectos y combinados",
     "intro": "Imperative with direct (DOP) and indirect object pronouns (IOP) is when you give someone a command and say who or what it's for at the same time.",
     "instruction": "Change the following sentences into commands based on the information provided. Use the necessary object pronouns.",
@@ -1856,9 +1871,10 @@ var imperativoWithDoublePronouns = {
 }
 
 var futuro = {
-    "exercise_title": "El Futuro",
+    "exercise_title_ES": "Tiempo Futuro",
+    "exercise_title": "Future Tense",
     "intro": '',
-    "instruction": 'Conjuga el verbo usando el futuro ',
+    "instruction": 'Conjugate the verb in the future tense.',
     "extraCreditAllowed": true,
     "exercice": [
         {
@@ -2177,32 +2193,32 @@ function selectExercise(tense) {
 
 
     switch(tense) {
-        case "presente_irregular": 
-            exerciceSelected = irrePresent;
+        case "presente_irregular_yo_verbs": 
+            exerciceSelected = presente_irregular_yo_verbs;
             break;
-        case "presente_irregular":
-            exerciceSelected = conjPreterito;
+        case "presente_stem_changing":
+            exerciceSelected = presente_stem_changing;
+            break;
+        case "preterito":
+            exerciceSelected = preterito;
             break;
         case "preterito_irregular":
-            exerciceSelected = conjPreteritoIrregular;
+            exerciceSelected = preterito_irregular;
             break;
-        case "presente": 
-            exerciceSelected = conj;
-            break;
-        case "imperfecto":
+        case "imperfecto": 
             exerciceSelected = imperfecto;
             break;
         case "imperativo":
             exerciceSelected = imperativo;
             break;
-        case "expresionesImperativo":
-            exerciceSelected = expresionesImperativo;
+        case "expresiones_en_imperativo":
+            exerciceSelected = expresiones_en_imperativo;
             break;
-        case "ImperativoWithPronouns":
-            exerciceSelected = imperativoWithPronouns;
+        case "imperativo_con_pronombres_CD_y_CI":
+            exerciceSelected = imperativo_con_pronombres_CD_y_CI;
             break;
-        case "imperativoWithDoublePronouns":
-            exerciceSelected = imperativoWithDoublePronouns;
+        case "imperativo_con_pronombres_combinados":
+            exerciceSelected = imperativo_con_pronombres_combinados;
             break;
         case "futuro":
             exerciceSelected = futuro;
