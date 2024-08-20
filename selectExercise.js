@@ -1,7 +1,8 @@
 
-//  var irrePresent = {
+//  var presente_irregular_yo_verbs = {
 //             "exercise_title": "Presente",
 //             "extraCreditAllowed": true,
+//             "extraCreditForEarlyCompletion": 4,
 //             "exercice": [
 //             {
 //                 "verbo": "hacer",
@@ -21,7 +22,8 @@ var presente_irregular_yo_verbs = {
     "exercise_title_ES": "Presente de los Verbos Irregulares en la Primera Persona del Singular",
     "exercise_title": "Present Tense of Irregular Yo Form",
     "instruction": 'Conjugate the verb in the present tense.',
-    "extraCreditAllowed": false,
+    "extraCreditAllowed": true,
+    "extraCreditForEarlyCompletion": 0,
     "exercice": [
     {
         "verbo": "hacer",
@@ -176,6 +178,7 @@ var presente_stem_changing = {
     "exercise_title": "Present Tense of Stem-Changing Verbs",
     "instruction": 'Conjugate the verb in the present tense.',
     "extraCreditAllowed": true,
+    "extraCreditForEarlyCompletion": 0,
     "exercice": [
     {
         "verbo": "querer",
@@ -293,7 +296,8 @@ var preterito = {
     "exercise_title_ES": "Pretérito de los Verbos Regulares",
     "exercise_title": "Preterite Tense of Regular Verbs",
     "instruction": 'Conjugate the verb in the preterite tense.',
-    "extraCreditAllowed": true,
+    "extraCreditAllowed": false,
+    "extraCreditForEarlyCompletion": 4,
     "exercice": [
     {
         "verbo": "hablar",
@@ -520,6 +524,7 @@ var preterito_irregular = {
     "exercise_title": "Irregular Preterites",
     "instruction": 'Conjugate the verb in the preterite tense.',
     "extraCreditAllowed": false,
+    "extraCreditForEarlyCompletion": 4,
     "exercice": [
     {
         "verbo": "ser",
@@ -673,7 +678,8 @@ var imperfecto = {
     "exercise_title_ES": "Tiempo Imperfecto",
     "exercise_title": "Imperfect Tense",
     "instruction": 'Conjugate the verb in the imperfect tense.',
-    "extraCreditAllowed": false,
+    "extraCreditAllowed": true,
+    "extraCreditForEarlyCompletion": 0,
     "exercice": [
     {
         "verbo": "jugar",
@@ -828,7 +834,8 @@ var imperativo = {
     "exercise_title": "Conjugación en imperativo",
     "intro": "An imperative is a verb form used to give commands, requests, or instructions, typically expressed in the base form without specifying the subject.",
     "instruction": 'Conjugate the verb in the imperative mood (command forms).',
-    "extraCreditAllowed": false,
+    "extraCreditAllowed": true,
+    "extraCreditForEarlyCompletion": 0,
     "exercice": [
         {
         "verbo": "hablar",
@@ -969,6 +976,7 @@ var expresiones_en_imperativo = {
     "intro": "An imperative is a verb form used to give commands, requests, or instructions, typically expressed in the base form without specifying the subject.",
     "instruction": "Translate the English phrase into Spanish. If you need help, click on the verb or complement. Each click will cost you virtual coins. You'll earn more coins by completing exercises without hints.",
     "extraCreditAllowed": true,
+    "extraCreditForEarlyCompletion": 0,
     "exercice": [
     {
         "verbo": "don't be",
@@ -1208,6 +1216,7 @@ var imperativo_con_pronombres_CD_y_CI = {
     "intro": "Imperative with direct (DOP) and indirect object pronouns (IOP) is when you give someone a command and say who or what it's for at the same time.",
     "instruction": "In this exercise, you'll practice using just one pronoun in commands. Type the command given along with the appropriate pronoun in Spanish.",
     "extraCreditAllowed": true,
+    "extraCreditForEarlyCompletion": 0,
     "exercice": [
     {
         "verbo": "call",
@@ -1595,6 +1604,7 @@ var imperativo_con_pronombres_combinados = {
     "intro": "Imperative with direct (DOP) and indirect object pronouns (IOP) is when you give someone a command and say who or what it's for at the same time.",
     "instruction": "Change the following sentences into commands based on the information provided. Use the necessary object pronouns.",
     "extraCreditAllowed": true,
+    "extraCreditForEarlyCompletion": 0,
     "exercice": [
     {
         "verbo": "Escribir",
@@ -1876,6 +1886,7 @@ var futuro = {
     "intro": '',
     "instruction": 'Conjugate the verb in the future tense.',
     "extraCreditAllowed": true,
+    "extraCreditForEarlyCompletion": 0,
     "exercice": [
         {
             "verbo": "hacer",

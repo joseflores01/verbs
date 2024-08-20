@@ -26,6 +26,9 @@
         <audio id="pfb-mp3">
             <source src="./p-fb.mp3" type="audio/mp3">
         </audio>
+        <audio id="finishfb-mp3">
+            <source src="./finish-fb.mp3" type="audio/mp3">
+        </audio>
         <audio id="nfb-mp3">
             <source src="./n-fb.mp3" type="audio/mp3">
         </audio>
@@ -76,10 +79,10 @@
             <b id="grade">--</b>
             <br class="extraCredit">
             <b class="extraCredit">Extra credit attempts available: </b><b  class="extraCredit" id="extraCorrectAttempts">0</b><b class="extraCredit">/</b><b class="extraCredit" id="extraAttemptsGrantted">0</b>
-            <!-- <br class="extraCreditForEarlyCompletion">
             <br class="extraCreditForEarlyCompletion">
-            <b class="extraCreditForEarlyCompletion">Finish within 60 seconds to earn 10 extra points!</b>
-            <div id="timerDisplay"></div> -->
+            <br class="extraCreditForEarlyCompletion">
+            <b class="extraCreditForEarlyCompletion"><b id="timerDisplay"></b></b>
+            
 
             <br>
             
@@ -172,6 +175,7 @@
     // var tenseToBePracticed = ""
     var audioFB = document.getElementById("pfb-mp3");
     var audioNegFB = document.getElementById("nfb-mp3");
+    var audioFinish = document.getElementById("finishfb-mp3");
     var isSkipped = false;
     var isExererciseComplete = false
     var hintForFree = false;
@@ -335,22 +339,41 @@
         document.getElementById("correctAnswer").innerHTML = ""
     }
 
-    var extraCreditUI = document.getElementsByClassName("extraCredit");
+
+
+    hideExtraCreditDashboard("extraCredit")
+    hideExtraCreditDashboard("extraCreditForEarlyCompletion")
+
+
+    function hideExtraCreditDashboard(extraCreditElement) {
+        var extraCreditUI = document.getElementsByClassName(extraCreditElement);
         for (var i = 0; i < extraCreditUI.length; i++) {
             extraCreditUI[i].classList.add("hide");
         }
+    }
 
-    function showExtraCreditOptions() {
+
+    
+
+
+    // var extraCreditUI = document.getElementsByClassName("extraCredit");
+    //     for (var i = 0; i < extraCreditUI.length; i++) {
+    //         extraCreditUI[i].classList.add("hide");
+    //     }
+
+
+    function showExtraCreditOptions(extraCreditElement) {
+        var extraCreditUI = document.getElementsByClassName(extraCreditElement);
         for (var i = 0; i < extraCreditUI.length; i++) {
             extraCreditUI[i].classList.remove("hide");
         }
-
     }
 
     var exerciceSelected = selectExercise(tense);
     var pickedVerb;
     var pickedSubject;
     var exercise_title;
+    var extraCreditForEarlyCompletion;
     var exercise_instruction;
     var isExtraCreditAllowed = false;
     var note;
@@ -361,33 +384,46 @@
     var firstAttempt; //a flag to mark if the user is trying the question for first time 
     var reavealAnswerAttempts;
 
-    // function startTimer(minutes, displayElementId) {
-    // let seconds = minutes * 60;
-    // const displayElement = document.getElementById(displayElementId);
+    function startTimer(minutes, displayElementId) {
 
-//     const timerInterval = setInterval(() => {
-//         let min = Math.floor(seconds / 60);
-//         let sec = seconds % 60;
+        showExtraCreditOptions("extraCreditForEarlyCompletion")
+        
+        let seconds = minutes * 60;
+        const displayElement = document.getElementById(displayElementId);
 
-//         // Format the time as MM:SS
-//         let formattedTime = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+        const timerInterval = setInterval(() => {
+            let min = Math.floor(seconds / 60);
+            let sec = seconds % 60;
 
-//         // Update the HTML element with the formatted time
-//         displayElement.textContent = formattedTime;
+            // Format the time as MM:SS
+            let formattedTime = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
 
-//         if (seconds > 0) {
-//             seconds--;
-//         } else {
-//             clearInterval(timerInterval);
-//             displayElement.textContent = "Time's up!";
-//         }
-//     }, 1000);
-// }
-// startTimer(2, 'timerDisplay');
+            // Update the HTML element with the formatted time
+            displayElement.textContent = "Finish within " + formattedTime + " for 10 extra points!";
 
+            
+            if (seconds > 0) {
+                seconds--;
+            } else {
+                clearInterval(timerInterval);
+                displayElement.textContent = "Time’s up for extra points!";
+            }
+            if (progress >= 100) {
+                clearInterval(timerInterval); // Stop the timer
+                // alert(formattedTime)
+                displayElement.textContent = "Buen trabajo! You earned 10 extra points!";
+                grade += 10;
+                grade = Math.min(110, grade);
+                document.getElementById("grade").innerHTML = grade;
+                console.log("Timer stopped because progress reached 100.");
 
+            }
+        }, 1000);
+    }
+    
+    
     onload = function() {
-
+        
 
         clearHint()
         clearPreviousAnswer()
@@ -417,6 +453,7 @@
         }
 
         exercise_title = exerciceSelected.exercise_title;
+        extraCreditForEarlyCompletion = exerciceSelected.extraCreditForEarlyCompletion;
         isExtraCreditAllowed = exerciceSelected.extraCreditAllowed;
         exercise_instruction = exerciceSelected.instruction;
         pickedVerb = exerciceSelected.exercice[getRandomInt(exerciceSelected.exercice.length)];
@@ -478,6 +515,7 @@
     const regex = /¡|!/g;
     var insertAnswer = document.getElementById("verboConjugado")
     var userInput;
+    let activateTime = false;
     insertAnswer.addEventListener('keydown', function(event) {
         // verboConjugado = document.getElementById("verboConjugado").value;
         userInput = insertAnswer.value;
@@ -490,6 +528,12 @@
             console.log("userInput should be the same insertAnswer.value " + userInput)
             console.log("userInput " + userInput + " rightAnswer " + rightAnswer)
             console.log("insertAnswer " + insertAnswer.value + " rightAnswer " + rightAnswer)
+
+            if (!activateTime && extraCreditForEarlyCompletion > 0) {
+                startTimer(extraCreditForEarlyCompletion, 'timerDisplay');
+                activateTime = true;
+            }
+
             if (userInput === rightAnswer) {
                 handleCorrectAnswer();
                 updateProgress();
@@ -517,8 +561,14 @@
             }
             points.innerHTML = score;
             progress = progress + 2;
+            if (progress == 100){
+                audioFinish.load();
+                audioFinish.play();
+            }
             audioFB.load();
             audioFB.play();
+
+
 
             if (hintUsed === false) {
                 hintNum++;
@@ -608,7 +658,7 @@
             document.getElementById("ProgresscCmplete").innerHTML = "🏁";
             isExererciseComplete = true;
             if (isExtraCreditAllowed) {
-                showExtraCreditOptions();
+                showExtraCreditOptions("extraCredit")
             }
         }
 
@@ -622,6 +672,8 @@
         // }
 
         grade += extraPointAdded;
+        // maximun grade is 110
+        grade = Math.min(110, grade);
         document.getElementById("grade").innerHTML = grade;
         extraPointAdded = 0;
     }
