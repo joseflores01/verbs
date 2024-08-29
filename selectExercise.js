@@ -18,6 +18,997 @@
 //             ]
 //         }
 
+// var gustar = {
+//     "exercise_title_ES": "El Verbo Gustar",
+//     "exercise_title": "The Verb Gustar",
+//     "instruction": 'Conjugate the verb in the present tense.',
+//     "extraCreditAllowed": true,
+//     "extraCreditForEarlyCompletion": 0,
+//     "exercice": [
+//     {
+//         "verbo": "I like",
+//         "complement": "apples",
+//         "hint_complement": "(f. pl.) manzanas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A mí)": "me gustan las manzanas",
+//         }
+//     },
+//     {
+//         "verbo": "You like",
+//         "complement": "apples",
+//         "hint_complement": "(f. pl.) manzanas",
+//         "hint_verb": "manzanas",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ti)": "te gustan las manzanas",
+//             "(A usted)": "le gustan las manzanas",
+//         }
+//     },
+//     {
+//         "verbo": "She likes",
+//         "complement": "apples",
+//         "hint_complement": "(f. pl.) manzanas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ella)": "le gustan las manzanas",
+//         }
+//     },
+//     {
+//         "verbo": "He likes",
+//         "complement": "apples",
+//         "hint_complement": "(f. pl.) manzanas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A él)": "le gustan las manzanas",
+//         }
+//     },
+//     {
+//         "verbo": "We like",
+//         "complement": "apples",
+//         "hint_complement": "(f. pl.) manzanas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A nosotros)": "nos gustan las manzanas",
+//             "(A nosotras)": "nos gustan las manzanas",
+//         }
+//     },
+//     {
+//         "verbo": "You like",
+//         "complement": "apples",
+//         "hint_complement": "(f. pl.) manzanas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ustedes)": "les gustan las manzanas",
+//         }
+//     },
+//     {
+//         "verbo": "They like",
+//         "complement": "apples",
+//         "hint_complement": "(f. pl.) manzanas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ellos)": "les gustan las manzanas",
+//             "(A ellas)": "les gustan las manzanas",
+//         }
+//     },
+//     {
+//         "verbo": "I like ",
+//         "complement": "ice-cream",
+//         "hint_complement": "(m. sing.) helado",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A mí)": "me gusta el helado",
+//         }
+//     },
+//     {
+//         "verbo": "You like ",
+//         "complement": "ice-cream",
+//         "hint_complement": "(m. sing.) helado",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ti)": "te gusta el helado",
+//             "(A usted)": "le gusta el helado",
+//         }
+//     },
+//     {
+//         "verbo": "He likes ",
+//         "complement": "ice-cream",
+//         "hint_complement": "(m. sing.) helado",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A él)": "le gusta el helado",
+//         }
+//     },
+//     {
+//         "verbo": "She likes ",
+//         "complement": "ice-cream",
+//         "hint_complement": "(m. sing.) helado",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ella)": "le gusta el helado",
+//         }
+//     },
+//     {
+//         "verbo": "We like ",
+//         "complement": "ice-cream",
+//         "hint_complement": "(m. sing.) helado",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A nosotros)": "nos gusta el helado",
+//             "(A nosotras)": "nos gusta el helado",
+//         }
+//     },
+//     {
+//         "verbo": "They like ",
+//         "complement": "ice-cream",
+//         "hint_complement": "(m. sing.) helado",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ellos)": "les gusta el helado",
+//             "(A ellas)": "les gusta el helado",
+//         }
+//     },
+//     {
+//         "verbo": "I like",
+//         "complement": "fruits",
+//         "hint_complement": "(f. pl.) frutas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A mí)": "me gustan las frutas",
+//         }
+//     },
+//     {
+//         "verbo": "You like",
+//         "complement": "fruits",
+//         "hint_complement": "(f. pl.) frutas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ti)": "te gustan las frutas",
+//             "(A usted)": "le gustan las frutas",
+//         }
+//     },
+//     {
+//         "verbo": "He likes",
+//         "complement": "fruits",
+//         "hint_complement": "(f. pl.) frutas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A él)": "le gustan las frutas",
+//         }
+//     },
+//     {
+//         "verbo": "She likes",
+//         "complement": "fruits",
+//         "hint_complement": "(f. pl.) frutas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ella)": "le gustan las frutas",
+//         }
+//     },
+//     {
+//         "verbo": "We like",
+//         "complement": "fruits",
+//         "hint_complement": "(f. pl.) frutas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A nosotros)": "nos gustan las frutas",
+//             "(A nosotras)": "nos gustan las frutas",
+
+//         }
+//     },
+//     {
+//         "verbo": "They like",
+//         "complement": "fruits",
+//         "hint_complement": "(f. pl.) frutas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ellos)": "les gustan las frutas",
+//             "(A ellas)": "les gustan las frutas",
+
+//         }
+//     },
+// // negatives
+//     {
+//         "verbo": "I don't like",
+//         "complement": "apples",
+//         "hint_complement": "(f. pl.) manzanas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A mí)": "no me gustan las manzanas",
+//         }
+//     },
+//     {
+//         "verbo": "You don't like",
+//         "complement": "apples",
+//         "hint_complement": "(f. pl.) manzanas",
+//         "hint_verb": "manzanas",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ti)": "no te gustan las manzanas",
+//             "(A usted)": "no le gustan las manzanas",
+//         }
+//     },
+//     {
+//         "verbo": "She doesn't likes",
+//         "complement": "apples",
+//         "hint_complement": "(f. pl.) manzanas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ella)": "no le gustan las manzanas",
+//         }
+//     },
+//     {
+//         "verbo": "He doesn't likes",
+//         "complement": "apples",
+//         "hint_complement": "(f. pl.) manzanas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A él)": "no le gustan las manzanas",
+//         }
+//     },
+//     {
+//         "verbo": "We don't like",
+//         "complement": "apples",
+//         "hint_complement": "(f. pl.) manzanas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A nosotros)": "no nos gustan las manzanas",
+//             "(A nosotras)": "no nos gustan las manzanas",
+//         }
+//     },
+//     {
+//         "verbo": "You don't like",
+//         "complement": "apples",
+//         "hint_complement": "(f. pl.) manzanas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ustedes)": "no les gustan las manzanas",
+//         }
+//     },
+//     {
+//         "verbo": "They don't like",
+//         "complement": "apples",
+//         "hint_complement": "(f. pl.) manzanas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ellos)": "no les gustan las manzanas",
+//             "(A ellas)": "no les gustan las manzanas",
+//         }
+//     },
+//     {
+//         "verbo": "I don't like ",
+//         "complement": "ice-cream",
+//         "hint_complement": "(m. sing.) helado",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A mí)": "no me gusta el helado",
+//         }
+//     },
+//     {
+//         "verbo": "You don't like ",
+//         "complement": "ice-cream",
+//         "hint_complement": "(m. sing.) helado",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ti)": "no te gusta el helado",
+//             "(A usted)": "no le gusta el helado",
+//         }
+//     },
+//     {
+//         "verbo": "He doesn't likes ",
+//         "complement": "ice-cream",
+//         "hint_complement": "(m. sing.) helado",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A él)": "no le gusta el helado",
+//         }
+//     },
+//     {
+//         "verbo": "She doesn't likes ",
+//         "complement": "ice-cream",
+//         "hint_complement": "(m. sing.) helado",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ella)": "no le gusta el helado",
+//         }
+//     },
+//     {
+//         "verbo": "We don't like ",
+//         "complement": "ice-cream",
+//         "hint_complement": "(m. sing.) helado",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A nosotros)": "no nos gusta el helado",
+//             "(A nosotras)": "no nos gusta el helado",
+//         }
+//     },
+//     {
+//         "verbo": "They doesn't like ",
+//         "complement": "ice-cream",
+//         "hint_complement": "(m. sing.) helado",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ellos)": "no les gusta el helado",
+//             "(A ellas)": "no les gusta el helado",
+//         }
+//     },
+//     {
+//         "verbo": "I don't like",
+//         "complement": "fruits",
+//         "hint_complement": "(f. pl.) frutas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A mí)": "no me gustan las frutas",
+//         }
+//     },
+//     {
+//         "verbo": "You don't like",
+//         "complement": "fruits",
+//         "hint_complement": "(f. pl.) frutas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ti)": "no te gustan las frutas",
+//             "(A usted)": "no le gustan las frutas",
+//         }
+//     },
+//     {
+//         "verbo": "He doesn't likes",
+//         "complement": "fruits",
+//         "hint_complement": "(f. pl.) frutas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A él)": "no le gustan las frutas",
+//         }
+//     },
+//     {
+//         "verbo": "She doesn't likes",
+//         "complement": "fruits",
+//         "hint_complement": "(f. pl.) frutas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ella)": "no le gustan las frutas",
+//         }
+//     },
+//     {
+//         "verbo": "We don't like",
+//         "complement": "fruits",
+//         "hint_complement": "(f. pl.) frutas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A nosotros)": "no nos gustan las frutas",
+//             "(A nosotras)": "no nos gustan las frutas",
+
+//         }
+//     },
+//     {
+//         "verbo": "They don't like",
+//         "complement": "fruits",
+//         "hint_complement": "(f. pl.) frutas",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ellos)": "no les gustan las frutas",
+//             "(A ellas)": "no les gustan las frutas",
+
+//         }
+//     },
+//     {
+//         "verbo": "I like",
+//         "complement": "to eat",
+//         "hint_complement": "comer",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A mí)": "me gusta comer",
+//         }
+//     },
+//     {
+//         "verbo": "He likes",
+//         "complement": "to eat",
+//         "hint_complement": "comer",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A él)": "le gusta comer",
+//         }
+//     },
+//     {
+//         "verbo": "She likes",
+//         "complement": "to eat",
+//         "hint_complement": "comer",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ella)": "le gusta comer",
+//         }
+//     },
+//     {
+//         "verbo": "You like",
+//         "complement": "to eat",
+//         "hint_complement": "comer",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ti)": "te gusta comer",
+//             "(A usted)": "le gusta comer",
+//             "(A ustedes)": "les gusta comer",
+//         }
+//     },
+//     {
+//         "verbo": "They like",
+//         "complement": "to eat",
+//         "hint_complement": "comer",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ellos)": "les gusta comer",
+//             "(A ellas)": "les gusta comer",
+//         }
+//     },
+//     {
+//         "verbo": "I like",
+//         "complement": "to sleep",
+//         "hint_complement": "dormir",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A mí)": "me gusta dormir",
+//         }
+//     },
+//     {
+//         "verbo": "He likes",
+//         "complement": "to sleep",
+//         "hint_complement": "dormir",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A él)": "le gusta dormir",
+//         }
+//     },
+//     {
+//         "verbo": "She likes",
+//         "complement": "to sleep",
+//         "hint_complement": "dormir",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ella)": "le gusta dormir",
+//         }
+//     },
+//     {
+//         "verbo": "You like",
+//         "complement": "to sleep",
+//         "hint_complement": "dormir",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ti)": "te gusta dormir",
+//             "(A usted)": "le gusta dormir",
+//             "(A ustedes)": "les gusta dormir",
+//         }
+//     },
+//     {
+//         "verbo": "They like",
+//         "complement": "to sleep",
+//         "hint_complement": "dormir",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ellos)": "les gusta dormir",
+//             "(A ellas)": "les gusta dormir",
+//         }
+//     },
+//     {
+//         "verbo": "I don't like",
+//         "complement": "to study",
+//         "hint_complement": "estudiar",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A mí)": "no me gusta estudiar",
+//         }
+//     },
+//     {
+//         "verbo": "You don't like",
+//         "complement": "to study",
+//         "hint_complement": "estudiar",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ti)": "no te gusta estudiar",
+//             "(A usted)": "no le gusta estudiar",
+//             "(A ustedes)": "no les gusta estudiar",
+//         }
+//     },
+//     {
+//         "verbo": "She doesn't like",
+//         "complement": "to study",
+//         "hint_complement": "estudiar",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ella)": "no le gusta estudiar",
+//         }
+//     },
+//     {
+//         "verbo": "He doesn't like",
+//         "complement": "to study",
+//         "hint_complement": "estudiar",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A él)": "no le gusta estudiar",
+//         }
+//     },
+//     {
+//         "verbo": "They don't like",
+//         "complement": "to study",
+//         "hint_complement": "estudiar",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A ellos)": "no les gusta estudiar",
+//             "(A ellas)": "no les gusta estudiar",
+//         }
+//     },
+//     {
+//         "verbo": "We don't like",
+//         "complement": "to study",
+//         "hint_complement": "estudiar",
+//         "hint_verb": "",
+//         "note": "",
+//         "hintForFree": false,
+//         "subject": {
+//             "(A nosotros)": "no nos gusta estudiar",
+//             "(A anosotras)": "no nos gusta estudiar",
+//         }
+//     },
+// ]
+// }
+var gustar = {
+    "exercise_title_ES": "El Verbo Gustar",
+    "exercise_title": "The Verb Gustar",
+    "instruction": 'Write a sentence using "gustar" and the given words. Include the correct definite article where needed.',
+    "extraCreditAllowed": true,
+    "extraCreditForEarlyCompletion": 0,
+    "exercice": [
+    {
+        "verbo": "",
+        "complement": "manzanas",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "me gustan las manzanas",
+            "A ti": "te gustan las manzanas",
+            "A Ud.": "le gustan las manzanas",
+            "A él": "le gustan las manzanas",
+            "A ella": "le gustan las manzanas",
+            "A nosotros": "nos gustan las manzanas",
+            "A Uds.": "les gustan las manzanas",
+            "A ellos": "les gustan las manzanas",
+        }
+    },
+    {
+        "verbo": "comer /",
+        "complement": "naranjas",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "me gusta comer naranjas",
+            "A ti": "te gusta comer naranjas",
+            "A Ud.": "le gusta comer naranjas",
+            "A él": "le gusta comer naranjas",
+            "A ella": "le gusta comer naranjas",
+            "A nosotros": "nos gusta comer naranjas",
+            "A Uds.": "les gusta comer naranjas",
+            "A ellos": "les gusta comer naranjas",
+        }
+    },
+    {
+        "verbo": "mirar /",
+        "complement": "televisión",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "me gusta mirar televisión",
+            "A ti": "te gusta mirar televisión",
+            "A Ud.": "le gusta mirar televisión",
+            "A él": "le gusta mirar televisión",
+            "A ella": "le gusta mirar televisión",
+            "A nosotros": "nos gusta mirar televisión",
+            "A Uds.": "les gusta mirar televisión",
+            "A ellos": "les gusta mirar televisión",
+            "A mis padres": "les gusta mirar televisión",
+
+        }
+    },
+    {
+        "verbo": "mirar /",
+        "complement": "(no) televisión",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "no me gusta mirar televisión",
+            "A ti": "no te gusta mirar televisión",
+            "A Ud.": "no le gusta mirar televisión",
+            "A él": "no le gusta mirar televisión",
+            "A ella": "no le gusta mirar televisión",
+            "A nosotros": "no nos gusta mirar televisión",
+            "A Uds.": "no les gusta mirar televisión",
+            "A Luci y Marta": "no les gusta mirar televisión",
+        }
+    },
+    {
+        "verbo": "",
+        "complement": "hamburguesa",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "me gusta la hamburguesa",
+            "A ti": "te gusta la hamburguesa",
+            "A Ud.": "le gusta la hamburguesa",
+            "A él": "le gusta la hamburguesa",
+            "A ella": "le gusta la hamburguesa",
+            "A nosotros": "nos gusta la hamburguesa",
+            "A Uds.": "les gusta la hamburguesa",
+            "A Luci y Marta": "les gusta la hamburguesa",
+        }
+    },
+    {
+        "verbo": "comer /",
+        "complement": "pescado",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "me gusta comer pescado",
+            "A ti": "te gusta comer pescado",
+            "A Ud.": "le gusta comer pescado",
+            "A él": "le gusta comer pescado",
+            "A ella": "le gusta comer pescado",
+            "A nosotros": "nos gusta comer pescado",
+            "A Uds.": "les gusta comer pescado",
+            "A Luci y Marta": "les gusta comer pescado",
+        }
+    },
+    {
+        "verbo": "",
+        "complement": "frutas",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "me gustan las frutas",
+            "A ti": "te gustan las frutas",
+            "A Ud.": "le gustan las frutas",
+            "A él": "le gustan las frutas",
+            "A ella": "le gustan las frutas",
+            "A Carlos y a mí": "nos gustan las frutas",
+            "A Uds.": "les gustan las frutas",
+            "A ellas": "les gustan las frutas",
+        }
+    },
+    {
+        "verbo": "",
+        "complement": "ensalada",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "me gusta la ensalada",
+            "A ti": "te gusta la ensalada",
+            "A Ud.": "le gusta la ensalada",
+            "A él": "le gusta la ensalada",
+            "A ella": "le gusta la ensalada",
+            "A nosotros": "nos gusta la ensalada",
+            "A Uds.": "les gusta la ensalada",
+            "A Sofía y a su hermana": "les gusta la ensalada",
+        }
+    },
+    {
+        "verbo": "",
+        "complement": "(no) ensalada",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "no me gusta la ensalada",
+            "A ti": "no te gusta la ensalada",
+            "A Ud.": "no le gusta la ensalada",
+            "A él": "no le gusta la ensalada",
+            "A ella": "no le gusta la ensalada",
+            "A nosotros": "no nos gusta la ensalada",
+            "A Uds.": "no les gusta la ensalada",
+            "A Sofía y a su hermana": "no les gusta la ensalada",
+        }
+    },
+    {
+        "verbo": "jugar /",
+        "complement": "fútbol",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "me gusta jugar fútbol",
+            "A ti": "te gusta jugar fútbol",
+            "A Ud.": "le gusta jugar fútbol",
+            "A él": "le gusta jugar fútbol",
+            "A ella": "le gusta jugar fútbol",
+            "A nosotros": "nos gusta jugar fútbol",
+            "A Uds.": "les gusta jugar fútbol",
+            "A ellos": "les gusta jugar fútbol",
+        }
+    },
+    {
+        "verbo": "",
+        "complement": "carne",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "me gusta la carne",
+            "A ti": "te gusta la carne",
+            "A Ud.": "le gusta la carne",
+            "A él": "le gusta la carne",
+            "A ella": "le gusta la carne",
+            "A nosotros": "nos gusta la carne",
+            "A Uds.": "les gusta la carne",
+            "A ellos": "les gusta la carne",
+        }
+    },
+    {
+        "verbo": "",
+        "complement": "(no) frijoles",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "no me gustan los frijoles",
+            "A ti": "no te gustan los frijoles",
+            "A Ud.": "no le gustan los frijoles",
+            "A él": "no le gustan los frijoles",
+            "A ella": "no le gustan los frijoles",
+            "A nosotros": "no nos gustan los frijoles",
+            "A Uds.": "no les gustan los frijoles",
+            "A ellos": "no les gustan los frijoles",
+        }
+    },
+    {
+        "verbo": "beber /",
+        "complement": "refrescos",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "me gusta beber refrescos",
+            "A ti": "te gusta beber refrescos",
+            "A Ud.": "le gusta beber refrescos",
+            "A él": "le gusta beber refrescos",
+            "A ella": "le gusta beber refrescos",
+            "A nosotros": "nos gusta beber refrescos",
+            "A Uds.": "les gusta beber refrescos",
+            "A ellos": "les gusta beber refrescos",
+        }
+    },
+    {
+        "verbo": "",
+        "complement": "pizza",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "me gusta la pizza",
+            "A ti": "te gusta la pizza",
+            "A Ud.": "le gusta la pizza",
+            "A Miguel": "le gusta la pizza",
+            "A Elena": "le gusta la pizza",
+            "A nosotros": "nos gusta la pizza",
+            "A Uds.": "les gusta la pizza",
+            "A ellos": "les gusta la pizza",
+        }
+    },
+    {
+        "verbo": "escuchar / ",
+        "complement": "música",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "me gusta escuchar música",
+            "A ti": "te gusta escuchar música",
+            "A Ud.": "le gusta escuchar música",
+            "A Miguel": "le gusta escuchar música",
+            "A Elena": "le gusta escuchar música",
+            "A nosotros": "nos gusta escuchar música",
+            "A Uds.": "les gusta escuchar música",
+            "A ellos": "les gusta escuchar música",
+        }
+    },
+    {
+        "verbo": "leer / ",
+        "complement": "libros",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "me gusta leer libros",
+            "A ti": "te gusta leer libros",
+            "A Ud.": "le gusta leer libros",
+            "A Miguel": "le gusta leer libros",
+            "A Elena": "le gusta leer libros",
+            "A nosotros": "nos gusta leer libros",
+            "A Uds.": "les gusta leer libros",
+            "A ellos": "les gusta leer libros",
+        }
+    },
+    {
+        "verbo": "escribir / ",
+        "complement": "(no) correos electrónicos",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "no me gusta escribir correos electrónicos",
+            "A ti": "no te gusta escribir correos electrónicos",
+            "A Ud.": "no le gusta escribir correos electrónicos",
+            "A Javier": "no le gusta escribir correos electrónicos",
+            "A Silvina": "no le gusta escribir correos electrónicos",
+            "A nosotros": "no nos gusta escribir correos electrónicos",
+            "A Uds.": "no les gusta escribir correos electrónicos",
+            "A Javier y a Silvina": "no les gusta escribir correos electrónicos",
+        }
+    },
+    {
+        "verbo": "",
+        "complement": "libros de misterio",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "me gustan los libros de misterio",
+            "A ti": "te gustan los libros de misterio",
+            "A Ud.": "le gustan los libros de misterio",
+            "A Enrique": "le gustan los libros de misterio",
+            "A él": "le gustan los libros de misterio",
+            "A María": "le gustan los libros de misterio",
+            "A nosotros": "nos gustan los libros de misterio",
+            "A Uds.": "les gustan los libros de misterio",
+            "A ellos": "les gustan los libros de misterio",
+        }
+    },
+    {
+        "verbo": "cocinar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "A mí": "me gusta cocinar",
+            "A ti": "te gusta cocinar",
+            "A Ud.": "le gusta cocinar",
+            "A él": "le gusta cocinar",
+            "A ella": "le gusta cocinar",
+            "A nosotros": "nos gusta cocinar",
+            "A Uds.": "les gusta cocinar",
+            "A ellos": "les gusta cocinar",
+        }
+    },
+]
+}
+
 var presente_irregular_yo_verbs = {
     "exercise_title_ES": "Presente de los Verbos Irregulares en la Primera Persona del Singular",
     "exercise_title": "Present Tense of Irregular Yo Form",
@@ -2204,6 +3195,9 @@ function selectExercise(tense) {
 
 
     switch(tense) {
+        case "gustar":
+            exerciceSelected = gustar
+            break;
         case "presente_irregular_yo_verbs": 
             exerciceSelected = presente_irregular_yo_verbs;
             break;
