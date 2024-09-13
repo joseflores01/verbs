@@ -1009,6 +1009,808 @@ var gustar = {
 ]
 }
 
+var presente_regular = {
+    "exercise_title_ES": "Presente de los Verbos Regulares",
+    "exercise_title": "Present Tense of Regular Verbs",
+    "instruction": 'Conjugate the verb in the present tense.',
+    "extraCreditAllowed": true,
+    "extraCreditForEarlyCompletion": 0,
+    "exercice": [
+    {
+        "verbo": "ayudar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "ayudo",
+            "tú": "ayudas",
+            "él": "ayuda",
+            "ella": "ayuda",
+            "Ud.": "ayuda",
+            "nosotros": "ayudamos",
+            "Uds.": "ayudan",
+            "ellos": "ayudan"
+        }
+    },
+    {
+        "verbo": "caminar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "camino",
+            "tú": "caminas",
+            "él": "camina",
+            "ella": "camina",
+            "Ud.": "camina",
+            "nosotros": "caminamos",
+            "Uds.": "caminan",
+            "ellos": "caminan"
+        }
+    },
+    {
+        "verbo": "bailar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "bailo",
+            "tú": "bailas",
+            "él": "baila",
+            "ella": "baila",
+            "Ud.": "baila",
+            "nosotros": "bailamos",
+            "Uds.": "bailan",
+            "ellos": "bailan"
+        }
+    },
+    {
+        "verbo": "buscar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "busco",
+            "tú": "buscas",
+            "él": "busca",
+            "ella": "busca",
+            "Ud.": "busca",
+            "nosotros": "buscamos",
+            "Uds.": "buscan",
+            "ellos": "buscan"
+        }
+    },
+    {
+        "verbo": "cantar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "canto",
+            "tú": "cantas",
+            "él": "canta",
+            "ella": "canta",
+            "Ud.": "canta",
+            "nosotros": "cantamos",
+            "Uds.": "cantan",
+            "ellos": "cantan"
+        }
+    },
+    {
+        "verbo": "cenar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "ceno",
+            "tú": "cenas",
+            "él": "cena",
+            "ella": "cena",
+            "Ud.": "cena",
+            "nosotros": "cenamos",
+            "Uds.": "cenan",
+            "ellos": "cenan"
+        }
+    },
+    {
+        "verbo": "cocinar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "cocino",
+            "tú": "cocinas",
+            "él": "cocina",
+            "ella": "cocina",
+            "Ud.": "cocina",
+            "nosotros": "cocinamos",
+            "Uds.": "cocinan",
+            "ellos": "cocinan"
+        }
+    },
+    {
+        "verbo": "comprar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "compro",
+            "tú": "compras",
+            "él": "compra",
+            "ella": "compra",
+            "Ud.": "compra",
+            "nosotros": "compramos",
+            "Uds.": "compran",
+            "ellos": "compran"
+        }
+    },
+    {
+        "verbo": "desayunar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "desayuno",
+            "tú": "desayunas",
+            "él": "desayuna",
+            "ella": "desayuna",
+            "Ud.": "desayuna",
+            "nosotros": "desayunamos",
+            "Uds.": "desayunan",
+            "ellos": "desayunan"
+        }
+    },
+    {
+        "verbo": "descansar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "descanso",
+            "tú": "descansas",
+            "él": "descansa",
+            "ella": "descansa",
+            "Ud.": "descansa",
+            "nosotros": "descansamos",
+            "Uds.": "descansan",
+            "ellos": "descansan"
+        }
+    },
+    {
+        "verbo": "enviar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "envío",
+            "tú": "envías",
+            "él": "envía",
+            "ella": "envía",
+            "Ud.": "envía",
+            "nosotros": "enviamos",
+            "Uds.": "envían",
+            "ellos": "envían"
+        }
+    },
+    {
+        "verbo": "escuchar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "escucho",
+            "tú": "escuchas",
+            "él": "escucha",
+            "ella": "escucha",
+            "Ud.": "escucha",
+            "nosotros": "escuchamos",
+            "Uds.": "escuchan",
+            "ellos": "escuchan"
+        }
+    },
+    {
+        "verbo": "esperar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "espero",
+            "tú": "esperas",
+            "él": "espera",
+            "ella": "espera",
+            "Ud.": "espera",
+            "nosotros": "esperamos",
+            "Uds.": "esperan",
+            "ellos": "esperan"
+        }
+    },
+    {
+        "verbo": "estudiar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "estudio",
+            "tú": "estudias",
+            "él": "estudia",
+            "ella": "estudia",
+            "Ud.": "estudia",
+            "nosotros": "estudiamos",
+            "Uds.": "estudian",
+            "ellos": "estudian"
+        }
+    },
+    {
+        "verbo": "explicar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "explico",
+            "tú": "explicas",
+            "él": "explica",
+            "ella": "explica",
+            "Ud.": "explica",
+            "nosotros": "explicamos",
+            "Uds.": "explican",
+            "ellos": "explican"
+        }
+    },
+    {
+        "verbo": "hablar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "hablo",
+            "tú": "hablas",
+            "él": "habla",
+            "ella": "habla",
+            "Ud.": "habla",
+            "nosotros": "hablamos",
+            "Uds.": "hablan",
+            "ellos": "hablan"
+        }
+    },
+    {
+        "verbo": "llamar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "llamo",
+            "tú": "llamas",
+            "él": "llama",
+            "ella": "llama",
+            "Ud.": "llama",
+            "nosotros": "llamamos",
+            "Uds.": "llaman",
+            "ellos": "llaman"
+        }
+    },
+    {
+        "verbo": "mirar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "miro",
+            "tú": "miras",
+            "él": "mira",
+            "ella": "mira",
+            "Ud.": "mira",
+            "nosotros": "miramos",
+            "Uds.": "miran",
+            "ellos": "miran"
+        }
+    },
+    {
+        "verbo": "pagar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "pago",
+            "tú": "pagas",
+            "él": "paga",
+            "ella": "paga",
+            "Ud.": "paga",
+            "nosotros": "pagamos",
+            "Uds.": "pagan",
+            "ellos": "pagan"
+        }
+    },
+    {
+        "verbo": "preparar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "preparo",
+            "tú": "preparas",
+            "él": "prepara",
+            "ella": "prepara",
+            "Ud.": "prepara",
+            "nosotros": "preparamos",
+            "Uds.": "preparan",
+            "ellos": "preparan"
+        }
+    },
+    {
+        "verbo": "tocar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "toco",
+            "tú": "tocas",
+            "él": "toca",
+            "ella": "toca",
+            "Ud.": "toca",
+            "nosotros": "tocamos",
+            "Uds.": "tocan",
+            "ellos": "tocan"
+        }
+    },
+    {
+        "verbo": "llegar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "llego",
+            "tú": "llegas",
+            "él": "llega",
+            "ella": "llega",
+            "Ud.": "llega",
+            "nosotros": "llegamos",
+            "Uds.": "llegan",
+            "ellos": "llegan"
+        }
+    },
+    {
+        "verbo": "nadar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "nado",
+            "tú": "nadas",
+            "él": "nada",
+            "ella": "nada",
+            "Ud.": "nada",
+            "nosotros": "nadamos",
+            "Uds.": "nadan",
+            "ellos": "nadan"
+        }
+    },
+    {
+        "verbo": "usar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "uso",
+            "tú": "usas",
+            "él": "usa",
+            "ella": "usa",
+            "Ud.": "usa",
+            "nosotros": "usamos",
+            "Uds.": "usan",
+            "ellos": "usan"
+        }
+    },
+    {
+        "verbo": "preguntar",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "pregunto",
+            "tú": "preguntas",
+            "él": "pregunta",
+            "ella": "pregunta",
+            "Ud.": "pregunta",
+            "nosotros": "preguntamos",
+            "Uds.": "preguntan",
+            "ellos": "preguntan"
+        }
+    },
+    {
+        "verbo": "aprender",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "aprendo",
+            "tú": "aprendes",
+            "él": "aprende",
+            "ella": "aprende",
+            "Ud.": "aprende",
+            "nosotros": "aprendemos",
+            "Uds.": "aprenden",
+            "ellos": "aprenden"
+        }
+    },
+    {
+        "verbo": "beber",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "bebo",
+            "tú": "bebes",
+            "él": "bebe",
+            "ella": "bebe",
+            "Ud.": "bebe",
+            "nosotros": "bebemos",
+            "Uds.": "beben",
+            "ellos": "beben"
+        }
+    },
+    {
+        "verbo": "comer",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "como",
+            "tú": "comes",
+            "él": "come",
+            "ella": "come",
+            "Ud.": "come",
+            "nosotros": "comemos",
+            "Uds.": "comen",
+            "ellos": "comen"
+        }
+    },
+    {
+        "verbo": "comprender",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "comprendo",
+            "tú": "comprendes",
+            "él": "comprende",
+            "ella": "comprende",
+            "Ud.": "comprende",
+            "nosotros": "comprendemos",
+            "Uds.": "comprenden",
+            "ellos": "comprenden"
+        }
+    },
+    {
+        "verbo": "correr",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "corro",
+            "tú": "corres",
+            "él": "corre",
+            "ella": "corre",
+            "Ud.": "corre",
+            "nosotros": "corremos",
+            "Uds.": "corren",
+            "ellos": "corren"
+        }
+    },
+    {
+        "verbo": "deber",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "debo",
+            "tú": "debes",
+            "él": "debe",
+            "ella": "debe",
+            "Ud.": "debe",
+            "nosotros": "debemos",
+            "Uds.": "deben",
+            "ellos": "deben"
+        }
+    },
+    {
+        "verbo": "leer",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "leo",
+            "tú": "lees",
+            "él": "lee",
+            "ella": "lee",
+            "Ud.": "lee",
+            "nosotros": "leemos",
+            "Uds.": "leen",
+            "ellos": "leen"
+        }
+    },
+    {
+        "verbo": "vender",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "vendo",
+            "tú": "vendes",
+            "él": "vende",
+            "ella": "vende",
+            "Ud.": "vende",
+            "nosotros": "vendemos",
+            "Uds.": "venden",
+            "ellos": "venden"
+        }
+    },
+    {
+        "verbo": "creer",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "creo",
+            "tú": "crees",
+            "él": "cree",
+            "ella": "cree",
+            "Ud.": "cree",
+            "nosotros": "creemos",
+            "Uds.": "creen",
+            "ellos": "creen"
+        }
+    },
+    {
+        "verbo": "responder",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "respondo",
+            "tú": "respondes",
+            "él": "responde",
+            "ella": "responde",
+            "Ud.": "responde",
+            "nosotros": "respondemos",
+            "Uds.": "responden",
+            "ellos": "responden"
+        }
+    },
+    {
+        "verbo": "compartir",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "comparto",
+            "tú": "compartes",
+            "él": "comparte",
+            "ella": "comparte",
+            "Ud.": "comparte",
+            "nosotros": "compartimos",
+            "Uds.": "comparten",
+            "ellos": "comparten"
+        }
+    },
+    {
+        "verbo": "abrir",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "abro",
+            "tú": "abres",
+            "él": "abre",
+            "ella": "abre",
+            "Ud.": "abre",
+            "nosotros": "abrimos",
+            "Uds.": "abren",
+            "ellos": "abren"
+        }
+    },
+    {
+        "verbo": "discutir",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "discuto",
+            "tú": "discutes",
+            "él": "discute",
+            "ella": "discute",
+            "Ud.": "discute",
+            "nosotros": "discutimos",
+            "Uds.": "discuten",
+            "ellos": "discuten"
+        }
+    },
+    {
+        "verbo": "escribir",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "escribo",
+            "tú": "escribes",
+            "él": "escribe",
+            "ella": "escribe",
+            "Ud.": "escribe",
+            "nosotros": "escribimos",
+            "Uds.": "escriben",
+            "ellos": "escriben"
+        }
+    },
+    {
+        "verbo": "existir",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "existo",
+            "tú": "existes",
+            "él": "existe",
+            "ella": "existe",
+            "Ud.": "existe",
+            "nosotros": "existimos",
+            "Uds.": "existen",
+            "ellos": "existen"
+        }
+    },
+    {
+        "verbo": "vivir",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "vivo",
+            "tú": "vives",
+            "él": "vive",
+            "ella": "vive",
+            "Ud.": "vive",
+            "nosotros": "vivimos",
+            "Uds.": "viven",
+            "ellos": "viven"
+        }
+    },
+    {
+        "verbo": "decidir",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "decido",
+            "tú": "decides",
+            "él": "decide",
+            "ella": "decide",
+            "Ud.": "decide",
+            "nosotros": "decidimos",
+            "Uds.": "deciden",
+            "ellos": "deciden"
+        }
+    },
+    {
+        "verbo": "recibir",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "recibo",
+            "tú": "recibes",
+            "él": "recibe",
+            "ella": "recibe",
+            "Ud.": "recibe",
+            "nosotros": "recibimos",
+            "Uds.": "reciben",
+            "ellos": "reciben"
+        }
+    },
+    {
+        "verbo": "describir",
+        "complement": "",
+        "hint_complement": "",
+        "hint_verb": "",
+        "note": "",
+        "hintForFree": false,
+        "subject": {
+            "yo": "describo",
+            "tú": "describes",
+            "él": "describe",
+            "ella": "describe",
+            "Ud.": "describe",
+            "nosotros": "describimos",
+            "Uds.": "describen",
+            "ellos": "describen"
+        }
+    },
+    ]
+}
+
 var presente_irregular_yo_verbs = {
     "exercise_title_ES": "Presente de los Verbos Irregulares en la Primera Persona del Singular",
     "exercise_title": "Present Tense of Irregular Yo Form",
@@ -3195,6 +3997,9 @@ function selectExercise(tense) {
 
 
     switch(tense) {
+        case "presente_regular":
+            exerciceSelected = presente_regular
+            break;
         case "gustar":
             exerciceSelected = gustar
             break;
