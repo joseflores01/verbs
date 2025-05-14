@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen</title>
+</head>
+<body>
+    <audio id="myAudio">
+        <source src="./exam_audios/sp3/final/av10l3u4_ascd2_trk38.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+    <button onclick="playAudio()" type="button">Escuchar audio</button>
+    <p id="message">p</p>
+    <script>
+        var x = document.getElementById("myAudio");
+        var reproduccion = 5;
+
+         onload()
+        function onload() {
+            document.getElementById("message").innerHTML = `Puedes escuchar este audio ${reproduccion} veces.`
+        }
+        function playAudio() { 
+            if (reproduccion > 0) {
+                x.play(); 
+                console.log("resproduciones restantes: " + reproduccion)
+            }
+            if (reproduccion -1 > 1) {
+                document.getElementById("message").innerHTML = `Puedes escuchar este audio ${reproduccion - 1} veces más.`
+            }
+            if (reproduccion -1 === 1) {
+                document.getElementById("message").innerHTML = "Puedes escuchar este audio 1 vez más."
+            }
+            if (reproduccion -1 === 0) {
+                document.getElementById("message").innerHTML = "Estás escuchando este audio por última vez."
+            }
+
+            x.onended = function(){
+                reproduccion--;
+                console.log('You do say.');
+                if (reproduccion <= 0) {
+                    document.getElementById("message").innerHTML = "Ya escuchaste este audio por última vez."
+            }
+            }
+            console.log(reproduccion)
+        }     
+    </script>
+</body>
+</html>
