@@ -660,6 +660,7 @@ var gustar = {
     "instruction": 'Write a sentence using "gustar" and the given words. Include the correct definite article where needed.',
     "extraCreditAllowed": true,
     "extraCreditForEarlyCompletion": 0,
+    "adaptProgress" : true,
     "exercice": [
     {
         "verbo": "",
@@ -1015,6 +1016,7 @@ var presente_regular = {
     "instruction": 'Conjugate the verb in the present tense.',
     "extraCreditAllowed": true,
     "extraCreditForEarlyCompletion": 0,
+    "adaptProgress" : false,
     "exercice": [
     {
         "verbo": "ayudar",
@@ -1817,6 +1819,7 @@ var presente_irregular_yo_verbs = {
     "instruction": 'Conjugate the verb in the present tense.',
     "extraCreditAllowed": true,
     "extraCreditForEarlyCompletion": 0,
+    "adaptProgress" : false,
     "exercice": [
     {
         "verbo": "hacer",
@@ -1972,6 +1975,7 @@ var presente_stem_changing = {
     "instruction": 'Conjugate the verb in the present tense.',
     "extraCreditAllowed": true,
     "extraCreditForEarlyCompletion": 0,
+    "adaptProgress" : false,
     "exercice": [
     {
         "verbo": "querer",
@@ -2091,6 +2095,7 @@ var preterito = {
     "instruction": 'Conjugate the verb in the preterite tense.',
     "extraCreditAllowed": false,
     "extraCreditForEarlyCompletion": 4,
+    "adaptProgress" : false,
     "exercice": [
     {
         "verbo": "hablar",
@@ -2318,6 +2323,7 @@ var preterito_irregular = {
     "instruction": 'Conjugate the verb in the preterite tense.',
     "extraCreditAllowed": false,
     "extraCreditForEarlyCompletion": 4,
+    "adaptProgress" : false,
     "exercice": [
     {
         "verbo": "ser",
@@ -2473,6 +2479,7 @@ var imperfecto = {
     "instruction": 'Conjugate the verb in the imperfect tense.',
     "extraCreditAllowed": true,
     "extraCreditForEarlyCompletion": 0,
+    "adaptProgress" : false,
     "exercice": [
     {
         "verbo": "jugar",
@@ -2629,6 +2636,7 @@ var imperativo = {
     "instruction": 'Conjugate the verb in the imperative mood (command forms).',
     "extraCreditAllowed": true,
     "extraCreditForEarlyCompletion": 0,
+    "adaptProgress" : false,
     "exercice": [
         {
         "verbo": "hablar",
@@ -2770,6 +2778,7 @@ var expresiones_en_imperativo = {
     "instruction": "Translate the English phrase into Spanish. If you need help, click on the verb or complement. Each click will cost you virtual coins. You'll earn more coins by completing exercises without hints.",
     "extraCreditAllowed": true,
     "extraCreditForEarlyCompletion": 0,
+    "adaptProgress" : true,
     "exercice": [
     {
         "verbo": "don't be",
@@ -3010,6 +3019,7 @@ var imperativo_con_pronombres_CD_y_CI = {
     "instruction": "In this exercise, you'll practice using just one pronoun in commands. Type the command given along with the appropriate pronoun in Spanish.",
     "extraCreditAllowed": true,
     "extraCreditForEarlyCompletion": 0,
+    "adaptProgress" : true,
     "exercice": [
     {
         "verbo": "call",
@@ -3398,6 +3408,7 @@ var imperativo_con_pronombres_combinados = {
     "instruction": "Change the following sentences into commands based on the information provided. Use the necessary object pronouns.",
     "extraCreditAllowed": true,
     "extraCreditForEarlyCompletion": 0,
+    "adaptProgress" : true,
     "exercice": [
     {
         "verbo": "Escribir",
@@ -3680,6 +3691,7 @@ var futuro = {
     "instruction": 'Conjugate the verb in the future tense.',
     "extraCreditAllowed": true,
     "extraCreditForEarlyCompletion": 0,
+    "adaptProgress" : false,
     "exercice": [
         {
             "verbo": "hacer",
