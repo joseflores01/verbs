@@ -14,7 +14,7 @@ A sleek, modern web application designed to help students and language learners 
 * **Pronoun Breakdown:** Clear organization across standard pronouns (*yo, tú, él/ella/usted, nosotros/as, vosotros/as, ellos/ellas/ustedes*).
 * **Interactive Practice & Quizzes:** Test your knowledge and track mastery with built-in conjugation drills.
 * **Responsive & Mobile-Friendly:** Optimized for seamless studying on desktop computers, tablets, and smartphones.
-* **Clean & Distraction-Free UI:** A minimalist interface engineered for rapid learning and readability.
+* **Clean & Distraction-Free UI:** A minimalist interface for rapid learning and readability.
 
 ---
 
