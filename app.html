@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin = "anonymous" referrerpolicy = "no-referrer"> </script>
+    <!-- <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script> -->
+    <script src="./phoenix.js"></script>
+    <!-- <script src="./main.js"></script> -->
+    <script src="./filegeneration.js"></script>
+    <script src="./selectExercise.js"></script>
+    <!-- <script type="module" src="./exercises.js"></script> -->
+    <link rel="stylesheet" href="styles.css">
+
+
+    <!-- <script src="./verbs.js"></script> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spanish With Mr Flores</title>
+</head>
+<body>
+    <div id="loader1" onload="myFunction()">Please wait 5 seconds</div>
+
+    <div id="content" style="display:none;">
+        <audio id="pfb-mp3">
+            <source src="./p-fb.mp3" type="audio/mp3">
+        </audio>
+        <audio id="finishfb-mp3">
+            <source src="./finish-fb.mp3" type="audio/mp3">
+        </audio>
+        <audio id="nfb-mp3">
+            <source src="./n-fb.mp3" type="audio/mp3">
+        </audio>
+        <audio id="cash-fb-mp3">
+            <source src="./cash-fb.mp3" type="audio/mp3">
+        </audio>
+ 
+        <div id="title">Spanish with Mr Flores 👨🏻‍🏫</div><br>
+        <!-- <h3>Common expressions exercise</h3> -->
+
+        <label for="tense">Estudiar: </label>
+        
+        <select onchange="selectTense(event)" name="tense" id="tense">
+            <option id="tenseToBePracticed" value="">Select topic</option>
+            <option value="presente_regular">Presente (Regular)</option>
+            <option value="gustar">Gustar</option>
+            <option value="presente_irregular_yo_verbs">Presente (irregular yo verbs)</option>
+            <option value="presente_stem_changing">Presente (stem-changing)</option>
+            <option value="preterito">Pretérito</option>
+            <option value="preterito_irregular">Pretérito (irregular)</option>
+            <option value="imperfecto">Imperfecto</option>
+            <option value="imperativo">Imperativo</option>
+            <option value="expresiones_en_imperativo">Expresiones en imperativo</option>
+            <option value="imperativo_con_pronombres_CD_y_CI">Imperativo con pronombres CD y CI</option>
+            <option value="imperativo_con_pronombres_combinados">Imperativo con pronombres combinados</option>
+            <option value="futuro">Futuro</option>
+        </select>
+        <!-- <p>Practice: <span id="tenseToBePracticed"></span></p><br> -->
+        <br><br>
+        <br>
+        <div id="instruction_div">
+            <b id="exercise_title"></b><br><br>
+            <span id="instruction"></span>
+        </div><br><br>
+        <div id="score_div">
+            <b>Correct: </b>
+            <b id="points">0</b>
+            <b>/</b>
+            <b id="incorrect">0</b>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <!-- <b>Correct/incorrect ratio: </b> -->
+            <b>Accuracy: </b>
+            <b id="ratio">--</b>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <b>Grade: </b>
+            <b id="grade">--</b>
+            <br class="extraCredit">
+            <b class="extraCredit">Extra credit attempts available: </b><b  class="extraCredit" id="extraCorrectAttempts">0</b><b class="extraCredit">/</b><b class="extraCredit" id="extraAttemptsGrantted">0</b>
+            <br class="extraCreditForEarlyCompletion">
+            <br class="extraCreditForEarlyCompletion">
+            <b class="extraCreditForEarlyCompletion"><b id="timerDisplay"></b></b>
+            
+
+            <br>
+            
+            <!-- <b id="progress-ui">0</b><br> -->
+
+        </div><br>
+        <div id="hintNote_container">
+            <span id="hintNote"></span>
+        </div>
+
+
+        <div id="phrase_div">
+            <div id="verb_div">
+                <b id="verbo" onclick="showVerbHint()"></b><br>
+                <b id="verbo_hint"></b><br><br>
+            </div>
+            <div id="complement_div">
+                <b id="complement" onclick="showHint()"></b><br>
+                <b id="complement_hint"></b><br><br>
+            </div>
+        <br>
+        <b id="subjectToShow"></b><br>
+        <input type="text" placeholder="answer" id="verboConjugado">
+        <br><span id="correctAnswer"></span><br>
+        <!-- <button onclick="myFunction()">Try it</button> -->
+        <!-- <button>check</button> -->
+        <span id="fb"></span><br>
+        <!-- <button>reveal answer</button><br><br> -->
+        <br><button onclick="showAnswerDialog()">👻 Reveal answer</button><br><br>
+        <!-- <div id="hide" class="modal_answer">
+            <span>👻 Hey!</span><br>
+            <span>I will tell you the answer</span><br>
+            <button>Reveal answer 💰x 20</button>
+            <button>Decline</button>
+        </div> -->
+
+        <dialog id="modal_answer">
+            <span>👻 Hey!</span><br>
+            <span>I will tell you the answer</span><br><br>
+            <button id="answerButton" disabled onclick="getAnswer()">Reveal answer 💰x 15</button>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <button onclick="closeAnswerDialog()">Decline</button>
+        </dialog>
+    
+        <button class="extraCredit" id="extraAttemptButton" onclick="giveExtraAttempt()">Extra Attempt 💰x 20</button><br>
+        <span class="extraCredit" id="maxReached"></span>
+        
+
+        <br>
+        <b>lifesavers:</b>
+        <b id="lifesavers3">🛟</b>
+        <b id="lifesavers2">🛟</b>
+        <b id="lifesavers1">🛟</b>
+        
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <b id="coins">💰</b><b id="coinsForHint"></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Progress: </b><b id="progress-ui">0</b><b>%</b><b id="ProgresscCmplete"></b><br><br>
+        <br><br>
+        <input type="text" placeholder="Nombre" id="nombre" onkeyup="success()">
+        <button type = "button" disabled id="fileButon" onclick = "CreateTextFile();">Crear reporte</button>
+        <div></div>
+        </div>
+    </div>
+</body>
+<script>
+    var time = setTimeout(showPage, 5000);
+    function showPage() {
+        document.getElementById("loader1").style.display = "none";
+        document.getElementById("content").style.display = "block";
+    }
+    
+    var hintNum = 20;
+    var extraAttempt = 0;
+    var extraAttemptAvailable = 0;
+    var extraPointAdded = 0;
+    const EXTRA_ATTEMPT_MAX = 5;
+    var hintUsed = false;
+    var lifesavers = 3;
+    var score = Number(0);
+    var progress = Number(0);
+    var grade = 0;
+    var accuracy = Number(0);
+    var negScore = Number(0);
+    var verbosMistakes = {};
+    var fina100score = 0;
+    var tense = localStorage.getItem("selectedTense");
+    var verboConjugado = "";
+    // var tenseToBePracticed = ""
+    var audioFB = document.getElementById("pfb-mp3");
+    var audioNegFB = document.getElementById("nfb-mp3");
+    var audioFinish = document.getElementById("finishfb-mp3");
+    var isSkipped = false;
+    var isExererciseComplete = false
+    var hintForFree = false;
+    
+    function updateCoinsButtons() {
+        if (hintNum < 20 || extraAttempt >= EXTRA_ATTEMPT_MAX){
+            document.getElementById("extraAttemptButton").disabled = true;
+        }
+        else {
+            document.getElementById("extraAttemptButton").disabled = false;
+        }
+    }
+
+    function giveExtraAttempt() {
+
+        if (hintNum >= 20) {
+            hintNum = hintNum -20;
+            document.getElementById("coinsForHint").innerHTML = hintNum
+            document.getElementById("cash-fb-mp3").load()
+            document.getElementById("cash-fb-mp3").play()
+            if (extraAttempt < EXTRA_ATTEMPT_MAX){
+                extraAttempt++
+                extraAttemptAvailable++
+                document.getElementById("extraAttemptsGrantted").innerHTML = extraAttempt;
+                document.getElementById("extraCorrectAttempts").innerHTML = extraAttemptAvailable
+            }
+            if (extraAttempt >= EXTRA_ATTEMPT_MAX){
+                document.getElementById("extraAttemptButton").disabled = true;
+                document.getElementById("maxReached").innerHTML = "Maximum extra attempts reached.";
+            }
+        }
+        updateCoinsButtons()
+    }
+
+    function showAnswerDialog() {
+        // alert()
+        var modal = document.getElementById("modal_answer")
+
+        if (hintNum >= 15) {
+            document.getElementById("answerButton").disabled= false;
+        }
+        else {
+            document.getElementById("answerButton").disabled= true;
+        }
+        modal.show()
+    }
+
+    function closeAnswerDialog() {
+        var modal = document.getElementById("modal_answer")
+        modal.close()
+    }
+
+    function getAnswer() {
+        if (hintNum >= 15) {
+            hintNum = hintNum -15;
+            document.getElementById("coinsForHint").innerHTML = hintNum;
+            document.getElementById("correctAnswer").innerHTML = correctAnswer;
+            document.getElementById("cash-fb-mp3").play();
+            closeAnswerDialog();
+        }
+        updateCoinsButtons();
+    }
+
+    function success() {
+        if(document.getElementById("nombre").value==="") { 
+            document.getElementById('fileButon').disabled = true; 
+        } else { 
+            document.getElementById('fileButon').disabled = false;
+        }
+    }
+
+    function initialize(selectedTense) {
+        score = Number(0);
+        progress = Number(0);
+        negScore = Number(0);
+        verbosMistakes = {};
+        fina100score = 0;
+        tense = localStorage.getItem("selectedTense");
+        verboConjugado = "";
+        complementHint = "";
+        correctAnswer = "";
+        verbHint = "";
+        console.log("reset everything");
+        onload();
+    }
+
+    function selectTense(e) {
+        console.log("this line works")
+        location.reload();
+        var selectedTense = e.target.value
+        localStorage.setItem("selectedTense", selectedTense);
+        initialize(selectedTense)
+    }
+
+    function formater(name){
+        var reporte = `Reporte de ${name}`
+        var format = "+"
+        for (var i=0; i < reporte.length + 2; i++) {
+            
+            format = format + "-"
+        }
+        format = format + `+\n|`
+        format = format + " " + reporte + " |" + "\n+";
+
+        for (var i=0; i < reporte.length + 2; i++) {
+            
+            format = format + "-"
+        }
+        format = format + `+\n\n`
+        return format;
+    }
+
+    function encryptReport(textToEncrypt) {
+        var encryptedAES = CryptoJS.AES.encrypt(textToEncrypt, "My key");
+        // var decryptedBytes = CryptoJS.AES.decrypt(encryptedAES, "My key");
+        // var plaintext = decryptedBytes.toString(CryptoJS.enc.Utf8);
+        return encryptedAES;
+    }
+
+    function showHint() {
+        if(hintNum > 0 || hintForFree === true) {
+    
+            // hintUsed = true;
+            if (!hintForFree) {
+                hintNum--;
+                hintUsed = true
+            }
+            document.getElementById("coinsForHint").innerHTML = hintNum
+            var hintMessage = document.getElementById("complement_hint");
+            hintMessage.innerHTML = complementHint
+        }
+        updateCoinsButtons()
+    }
+
+    function showVerbHint() {
+        if(hintNum > 0 || hintForFree === true) { 
+            // hintNum--;
+            // hintUsed = true;
+            if (!hintForFree) {
+                hintNum--;
+                hintUsed = true
+            }
+            document.getElementById("coinsForHint").innerHTML = hintNum
+            var hintMessage = document.getElementById("verbo_hint");
+            hintMessage.innerHTML = verbHint
+        }
+        updateCoinsButtons()
+
+    }
+
+    function clearHint() {
+        hintUsed = false;
+        var verbMessage = document.getElementById("verbo_hint");
+        var hintMessage = document.getElementById("complement_hint");
+        verbMessage.innerHTML = ""
+        hintMessage.innerHTML = ""
+
+    }
+
+    function clearPreviousAnswer() {
+        document.getElementById("correctAnswer").innerHTML = ""
+    }
+
+
+
+    hideExtraCreditDashboard("extraCredit")
+    hideExtraCreditDashboard("extraCreditForEarlyCompletion")
+
+
+    function hideExtraCreditDashboard(extraCreditElement) {
+        var extraCreditUI = document.getElementsByClassName(extraCreditElement);
+        for (var i = 0; i < extraCreditUI.length; i++) {
+            extraCreditUI[i].classList.add("hide");
+        }
+    }
+
+
+    
+
+
+    // var extraCreditUI = document.getElementsByClassName("extraCredit");
+    //     for (var i = 0; i < extraCreditUI.length; i++) {
+    //         extraCreditUI[i].classList.add("hide");
+    //     }
+
+
+    function showExtraCreditOptions(extraCreditElement) {
+        var extraCreditUI = document.getElementsByClassName(extraCreditElement);
+        for (var i = 0; i < extraCreditUI.length; i++) {
+            extraCreditUI[i].classList.remove("hide");
+        }
+    }
+
+    var exerciceSelected = selectExercise(tense);
+    var pickedVerb;
+    var pickedSubject;
+    var exercise_title;
+    var extraCreditForEarlyCompletion;
+    var exercise_instruction;
+    var isExtraCreditAllowed = false;
+    var note;
+    var subject;
+    let count;
+    var pronounPicked;
+    var flag;
+    var firstAttempt; //a flag to mark if the user is trying the question for first time 
+    var reavealAnswerAttempts;
+
+    function startTimer(minutes, displayElementId) {
+
+        showExtraCreditOptions("extraCreditForEarlyCompletion")
+        
+        let seconds = minutes * 60;
+        const displayElement = document.getElementById(displayElementId);
+
+        const timerInterval = setInterval(() => {
+            let min = Math.floor(seconds / 60);
+            let sec = seconds % 60;
+
+            // Format the time as MM:SS
+            let formattedTime = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+
+            // Update the HTML element with the formatted time
+            displayElement.textContent = "Finish within " + formattedTime + " for 10 extra points!";
+
+            
+            if (seconds > 0) {
+                seconds--;
+            } else {
+                clearInterval(timerInterval);
+                displayElement.textContent = "Time’s up for extra points!";
+            }
+            if (progress >= 100) {
+                clearInterval(timerInterval); // Stop the timer
+                // alert(formattedTime)
+                displayElement.textContent = "Buen trabajo! You earned 10 extra points!";
+                grade += 10;
+                grade = Math.min(110, grade);
+                document.getElementById("grade").innerHTML = grade;
+                console.log("Timer stopped because progress reached 100.");
+
+            }
+        }, 1000);
+    }
+    
+    
+    onload = function() {
+        
+
+        clearHint()
+        clearPreviousAnswer()
+        document.getElementById("coinsForHint").innerHTML = hintNum
+
+        // var hintMessage = document.getElementById("verbo_hint");
+        // var hintMessage = document.getElementById("complement_hint");
+        // hintMessage.innerHTML = ""
+        // hintMessage.innerHTML = ""
+
+        console.log("____________________________-- ")
+
+        console.log("score " + score)
+
+        var points = document.getElementById("points")
+        var incorrect = document.getElementById("incorrect")
+
+        document.getElementById("fb").innerHTML = ""
+        console.log("again")
+        var verbo = document.getElementById("verbo");
+        var complement = document.getElementById("complement"); 
+        var subjectToShow = document.getElementById("subjectToShow");
+
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        exercise_title = exerciceSelected.exercise_title;
+        adaptProgress = exerciceSelected.adaptProgress; // adptative progress to finish early 
+        extraCreditForEarlyCompletion = exerciceSelected.extraCreditForEarlyCompletion;
+        isExtraCreditAllowed = exerciceSelected.extraCreditAllowed;
+        exercise_instruction = exerciceSelected.instruction;
+        pickedVerb = exerciceSelected.exercice[getRandomInt(exerciceSelected.exercice.length)];
+        pickedSubject = pickedVerb.subject;
+        hintForFree = pickedVerb.hintForFree;
+        note = pickedVerb.note
+
+        document.getElementById("hintNote").innerHTML = note;
+        // document.getElementById("tenseToBePracticed").innerHTML = exercise_title;
+
+
+    
+        console.log("out of if statement tense_ " + tense + "pickedVerb " + pickedVerb.verbo)
+        console.log("el tiempo es " + tense)
+
+
+
+        document.getElementById("exercise_title").innerHTML = exercise_title
+        document.getElementById("instruction").innerHTML = exercise_instruction
+
+
+    
+
+
+        verbo.innerHTML = pickedVerb.verbo;
+        // Fix alignment if there is not complement
+        // if (pickedVerb.complement === "") {
+            // document.getElementById("complement_div").style.display = "none";
+        // }
+        // else{
+            complement.innerHTML = "&nbsp;" + pickedVerb.complement;
+        // }
+        subject = Object.keys(pickedSubject);
+        count= Object.keys(pickedSubject).length; 
+
+
+        pronounPicked = subject[getRandomInt(count)];
+
+        console.log("count is: " + count)
+
+        console.log("pronounPicked: " + pronounPicked);
+        console.log("pickedSubject[pronounPicked] " + pickedSubject[pronounPicked]);
+        console.log("pickedSubject " + JSON.stringify(pickedSubject));
+
+        subjectToShow.innerHTML = pronounPicked;
+
+
+        complementHint = pickedVerb.hint_complement
+        verbHint = pickedVerb.hint_verb
+        correctAnswer = pickedSubject[pronounPicked]
+
+
+        // // This flag prevent user to being deducted points when his/her question is wrong and keep tyring
+        flag = false;
+        firstAttempt = true; //a flag to mark if the user is trying the question for first time 
+        reavealAnswerAttempts = 2;
+
+    }
+    const regex = /¡|!/g;
+    var insertAnswer = document.getElementById("verboConjugado")
+    var userInput;
+    let activateTime = false;
+    insertAnswer.addEventListener('keydown', function(event) {
+        // verboConjugado = document.getElementById("verboConjugado").value;
+        userInput = insertAnswer.value;
+        userInput = userInput.toLowerCase().trim().replaceAll(regex, '').replaceAll("á", "a").replaceAll("é", "e").replaceAll("í", "i").replaceAll("ó", "o").replaceAll("ú", "u");
+        var rightAnswer = pickedSubject[pronounPicked].toLowerCase().trim().replaceAll(regex, '').replaceAll("á", "a").replaceAll("é", "e").replaceAll("í", "i").replaceAll("ó", "o").replaceAll("ú", "u");
+        
+        
+        if (event.key === 'Enter' && insertAnswer.value != '') {
+            console.log("insertAnswer.value " + insertAnswer.value)
+            console.log("userInput should be the same insertAnswer.value " + userInput)
+            console.log("userInput " + userInput + " rightAnswer " + rightAnswer)
+            console.log("insertAnswer " + insertAnswer.value + " rightAnswer " + rightAnswer)
+
+            if (!activateTime && extraCreditForEarlyCompletion > 0) {
+                startTimer(extraCreditForEarlyCompletion, 'timerDisplay');
+                activateTime = true;
+            }
+
+            if (userInput === rightAnswer) {
+                handleCorrectAnswer();
+                updateProgress();
+            }
+            else {
+                audioNegFB.load();
+                audioNegFB.play();
+                handleIncorrectAnswer();
+                updateProgress();
+            }                
+            document.getElementById("extraCorrectAttempts").innerHTML = extraAttemptAvailable;
+            updateCoinsButtons();
+            console.log('Enter key pressed!');
+        }
+    });
+
+    let firstTimeMaxProgress = true;
+
+    function updateCoins() {
+        if (hintUsed === false) {
+                hintNum++;
+                document.getElementById("coinsForHint").innerHTML = hintNum;
+        }
+    }
+
+    function handleCorrectAnswer() {
+        document.getElementById("fb").innerHTML = "Correct"
+
+        if (firstAttempt || reavealAnswerAttempts >= 1) {
+            score++
+            if (progress >= 100 && extraAttemptAvailable > 0) {
+                extraPointAdded = 2;
+                extraAttemptAvailable--;
+            }
+            points.innerHTML = score;
+            // progress = progress + 2;
+            adaptiveScalingProgress()
+            if (progress == 100 && firstTimeMaxProgress){
+                audioFinish.load();
+                audioFinish.play();
+                firstTimeMaxProgress = false;
+            }
+            audioFB.load();
+            audioFB.play();
+            updateCoins() 
+
+        }
+        firstAttempt = false;
+        reavealAnswerAttempts = 2;
+
+        // pickedSubject[pronounPicked] = null
+        // rightAnswer = null
+        console.log("before load" + verboConjugado +  "=" + pickedSubject[pronounPicked]);
+        console.log("this line was excecuteed");
+
+        document.getElementById("verboConjugado").value = "";
+                
+        // updateProgress();
+        // extraPointAdded = 0
+
+        console.log("last line of if correct pickedSubject[pronounPicked] = " + pickedSubject[pronounPicked] )
+        // load to the next question
+        onload();
+    }
+    function adaptiveScalingProgress() {
+        var totalQuestions = score + negScore
+
+        if (adaptProgress) {
+            if (accuracy >= 90 && totalQuestions >= 25)
+                progress = progress + 4;
+            else if (accuracy >= 90 && totalQuestions >= 15)
+                progress = progress + 3;
+            else
+                progress = progress + 2;
+        }
+        else {
+            progress = progress + 2;
+        }
+
+
+        progress = Math.min(progress, 100); // Ensure progress does not exceed 100
+    }
+
+
+    function handleIncorrectAnswer() {
+                // console.log("error statement was excecuted...")
+                // // cosole.log("if (verboConjugado !== pickedSubject[pronounPicked] && pickedSubject[pronounPicked] !== null && flag === false) " + verboConjugado + " " + pickedSubject[pronounPicked] + " " + pickedSubject[pronounPicked] + " " + flag)
+                // console.log("inside else pickedSubject[pronounPicked] = " + pickedSubject[pronounPicked] )
+                
+                if (firstAttempt) {
+
+                    // remove any extra poin available for this attempt
+                    extraPointAdded = 0
+                    if (isExererciseComplete && extraAttemptAvailable > 0) {
+                        extraAttemptAvailable--;
+                    }
+                    
+                    verbosMistakes[correctAnswer] = "err"
+                    lifesavers--
+                    if (lifesavers === 2) {
+                        document.getElementById("lifesavers1").setAttribute("id", "drop");
+                    }
+                    if (lifesavers === 1) {
+                        document.getElementById("lifesavers2").setAttribute("id", "drop");
+                    }
+                    if (lifesavers === 0) {
+                        document.getElementById("lifesavers3").setAttribute("id", "drop");
+                    }
+                    flag = true;
+                    if (lifesavers < 0) {
+                        negScore++
+                        incorrect.innerHTML = negScore;
+
+                        if (!isExererciseComplete) {
+                            progress = progress -4
+
+                            if (progress < 0) {
+                                progress = 0 //reset progress
+                            }
+                        }
+                    }
+                }
+                firstAttempt = false;
+                reavealAnswerAttempts--
+                
+                
+                document.getElementById("fb").innerHTML = "incorrect"
+                if (reavealAnswerAttempts <= 0){
+                    document.getElementById("correctAnswer").innerHTML = correctAnswer;
+                }   
+    }
+
+
+    function updateProgress() {
+        fina100score = progress;
+        accuracy = parseFloat(((score / (score + negScore)) * 100).toFixed(2))
+        document.getElementById("ratio").innerHTML = accuracy
+        document.getElementById("progress-ui").innerHTML = progress
+        if (progress <= 100 && !isExererciseComplete) {
+            // calculate grade
+            grade = parseFloat((((score / (score + negScore)) * 100) * progress / 100).toFixed(2))
+            // document.getElementById("grade").innerHTML = grade;
+            
+            // console.log("type of grade is: " + typeof grade)
+            // console.log("type of 2.00 is: " +typeof 2.00)
+        }
+        if (progress >= 100) { 
+            document.getElementById("ProgresscCmplete").innerHTML = "🏁";
+            isExererciseComplete = true;
+            if (isExtraCreditAllowed) {
+                showExtraCreditOptions("extraCredit")
+            }
+        }
+
+        //     if (extraAttemptAvailable > 0) {
+        //         grade += extraPointAdded
+        //         extraPointAdded = 0
+        //         // grade += extraPointAdded
+        //         document.getElementById("grade").innerHTML = grade;
+        //         document.getElementById("extraCorrectAttempts").innerHTML = extraPointAdded
+        //     }
+        // }
+
+        grade += extraPointAdded;
+        // maximun grade is 110
+        grade = Math.min(110, grade);
+        document.getElementById("grade").innerHTML = grade;
+        extraPointAdded = 0;
+    }
+</script>
+</html>
